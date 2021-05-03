@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const logger = require("morgan");
 const app = express();
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.engine("ejs", engine);
 app.use(logger("tiny"));
+app.use(methodOverride("_method"));
 
 /* Mount Routes */
 app.use("/profiles", profileRoutes);

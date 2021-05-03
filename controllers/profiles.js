@@ -13,4 +13,10 @@ module.exports = {
     }).populate("tasks");
     res.render("profiles/profile", { profile });
   },
+  async updateProfile(req, res, next) {
+    await Profile.findByIdAndUpdate(req.params.profileId, {
+      hours: req.body.hours,
+    });
+    res.redirect(`/profiles/${req.params.profileId}`);
+  },
 };

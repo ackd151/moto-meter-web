@@ -13,4 +13,10 @@ module.exports = {
     await profile.save();
     res.redirect(`/profiles/${profileId}`);
   },
+  async updateTask(req, res, next) {
+    await Task.findByIdAndUpdate(req.params.taskId, {
+      lastCompletedAt: req.body.newHours,
+    });
+    res.redirect(`/profiles/${req.params.profileId}`);
+  },
 };

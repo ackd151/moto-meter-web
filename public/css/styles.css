@@ -10,6 +10,6 @@ body {
 .profile__box,
 .tasks__box,
 .tasks__task-box,
-.tasks__task-box__task {
+.task {
   border: 1px solid black;
 }

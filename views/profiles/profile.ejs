@@ -1,92 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <title>Profile Page</title>
-  </head>
-  <body>
-    <a href="/">HOME</a>
-    <!-- profile section -->
-    <div class="profile__box">
-      <h2 class="profile__title"><%= profile.title %></h2>
-      <p>Current hours: <%= profile.hours %></p>
-      <div class="profile__update-hours-form">
-        <form action="/profiles/<%=profile._id%>?_method=PATCH" method="POST">
-          <h4>Update your engine hours</h4>
-          <label for="hours">New engine hours: </label>
-          <input
-            type="number"
-            step=".1"
-            id="hours"
-            name="hours"
-            placeholder="engine hours"
-          />
-          <button>Update Hours</button>
-        </form>
-      </div>
-    </div>
-    <!-- task section -->
-    <div class="tasks__box">
-      <h2 class="tasks__title">Tasks</h2>
-      <form
-        class="tasks__new-task-form"
-        action="/profiles/<%=profile._id%>/tasks"
-        method="POST"
-      >
-        <label for="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          name="task[title]"
-          placeholder="Task description"
-        />
-        <label for="interval">Maintenance Interval (hrs): </label>
+<% layout("/layouts/boilerplate") %> <% include ../partials/navbar %>
+<!-- profile section -->
+<div class="profile-page">
+  <div class="profile__box">
+    <h2 class="profile__title"><%= profile.title %></h2>
+    <p>Current hours: <%= profile.hours %></p>
+    <div class="profile__update-hours-form">
+      <form action="/profiles/<%=profile._id%>?_method=PATCH" method="POST">
+        <h4>Update your engine hours</h4>
+        <label for="hours">New engine hours: </label>
         <input
           type="number"
           step=".1"
-          id="interval"
-          name="task[interval]"
-          placeholder="e.g 7.5"
+          id="hours"
+          name="hours"
+          placeholder="engine hours"
         />
-        <label for="lastDoneAt">Last completed at (hrs): </label>
-        <input
-          type="number"
-          step=".1"
-          id="lastDoneAt"
-          name="task[lastCompletedAt]"
-          placeholder="e.g. 7.5"
-        />
-        <button>Create Task</button>
+        <button>Update Hours</button>
       </form>
-      <div class="tasks__task-box">
-        <% if (profile.tasks) { for (const task of profile.tasks) { %>
-        <div class="task">
-          <h3>Task: <%= task.title %></h3>
-          <p>Due in: <%= task.remainingHours %> hours</p>
-          <p>Interval: <%= task.interval %></p>
-          <p>Last completed at: <%= task.lastCompletedAt %></p>
-          <div class="task__sign-off-form">
-            <form
-              action="/profiles/<%=profile._id%>/tasks/<%=task._id%>?_method=PATCH"
-              method="POST"
-            >
-              <label for="newHours">Sign off at: </label>
-              <input
-                type="number"
-                id="newHours"
-                name="newHours"
-                value="<%=profile.hours%>"
-              />
-              <p>hours</p>
-              <button>Sign Off</button>
-            </form>
-          </div>
-        </div>
-        <% } } %>
-      </div>
     </div>
-  </body>
-</html>
+  </div>
+  <!-- task section -->
+  <div class="tasks__box">
+    <h2 class="tasks__title">Tasks</h2>
+    <form
+      class="tasks__new-task-form"
+      action="/profiles/<%=profile._id%>/tasks"
+      method="POST"
+    >
+      <label for="title">Title</label>
+      <input
+        type="text"
+        id="title"
+        name="task[title]"
+        placeholder="Task description"
+      />
+      <label for="interval">Maintenance Interval (hrs): </label>
+      <input
+        type="number"
+        step=".1"
+        id="interval"
+        name="task[interval]"
+        placeholder="e.g 7.5"
+      />
+      <label for="lastDoneAt">Last completed at (hrs): </label>
+      <input
+        type="number"
+        step=".1"
+        id="lastDoneAt"
+        name="task[lastCompletedAt]"
+        placeholder="e.g. 7.5"
+      />
+      <button>Create Task</button>
+    </form>
+    <div class="tasks__task-box">
+      <% if (profile.tasks) { for (const task of profile.tasks) { %>
+      <div class="task">
+        <h3>Task: <%= task.title %></h3>
+        <p>Due in: <%= task.remainingHours %> hours</p>
+        <p>Interval: <%= task.interval %></p>
+        <p>Last completed at: <%= task.lastCompletedAt %></p>
+        <div class="task__sign-off-form">
+          <form
+            action="/profiles/<%=profile._id%>/tasks/<%=task._id%>?_method=PATCH"
+            method="POST"
+          >
+            <label for="newHours">Sign off at: </label>
+            <input
+              type="number"
+              id="newHours"
+              name="newHours"
+              value="<%=profile.hours%>"
+            />
+            <p>hours</p>
+            <button>Sign Off</button>
+          </form>
+        </div>
+      </div>
+      <% } } %>
+    </div>
+  </div>
+  <div class="notes">
+    <label for="notes">Notes</label>
+    <textarea name="notes__contents" id="notes" cols="30" rows="10"></textarea>
+  </div>
+</div>

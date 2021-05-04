@@ -4,7 +4,7 @@
 body {
   background-color: aquamarine;
 }
-
+/* dev */
 .home__new-profile-form,
 .home__profiles,
 .profile__box,
@@ -12,4 +12,34 @@ body {
 .tasks__task-box,
 .task {
   border: 1px solid black;
+}
+
+.profile-page {
+  display: flex;
+}
+
+.profile__box {
+  width: 33.3333%;
+}
+.tasks__box {
+  width: 33.3333%;
+}
+
+.notes {
+  width: 33.3333%;
+}
+
+.notes label {
+  text-decoration: underline;
+  position: relative;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+}
+
+.notes textarea {
+  margin-top: -20px;
+  padding: 25px 5px 5px 5px;
+  width: 100%;
+  height: 100%;
 }

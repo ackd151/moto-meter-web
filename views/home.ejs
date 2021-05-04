@@ -1,56 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moto Meter Home</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
-  <body>
-    <h1>Welcome to MotoMeter</h1>
-    <div class="home__new-profile-form">
-      <form action="/profiles" method="POST">
-        <h3>Create new bike profile</h3>
-        <label for="year">YEAR</label>
-        <input
-          type="text"
-          id="year"
-          name="profile[year]"
-          placeholder="manufacture year"
-        />
+<% layout("/layouts/boilerplate") %> <% include ./partials/navbar %>
+<h1>Welcome to MotoMeter</h1>
+<div class="home__new-profile-form">
+  <form action="/profiles" method="POST">
+    <h3>Create new bike profile</h3>
+    <label for="year">YEAR</label>
+    <input
+      type="text"
+      id="year"
+      name="profile[year]"
+      placeholder="manufacture year"
+    />
 
-        <label for="make">MAKE</label>
-        <input
-          type="text"
-          id="make"
-          name="profile[make]"
-          placeholder="manufacturer"
-        />
+    <label for="make">MAKE</label>
+    <input
+      type="text"
+      id="make"
+      name="profile[make]"
+      placeholder="manufacturer"
+    />
 
-        <label for="model">MODEL</label>
-        <input
-          type="text"
-          id="model"
-          name="profile[model]"
-          placeholder="model series"
-        />
+    <label for="model">MODEL</label>
+    <input
+      type="text"
+      id="model"
+      name="profile[model]"
+      placeholder="model series"
+    />
 
-        <label for="hours">HOURS</label>
-        <input
-          type="text"
-          id="hours"
-          name="profile[hours]"
-          placeholder="Current engine hours"
-        />
+    <label for="hours">HOURS</label>
+    <input
+      type="text"
+      id="hours"
+      name="profile[hours]"
+      placeholder="Current engine hours"
+    />
 
-        <button>Create</button>
-      </form>
-    </div>
-    <div class="home__profiles">
-      <% if (profiles) { for (const profile of profiles) { %>
-      <a href="/profiles/<%= profile._id%>"><h4><%= profile.title %></h4></a>
-      <% } } %>
-    </div>
-  </body>
-</html>
+    <button>Create</button>
+  </form>
+</div>
+<div class="home__profiles">
+  <% if (profiles) { for (const profile of profiles) { %>
+  <a href="/profiles/<%= profile._id%>"><h4><%= profile.title %></h4></a>
+  <% } } %>
+</div>

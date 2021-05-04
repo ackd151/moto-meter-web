@@ -11,6 +11,21 @@ module.exports = {
     const profile = await Profile.findOne({
       _id: req.params.profileId,
     }).populate("tasks");
+    // working
+    for (const task of profile.tasks) {
+      task.remainingHours = await task.getRemainingHours();
+    }
+
+    // attempt to sort tasks....
+    const { tasks } = profile;
+    console.log(tasks);
+    for (const task of tasks) {
+      task.remainingHours = await task.getRemainingHours();
+      console.log(task.remainingHours);
+    }
+    tasks.sort(compareTasks);
+    console.log(tasks);
+
     res.render("profiles/profile", { profile });
   },
   async updateProfile(req, res, next) {
@@ -20,3 +35,11 @@ module.exports = {
     res.redirect(`/profiles/${req.params.profileId}`);
   },
 };
+
+function compareTasks(a, b) {
+  return a.remainingHours > b.remainingHours
+    ? 1
+    : a.remainingHours < b.remainingHours
+    ? -1
+    : 0;
+}

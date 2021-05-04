@@ -17,11 +17,24 @@ const taskSchema = new Schema({
   },
 });
 
-taskSchema.virtual("remainingHours").get(async function () {
+taskSchema.methods.getRemainingHours = async function () {
   const profile = await Profile.findOne({
-    "tasks._id": { $elemMatch: { _id: this._id } },
+    tasks: {
+      $in: this._id,
+    },
   });
-  console.log(profile);
-});
+  // console.log(this.lastCompletedAt + this.interval - profile.hours);
+  return this.lastCompletedAt + this.interval - profile.hours;
+};
+
+// taskSchema.virtual("remainingHours").get(async function () {
+//   const profile = await Profile.findOne({
+//     tasks: {
+//       $in: this._id,
+//     },
+//   });
+//   console.log(this.lastCompletedAt + this.interval - profile.hours);
+//   return this.lastCompletedAt + this.interval - profile.hours;
+// });
 
 module.exports = model("Task", taskSchema);

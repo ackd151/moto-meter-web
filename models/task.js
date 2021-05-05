@@ -27,14 +27,4 @@ taskSchema.methods.getRemainingHours = async function () {
   return this.lastCompletedAt + this.interval - profile.hours;
 };
 
-// taskSchema.virtual("remainingHours").get(async function () {
-//   const profile = await Profile.findOne({
-//     tasks: {
-//       $in: this._id,
-//     },
-//   });
-//   console.log(this.lastCompletedAt + this.interval - profile.hours);
-//   return this.lastCompletedAt + this.interval - profile.hours;
-// });
-
 module.exports = model("Task", taskSchema);

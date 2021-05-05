@@ -1,8 +1,19 @@
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
+
 body {
-  background-color: aquamarine;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  background-color: rgb(58, 58, 58);
+  height: 100vh;
+}
+
+input {
+  background-color: inherit;
+  color: inherit;
 }
 /* dev */
 .home__new-profile-form,
@@ -14,13 +25,59 @@ body {
   border: 1px solid black;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 1rem;
+  background-color: #000;
+}
+
+.navbar .brand a {
+  display: flex;
+  align-items: center;
+}
+
+.navbar a,
+.navbar a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar a:hover,
+.navbar a:active {
+  color: #afafaf;
+}
+
+.logging a:not(:last-child) {
+  padding-right: 1rem;
+}
+
+.btn-logging {
+  padding: 0.5rem 1rem;
+  border: 2px solid #fff;
+  border-radius: 25%;
+}
+
+.navbar .btn-register {
+  text-decoration: underline;
+}
+
 .profile-page {
   display: flex;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 .profile__box {
-  width: 33.3333%;
+  width: 30%;
 }
+
+.profile__image img {
+  width: 100%;
+  object-fit: fill;
+}
+
 .tasks__box {
   width: 33.3333%;
 }
@@ -42,4 +99,43 @@ body {
   padding: 25px 5px 5px 5px;
   width: 100%;
   height: 100%;
+  background-color: inherit;
+  color: inherit;
+}
+
+.tasks__new-task-form {
+  border: 1px solid #afafaf;
+}
+
+.tasks__new-task-form form {
+  transition: visibility 1.5s, opacity 1.5s;
+  opacity: 1;
+  visibility: visible;
+  position: static;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-task-toggle {
+  z-index: 10;
+  background-color: rgb(58, 58, 58);
+  text-align: center;
+  color: #afafaf;
+}
+
+.new-task-toggle:hover {
+  background-color: rgb(95, 95, 95);
+  color: #fff;
+  cursor: pointer;
+}
+
+.hidden {
+  position: absolute;
+  top: -50px;
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
 }

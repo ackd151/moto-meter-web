@@ -1,6 +1,15 @@
 <nav class="navbar">
-  <a href="/">home</a>
-  <a href="/register">register</a>
-  <a href="/login">login</a>
-  <a href="/logout">logout</a>
+  <div class="brand">
+    <a href="/"
+      ><img src="/images/ic_launcher_small.png" alt="Moto Meter Brand Icon" />
+      <p>MotoMeter</p></a
+    >
+  </div>
+  <div class="logging">
+    <!-- ejs if !logged-in -->
+    <a href="/register" class="btn-register">register</a>
+    <a href="/login" class="btn-logging">login</a>
+    <!-- else -->
+    <!-- <a href="/logout" class="btn-logging">logout</a> -->
+  </div>
 </nav>

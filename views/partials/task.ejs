@@ -1,9 +1,9 @@
 <article class="task">
   <div class="task__title"><h3>Task: <%= task.title %></h3></div>
   <div class="task__info">
-    <p>Due in: <%= task.remainingHours %> hours</p>
-    <p>Interval: <%= task.interval %></p>
-    <p>Last completed at: <%= task.lastCompletedAt %></p>
+    <p>Due in: <%= task.remainingHours %> hours.</p>
+    <p>Interval: <%= task.interval %> hours.</p>
+    <p>Last completed at: <%= task.lastCompletedAt %> hour mark.</p>
   </div>
   <form
     action="/profiles/<%=profile._id%>/tasks/<%=task._id%>?_method=PATCH"

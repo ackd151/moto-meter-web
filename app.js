@@ -1,17 +1,24 @@
 /* Application imports */
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 const path = require("path");
 const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const logger = require("morgan");
+const ExpressError = require("./utils/ExpressError");
 const app = express();
 
 /* Import Routes */
+const indexRoutes = require("./routes/index");
 const profileRoutes = require("./routes/profiles");
 const taskRoutes = require("./routes/tasks");
 
 /* Model imports */
+const User = require("./models/user");
 const Profile = require("./models/profile");
 const Task = require("./models/task");
 
@@ -34,14 +41,37 @@ app.engine("ejs", engine);
 app.use(logger("tiny"));
 app.use(methodOverride("_method"));
 
+/* Session config */
+const sessionOptions = {
+  secret: "Change me",
+  resave: false,
+  saveUninitialized: false,
+};
+app.use(session(sessionOptions));
+
+/* Passport config */
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 /* Mount Routes */
+app.use("/", indexRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/profiles/:profileId/tasks", taskRoutes);
-// Home route
-app.get("/", async (req, res, next) => {
-  const profiles = await Profile.find({});
-  console.log(profiles);
-  res.render("home", { profiles });
+
+/* Invalid routes */
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Invalid URL", 404));
+});
+
+/* Error Handling */
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Something Went Wrong!";
+  res.status(statusCode).render("error", { err });
+  next(err);
 });
 
 /* Start server */

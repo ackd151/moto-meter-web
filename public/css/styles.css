@@ -15,14 +15,13 @@ input {
   background-color: inherit;
   color: inherit;
 }
-/* dev */
-.home__new-profile-form,
-.home__profiles,
-.profile__box,
-.tasks__box,
-.tasks__task-box,
-.task {
-  border: 1px solid black;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px rgb(58, 58, 58) inset !important;
+  -webkit-text-fill-color: #fff !important;
 }
 
 .navbar {
@@ -107,7 +106,7 @@ input {
   border: 1px solid #afafaf;
 }
 
-.tasks__new-task-form form {
+form {
   transition: visibility 1.5s, opacity 1.5s;
   opacity: 1;
   visibility: visible;
@@ -134,8 +133,71 @@ input {
 
 .hidden {
   position: absolute;
-  top: -50px;
+  top: -500px;
   /* display: none; */
   visibility: hidden;
   opacity: 0;
+}
+
+.nearest-task {
+  margin-top: 1rem;
+}
+
+.register__page {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register__form {
+  width: 50%;
+}
+
+.register__form > * {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.register__form input {
+  padding: 0.25rem;
+  border-radius: 5px;
+}
+
+.register__form button {
+  width: 100%;
+  padding: 0.25rem 0;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.register__form a,
+.register__form a:visited {
+  text-decoration: none;
+  color: #afafaf;
+}
+
+.register__form a:hover,
+.register__form a:active {
+  color: #fff;
+}
+
+.error-page {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-content {
+  text-align: center;
+  width: auto;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 15px;
+  padding: 5rem 10rem;
+  color: rgb(0, 0, 0);
+  background-color: rgb(220, 100, 100);
 }

@@ -20,9 +20,21 @@ router.get("/register", (req, res, next) => {
 router.post(
   "/register",
   catchAsync(async (req, res, next) => {
-    const { username, email, password } = req.body.user;
-    const newUser = new User({ username, email });
-    const registeredUser = await User.register(newUser, password);
+    try {
+      const { username, email, password, password2 } = req.body.user;
+      if (password !== password2) {
+        req.flash("error", "Passwords do not match.");
+        return res.redirect("/register");
+      }
+      const newUser = new User({ username, email });
+      const registeredUser = await User.register(newUser, password);
+    } catch (e) {
+      let msg = e.message;
+      if (msg.includes("email_1"))
+        msg = "A user with the given email is already registered";
+      req.flash("error", `${msg}`);
+      return res.redirect("/register");
+    }
     res.redirect("/");
   })
 );

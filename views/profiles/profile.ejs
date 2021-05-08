@@ -1,4 +1,4 @@
-<% layout("/layouts/boilerplate") %> <% include ../partials/navbar %>
+<% layout("/layouts/boilerplate") %>
 <!-- profile section -->
 <div class="profile-page">
   <section class="profile__box">
@@ -24,7 +24,10 @@
       </form>
       <div class="nearest-task">
         <h4>Next Task</h4>
-        <% const task = profile.tasks[0]; %> <% include ../partials/task %>
+        <% if (profile.tasks && profile.tasks.length) { %> <% const task =
+        profile.tasks[0]; %> <% include ../partials/task %> <% } else { %>
+        <p>No tasks created yet...</p>
+        <% } %>
       </div>
     </div>
   </section>

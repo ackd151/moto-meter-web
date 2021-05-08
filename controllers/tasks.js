@@ -11,6 +11,7 @@ module.exports = {
     await newTask.save();
     profile.tasks.push(newTask);
     await profile.save();
+    req.flash("success", "New maintenance task added.");
     res.redirect(`/profiles/${profileId}`);
   },
   async updateTask(req, res, next) {

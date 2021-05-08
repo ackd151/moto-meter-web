@@ -4,6 +4,7 @@ module.exports = {
   async createProfile(req, res, next) {
     const newProfile = new Profile(req.body.profile);
     await newProfile.save();
+    req.flash("success", "New dirtbike profile created.");
     res.redirect(`/profiles/${newProfile._id}`);
   },
   async getProfile(req, res, next) {

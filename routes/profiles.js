@@ -5,11 +5,12 @@ const {
   getProfile,
   updateProfile,
 } = require("../controllers/profiles");
+const catchAsync = require("../utils/catchAsync");
 
-router.post("/", createProfile);
+router.post("/", catchAsync(createProfile));
 
-router.get("/:profileId", getProfile);
+router.get("/:profileId", catchAsync(getProfile));
 
-router.patch("/:profileId", updateProfile);
+router.patch("/:profileId", catchAsync(updateProfile));
 
 module.exports = router;

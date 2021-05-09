@@ -6,10 +6,12 @@
     >
   </div>
   <div class="logging">
-    <!-- ejs if !logged-in -->
+    <% if (!currentUser) { %>
     <a href="/register" class="btn-register">register</a>
     <a href="/login" class="btn-logging">login</a>
-    <!-- else -->
-    <!-- <a href="/logout" class="btn-logging">logout</a> -->
+    <% } else { %>
+    <span class="user">Hello <%= currentUser.username %>!</span>
+    <a href="/logout" class="btn-logging">logout</a>
+    <% } %>
   </div>
 </nav>

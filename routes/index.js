@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 const Profile = require("../models/profile");
 const User = require("../models/user");
 const ExpressError = require("../utils/ExpressError");
@@ -28,6 +29,10 @@ router.post(
       }
       const newUser = new User({ username, email });
       const registeredUser = await User.register(newUser, password);
+      req.login(registeredUser, (err) => {
+        if (err) return next(err);
+        req.flash("success", `Welcome to MotoMeter ${username}`);
+      });
     } catch (e) {
       let msg = e.message;
       if (msg.includes("email_1"))
@@ -47,14 +52,23 @@ router.get("/login", (req, res, next) => {
 // Post Login - "/login"
 router.post(
   "/login",
-  catchAsync(async (req, res, next) => {})
+  passport.authenticate("local", {
+    failureFlash: true,
+    failureRedirect: "/login",
+  }),
+  catchAsync(async (req, res, next) => {
+    req.flash("success", "welcome back!");
+    const redirectUrl = req.session.intendedRoute || "/";
+    delete req.session.intendedRoute;
+    res.redirect(redirectUrl);
+  })
 );
 
-// Post Logout - "/logout"
-router.post("/logout", (req, res, next) => {});
-
-router.get("/error", (req, res, next) => {
-  throw new ExpressError();
+// Get Logout - "/logout"
+router.get("/logout", (req, res, next) => {
+  req.logout();
+  req.flash("success", "Logged out.");
+  res.redirect("/");
 });
 
 module.exports = router;

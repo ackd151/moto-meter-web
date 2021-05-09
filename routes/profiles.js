@@ -5,12 +5,13 @@ const {
   getProfile,
   updateProfile,
 } = require("../controllers/profiles");
+const { isLoggedIn } = require("../middleware/index");
 const catchAsync = require("../utils/catchAsync");
 
-router.post("/", catchAsync(createProfile));
+router.post("/", isLoggedIn, catchAsync(createProfile));
 
-router.get("/:profileId", catchAsync(getProfile));
+router.get("/:profileId", isLoggedIn, catchAsync(getProfile));
 
-router.patch("/:profileId", catchAsync(updateProfile));
+router.patch("/:profileId", isLoggedIn, catchAsync(updateProfile));
 
 module.exports = router;

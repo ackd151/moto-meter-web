@@ -24,7 +24,9 @@ taskSchema.methods.getRemainingHours = async function () {
     },
   });
   // console.log(this.lastCompletedAt + this.interval - profile.hours);
-  return this.lastCompletedAt + this.interval - profile.hours;
+  return (
+    Math.round((this.lastCompletedAt + this.interval - profile.hours) * 10) / 10
+  );
 };
 
 module.exports = model("Task", taskSchema);

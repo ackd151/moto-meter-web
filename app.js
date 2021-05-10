@@ -74,7 +74,7 @@ app.use((req, res, next) => {
 /* Mount Routes */
 app.use("/", indexRoutes);
 app.use("/profiles", profileRoutes);
-app.use("/profiles/:profileId/tasks", taskRoutes);
+app.use("/profiles/:profileId/maintenance", taskRoutes);
 
 /* Invalid routes */
 app.all("*", (req, res, next) => {

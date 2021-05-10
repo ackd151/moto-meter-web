@@ -2,6 +2,12 @@ const Profile = require("../models/profile");
 const Task = require("../models/task");
 
 module.exports = {
+  async getTaskPage(req, res, next) {
+    const { profileId } = req.params;
+    // Fetch associated Profile
+    const profile = await (await Profile.findById(profileId)).populate("tasks");
+    res.render("pages/maintenance", { profile });
+  },
   async createTask(req, res, next) {
     const { profileId } = req.params;
     // Fetch associated Profile

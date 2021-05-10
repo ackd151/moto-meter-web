@@ -27,7 +27,7 @@ module.exports = {
     tasks.sort(compareTasks);
     console.log(tasks);
 
-    res.render("profiles/profile", { profile });
+    res.render("pages/profile", { profile });
   },
   async updateProfile(req, res, next) {
     await Profile.findByIdAndUpdate(req.params.profileId, {

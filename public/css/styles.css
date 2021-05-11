@@ -50,9 +50,11 @@ input:-webkit-autofill:active {
 
 /** site wide **/
 .page {
-  height: 95vh;
+  margin-top: 4.5rem;
+  height: 87vh;
   width: 100vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -118,9 +120,9 @@ input:-webkit-autofill:active {
   color: #afafaf;
   padding-right: 1rem;
 }
-/* End navbar */
+/* end - navbar */
 
-/** profile page **/
+/** Profile page **/
 
 .profile__box {
   border: 1px solid rgb(76, 211, 139);
@@ -193,11 +195,35 @@ input:-webkit-autofill:active {
 .due-in {
   color: rgb(76, 211, 139);
 }
+/* end - profile page */
 
-.tasks__box {
-  width: 33.3333%;
-  margin-bottom: 5rem;
+/** Profile header partial **/
+.profile-header {
+  border: 1px solid #afafaf;
+  border-radius: 5px;
+  padding: 1rem;
 }
+
+.profile-links {
+  display: flex;
+}
+
+.profile-header img {
+  max-height: 50px;
+}
+
+/* end - profile header */
+
+/** Maintenance page **/
+.tasks__box {
+  /* width: 70%; */
+}
+
+.tasks__task-box {
+  overflow-y: auto;
+}
+
+/* end - maintenance page */
 
 .notes {
   width: 33.3333%;
@@ -322,9 +348,13 @@ form {
 }
 
 .flash {
+  position: absolute;
+  top: 1rem;
+  /* left: 10rem; */
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
-  width: auto;
-  margin: 0.25rem 1rem;
+  width: fit-content;
   padding: 0.25rem;
   color: #fff;
   border-radius: 5px;

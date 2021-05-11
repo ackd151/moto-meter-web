@@ -1,5 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 <div class="page">
+  <% include ../partials/profileHeader %>
   <section class="tasks__box">
     <h2 class="tasks__title">Tasks</h2>
     <div class="tasks__new-task-form">
@@ -56,3 +57,16 @@
     </div>
   </section>
 </div>
+<script>
+  // Show/hide new task from and switch up/down chevron
+  document
+    .querySelector(".new-task-toggle")
+    .addEventListener("click", function () {
+      document
+        .querySelector(".tasks__new-task-form form")
+        .classList.toggle("hidden");
+      const toggleIcon = document.querySelector(".fas").classList;
+      toggleIcon.toggle("fa-chevron-down");
+      toggleIcon.toggle("fa-chevron-up");
+    });
+</script>

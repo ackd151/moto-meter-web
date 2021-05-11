@@ -23,7 +23,6 @@ taskSchema.methods.getRemainingHours = async function () {
       $in: this._id,
     },
   });
-  // console.log(this.lastCompletedAt + this.interval - profile.hours);
   return (
     Math.round((this.lastCompletedAt + this.interval - profile.hours) * 10) / 10
   );

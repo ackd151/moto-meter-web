@@ -17,6 +17,8 @@ const app = express();
 const indexRoutes = require("./routes/index");
 const profileRoutes = require("./routes/profiles");
 const taskRoutes = require("./routes/tasks");
+const inspectionRoutes = require("./routes/inspections");
+const noteRoutes = require("./routes/notes");
 
 /* Model imports */
 const User = require("./models/user");
@@ -75,6 +77,8 @@ app.use((req, res, next) => {
 app.use("/", indexRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/profiles/:profileId/maintenance", taskRoutes);
+app.use("/profiles/:profileId/inspections", inspectionRoutes);
+app.use("/profiles/:profileId/notes", noteRoutes);
 
 /* Invalid routes */
 app.all("*", (req, res, next) => {

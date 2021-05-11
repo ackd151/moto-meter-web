@@ -57,7 +57,7 @@ router.post(
     failureRedirect: "/login",
   }),
   catchAsync(async (req, res, next) => {
-    req.flash("success", "welcome back!");
+    req.flash("success", `Welcome back, ${req.user.username}!`);
     const redirectUrl = req.session.intendedRoute || "/";
     delete req.session.intendedRoute;
     res.redirect(redirectUrl);

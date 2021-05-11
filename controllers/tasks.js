@@ -6,7 +6,7 @@ module.exports = {
     const { profileId } = req.params;
     // Fetch associated Profile
     const profile = await (await Profile.findById(profileId)).populate("tasks");
-    res.render("pages/maintenance", { profile });
+    res.render("pages/maintenance", { profile, url: req.originalUrl });
   },
   async createTask(req, res, next) {
     const { profileId } = req.params;

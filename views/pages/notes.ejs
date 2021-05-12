@@ -1,4 +1,25 @@
 <% layout("/layouts/boilerplate") %>
-<div class="page">
-  <h1>NOTES</h1>
+<div class="action-page">
+  <% include ../partials/profileHeader %>
+  <section class="notes">
+    <div class="tray">
+      <h2>Notes</h2>
+    </div>
+    <form
+      action="/profiles/<%=profile._id%>/notes"
+      method="POST"
+      class="notes-form"
+    >
+      <textarea
+        name="notes"
+        id="notes"
+        cols="30"
+        rows="10"
+        placeholder="Record notes, specs, torques, maintenance steps,..."
+      >
+<%= profile.notes || "" %></textarea
+      >
+      <button class="btn-save"><i class="fas fa-save"></i></button>
+    </form>
+  </section>
 </div>

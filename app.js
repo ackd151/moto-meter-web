@@ -62,16 +62,29 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.deserializeUser(User.deserializeUser()); /* site-wide vars */
 
-/* Flash config */
-app.use(flash());
+/* Flash config */ app.use(flash());
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.url = req.originalUrl;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
+
+//***********************************DEV********************************* */
+
+app.use((req, res, next) => {
+  req.user = {
+    _id: "60947b208d479026b08dd764",
+    username: "ackd151",
+  };
+  res.locals.currentUser = req.user;
+  next();
+});
+
+//*********************************************************************** */
 
 /* Mount Routes */
 app.use("/", indexRoutes);

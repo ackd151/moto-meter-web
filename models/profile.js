@@ -24,6 +24,7 @@ const profileSchema = new Schema({
       ref: "Task",
     },
   ],
+  notes: String,
 });
 
 profileSchema.virtual("title").get(function () {

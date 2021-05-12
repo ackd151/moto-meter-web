@@ -1,25 +1,33 @@
 <article class="task">
-  <div class="task__title"><h3>Task: <%= task.title %></h3></div>
   <div class="task__info">
+    <h3>Task: <%= task.title %></h3>
     <p>Due in: <%= task.remainingHours %> hours.</p>
     <p>Interval: <%= task.interval %> hours.</p>
     <p>Last completed at: <%= task.lastCompletedAt %> hour mark.</p>
   </div>
-  <form
-    action="/profiles/<%=profile._id%>/tasks/<%=task._id%>?_method=PATCH"
-    method="POST"
-    class="task__sign-off-form"
-  >
-    <label for="newHours">Sign off at: </label>
-    <input
-      type="number"
-      id="newHours"
-      name="newHours"
-      value="<%=profile.hours%>"
-      max="<%=profile.hours%>"
-      required
-    />
-    <p>hours</p>
-    <button>Sign Off</button>
-  </form>
+  <div class="task__actions">
+    <div class="task__sign-off">
+      <h4>Sign Off</h4>
+      <form
+        action="/profiles/<%=profile._id%>/tasks/<%=task._id%>?_method=PATCH"
+        method="POST"
+        class="task__sign-off-form"
+      >
+        <label for="newHours">Sign off at: </label>
+        <input
+          type="number"
+          id="newHours"
+          name="newHours"
+          value="<%=profile.hours%>"
+          max="<%=profile.hours%>"
+          required
+        />
+        <p>hours</p>
+        <button>Sign Off</button>
+      </form>
+    </div>
+    <div class="task__edit">
+      <h4>Edit</h4>
+    </div>
+  </div>
 </article>

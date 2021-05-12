@@ -9,9 +9,9 @@ module.exports = {
   },
   async getProfile(req, res, next) {
     // Fetch profile by id, populate tasks
-    const profile = await Profile.findOne({
-      _id: req.params.profileId,
-    }).populate("tasks");
+    const profile = await Profile.findById(req.params.profileId).populate(
+      "tasks"
+    );
     // working
     for (const task of profile.tasks) {
       task.remainingHours = await task.getRemainingHours();

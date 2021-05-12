@@ -1,8 +1,16 @@
 <% layout("/layouts/boilerplate") %>
-<div class="page">
+<div class="action-page">
   <% include ../partials/profileHeader %>
   <section class="tasks__box">
     <h2 class="tasks__title">Tasks</h2>
+
+    <div class="tasks__task-box">
+      <!-- prettier-ignore -->
+      <%  if (profile.tasks) { %> 
+        <%  for (const task of profile.tasks) { %>
+            <% include ../partials/task %> 
+        <% } } %>
+    </div>
     <div class="tasks__new-task-form">
       <form
         class="hidden"
@@ -47,13 +55,6 @@
         New Task
         <span><i id="toggle-chevron" class="fas fa-chevron-down"></i></span>
       </p>
-    </div>
-    <div class="tasks__task-box">
-      <!-- prettier-ignore -->
-      <%  if (profile.tasks) { %> 
-        <%  for (const task of profile.tasks) { %>
-            <% include ../partials/task %> 
-        <% } } %>
     </div>
   </section>
 </div>

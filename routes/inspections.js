@@ -1,8 +1,12 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
+const Profile = require("../models/profile");
 
-router.get("/", (req, res, next) => {
-  res.render("pages/inspection");
+router.get("/", async (req, res, next) => {
+  const { profileId } = req.params;
+  const profile = await Profile.findById(profileId);
+  console.log(profile);
+  res.render("pages/inspection", { profile });
 });
 
 module.exports = router;

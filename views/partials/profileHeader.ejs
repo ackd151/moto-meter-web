@@ -1,36 +1,33 @@
 <div class="profile-header">
-  <h3><%= profile.title %></h3>
-  <div class="profile-links">
-    <div>
-      <img src="/images/ktm.jpg" alt="profile picture" />
+  <div class="profile-img">
+    <img src="/images/ktm.jpg" alt="profile picture" />
     </div>
-    <% if (url.indexOf("inspections") < 0) { %>
+    <div class="profile-title">
+    <h3><%= profile.title %></h3>
+</div>
+  <div class="profile-links">
     <a
       href="/profiles/<%=profile._id%>/inspections"
-      class="btn profile__action action-preride"
+      class="btn profile__action <%= url.indexOf("inspections") > 0 ? "active-action": "" %>"
     >
       <i class="fas fa-clipboard-check"></i>pre-ride </a
-    ><% } %>
+    >
     <a
       href="/profiles/<%= profile._id %>"
-      class="btn profile__action action-postride"
+      class="btn profile__action <%= url.indexOf("post-ride") > 0 ? "active-action": "" %>"
       ><i class="fas fa-stopwatch"></i>post-ride</a
     >
-    <% if (url.indexOf("maintenance") < 0) { %>
     <a
       href="/profiles/<%=profile._id%>/maintenance"
-      class="btn profile__action action-tasks"
+      class="btn profile__action <%= url.indexOf("maintenance") > 0 ? "active-action": "" %>"
     >
       <i class="fas fa-tools"></i>maintenance
     </a>
-
-    <% } %> <% if (url.indexOf("notes") < 0) { %>
     <a
       href="/profiles/<%=profile._id%>/notes"
-      class="btn profile__action action-notes"
+      class="btn profile__action <%= url.indexOf("notes") > 0 ? "active-action": "" %>"
     >
       <i class="fas fa-clipboard-list"></i>notes
     </a>
-    <% } %>
   </div>
 </div>

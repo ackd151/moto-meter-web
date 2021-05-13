@@ -1,10 +1,12 @@
 /** vars **/
 
 /** element selctors**/
-* {
-  box-sizing: border-box;
+*,
+*::after,
+*::before {
   padding: 0;
   margin: 0;
+  box-sizing: inherit;
 }
 
 html {
@@ -15,6 +17,8 @@ body {
   font-family: "Roboto", sans-serif;
   color: #fff;
   background-color: rgb(58, 58, 58);
+  /* height: 100vh; */
+  box-sizing: border-box;
 }
 
 a {
@@ -68,6 +72,7 @@ textarea {
 
 .btn {
   box-shadow: 0 2px 5px 1px rgba(0, 255, 255, 0.2);
+  border-radius: 5px;
 }
 
 .btn:hover {
@@ -266,12 +271,93 @@ textarea {
   overflow-y: auto;
 }
 
-.task {
+/* Task partial */
+.task-partial {
+  border: 1px solid #afafaf;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
+.task__sign-off,
+.task__edit {
+  border: 1px solid rgb(76, 211, 139);
+  width: 33%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.task__sign-off-form {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-off-label {
+  display: inline-block;
+  transform: translate(130%);
+  margin-right: 0.5rem;
+  transition: all 0.5s 0.1s;
+}
+
+.task__sign-off-form:hover > .sign-off-label {
+  transform: translate(0);
+  transition: all 0.5s;
+}
+
+.sign-off-action {
+  transition: all 0.1s;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.task__sign-off-form:hover > .sign-off-action {
+  transition: all 0.5s 0.3s;
+  visibility: visible;
+  opacity: 1;
+}
+
+#newHours {
+  vertical-align: middle;
+}
+
+.sign-off-submit {
+  background-color: transparent;
+  vertical-align: middle;
+  border-radius: 5px;
+}
+
+.fa-check-square {
+  font-size: 2.5rem;
+  color: rgb(76, 211, 139);
+}
+
+.task__edit-label {
+  display: inline-block;
+  transform: translate(130%, 130%);
+}
+
+.task__edit-form {
+  visibility: hidden;
+}
+
+/* Get rid of default button styling */
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+/* end - Task partial */
 /* end - Maintenance page */
 
 .tasks__new-task-form {
@@ -294,7 +380,7 @@ textarea {
   border-radius: 5px;
   background-color: rgb(58, 58, 58);
   padding: 1rem;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   color: #afafaf;
 }
 
@@ -304,9 +390,13 @@ textarea {
 }
 
 .btn-save {
-  padding: 0.25rem;
+  padding: 0.25rem 1rem;
   background-color: rgb(76, 211, 139);
   border-radius: 5px;
+}
+
+.btn-save i {
+  margin-right: 0.5rem;
 }
 
 /* end - Notes page */
@@ -315,12 +405,12 @@ textarea {
 
 /* end - Inspection page */
 
-form {
+/* form {
   transition: visibility 1.5s, opacity 1.5s;
   opacity: 1;
   visibility: visible;
   position: static;
-}
+} */
 
 .form-row {
   display: flex;

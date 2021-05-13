@@ -1,12 +1,17 @@
 const Profile = require("../models/profile");
 const Task = require("../models/task");
+const compareTasks = require("../utils/compareTasks");
 
 module.exports = {
   async getTaskPage(req, res, next) {
     const { profileId } = req.params;
-    // Fetch associated Profile
     const profile = await Profile.findById(profileId).populate("tasks");
-    console.log(profile);
+    // Sort tasks
+    const { tasks } = profile;
+    for (const task of tasks) {
+      task.remainingHours = await task.getRemainingHours();
+    }
+    tasks.sort(compareTasks);
     res.render("pages/maintenance", { profile });
   },
   async createTask(req, res, next) {
@@ -22,9 +27,11 @@ module.exports = {
     res.redirect(`/profiles/${profileId}`);
   },
   async updateTask(req, res, next) {
-    await Task.findByIdAndUpdate(req.params.taskId, {
-      lastCompletedAt: req.body.newHours,
-    });
-    res.redirect(`/profiles/${req.params.profileId}`);
+    const { lastCompletedAt, interval } = req.body;
+    const task = await Task.findById(req.params.taskId);
+    task.interval = interval || task.interval;
+    task.lastCompletedAt = lastCompletedAt || task.lastCompletedAt;
+    await task.save();
+    res.redirect(`/profiles/${req.params.profileId}/maintenance`);
   },
 };

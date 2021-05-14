@@ -1,5 +1,5 @@
-const Profile = require("../models/profile");
-const Task = require("../models/task");
+const Profile = require("../models/profileModel");
+const Task = require("../models/taskModel");
 const compareTasks = require("../utils/compareTasks");
 
 module.exports = {

@@ -1,0 +1,56 @@
+<% layout("/layouts/boilerplate") %>
+<div class="user-page">
+  <section class="user-page__profile-actions">
+    <form
+      action="/home/<%=user.username%>/profiles"
+      method="POST"
+      class="new-profile-form"
+    >
+      <h3>New Bike Profile</h3>
+      <div>
+        <label for="year">YEAR</label>
+        <input
+          type="text"
+          id="year"
+          name="profile[year]"
+          placeholder="manufacture year"
+        />
+      </div>
+      <div>
+        <label for="make">MAKE</label>
+        <input
+          type="text"
+          id="make"
+          name="profile[make]"
+          placeholder="manufacturer"
+        />
+      </div>
+      <div>
+        <label for="model">MODEL</label>
+        <input
+          type="text"
+          id="model"
+          name="profile[model]"
+          placeholder="model series"
+        />
+      </div>
+      <div>
+        <label for="hours">HOURS</label>
+        <input
+          type="text"
+          id="hours"
+          name="profile[hours]"
+          placeholder="Current engine hours"
+        />
+      </div>
+      <button>Create</button>
+    </form>
+  </section>
+  <div class="user-page__profiles">
+    <% if (user.bikeProfiles) { for (const profile of user.bikeProfiles) { %>
+    <a href="/home/<%=user.username%>/profiles/<%= profile._id%>"
+      ><h4><%= profile.title %></h4></a
+    >
+    <% } } %>
+  </div>
+</div>

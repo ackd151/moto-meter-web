@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
-const Profile = require("./profile");
+const Profile = require("./profileModel");
 
 const taskSchema = new Schema({
   title: {

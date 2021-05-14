@@ -134,8 +134,20 @@ textarea {
 }
 /* end - Navbar */
 
-/** Profile page **/
+/** User home page **/
+.user-page {
+  height: 100%;
+  width: 80%;
+}
 
+.new-profile-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* end - User home page */
+
+/** Profile page **/
 .profile__box {
   border: 1px solid rgb(76, 211, 139);
   border-radius: 5px;

@@ -24,6 +24,12 @@ const profileSchema = new Schema({
       ref: "Task",
     },
   ],
+  inspections: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Inspection",
+    },
+  ],
   notes: String,
 });
 

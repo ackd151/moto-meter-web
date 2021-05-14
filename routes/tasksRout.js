@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-const { createTask, updateTask, getTaskPage } = require("../controllers/tasks");
+const {
+  createTask,
+  updateTask,
+  getTaskPage,
+} = require("../controllers/tasksCtrl");
 const catchAsync = require("../utils/catchAsync");
 const { isLoggedIn } = require("../middleware/index");
 

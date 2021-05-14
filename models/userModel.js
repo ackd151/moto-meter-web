@@ -8,6 +8,7 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  username: { type: String, unique: true, required: true },
   bikeProfiles: [
     {
       type: Schema.Types.ObjectId,

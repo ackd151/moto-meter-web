@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-const Profile = require("../models/profile");
+const Profile = require("../models/profileModel");
 
 router.get("/", async (req, res, next) => {
   const { profileId } = req.params;

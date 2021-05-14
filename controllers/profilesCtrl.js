@@ -1,12 +1,16 @@
-const Profile = require("../models/profile");
+const Profile = require("../models/profileModel");
+const User = require("../models/userModel");
 const compareTasks = require("../utils/compareTasks");
 
 module.exports = {
   async createProfile(req, res, next) {
+    const user = await User.findOne({ username: req.params.username });
     const newProfile = new Profile(req.body.profile);
+    user.bikeProfiles.push(newProfile);
     await newProfile.save();
+    await user.save();
     req.flash("success", "New dirtbike profile created.");
-    res.redirect(`/profiles/${newProfile._id}`);
+    res.redirect(`/home/${req.params.username}/profiles/${newProfile._id}`);
   },
   async getProfile(req, res, next) {
     // Fetch profile by id, populate tasks
@@ -26,6 +30,8 @@ module.exports = {
     await Profile.findByIdAndUpdate(req.params.profileId, {
       hours: req.body.hours,
     });
-    res.redirect(`/profiles/${req.params.profileId}`);
+    res.redirect(
+      `/home/${req.params.username}/profiles/${req.params.profileId}`
+    );
   },
 };

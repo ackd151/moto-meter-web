@@ -14,16 +14,17 @@ const ExpressError = require("./utils/ExpressError");
 const app = express();
 
 /* Import Routes */
-const indexRoutes = require("./routes/index");
-const profileRoutes = require("./routes/profiles");
-const taskRoutes = require("./routes/tasks");
-const inspectionRoutes = require("./routes/inspections");
-const noteRoutes = require("./routes/notes");
+const indexRoutes = require("./routes/indexRout");
+const userRoutes = require("./routes/userRoutes");
+const profileRoutes = require("./routes/profilesRout");
+const taskRoutes = require("./routes/tasksRout");
+const inspectionRoutes = require("./routes/inspectionsRout");
+const noteRoutes = require("./routes/notesRout");
 
 /* Model imports */
-const User = require("./models/user");
-const Profile = require("./models/profile");
-const Task = require("./models/task");
+const User = require("./models/userModel");
+const Profile = require("./models/profileModel");
+const Task = require("./models/taskModel");
 
 /* Set up db (local) */
 mongoose.connect("mongodb://localhost:27017/motoMeterDB", {
@@ -64,7 +65,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser()); /* site-wide vars */
 
-/* Flash config */ app.use(flash());
+/* Flash config */
+app.use(flash());
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.url = req.originalUrl;
@@ -75,23 +77,24 @@ app.use((req, res, next) => {
 
 //***********************************DEV********************************* */
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: "60947b208d479026b08dd764",
-    username: "ackd151",
-  };
-  res.locals.currentUser = req.user;
-  next();
-});
+// app.use((req, res, next) => {
+//   req.user = {
+//     _id: "60947b208d479026b08dd764",
+//     username: "ackd151",
+//   };
+//   res.locals.currentUser = req.user;
+//   next();
+// });
 
 //*********************************************************************** */
 
 /* Mount Routes */
 app.use("/", indexRoutes);
-app.use("/profiles", profileRoutes);
-app.use("/profiles/:profileId/maintenance", taskRoutes);
-app.use("/profiles/:profileId/inspections", inspectionRoutes);
-app.use("/profiles/:profileId/notes", noteRoutes);
+app.use("/home", userRoutes);
+app.use("/home/:username/profiles", profileRoutes);
+app.use("/home/:username/profiles/:profileId/maintenance", taskRoutes);
+app.use("/home/:username/profiles/:profileId/inspections", inspectionRoutes);
+app.use("/home/:username/profiles/:profileId/notes", noteRoutes);
 
 /* Invalid routes */
 app.all("*", (req, res, next) => {

@@ -34,4 +34,8 @@ module.exports = {
       `/home/${req.params.username}/profiles/${req.params.profileId}`
     );
   },
+  async getPostRide(req, res, next) {
+    const profile = await Profile.findById(req.params.profileId);
+    res.render("pages/postRide", { profile });
+  },
 };

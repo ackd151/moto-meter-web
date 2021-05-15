@@ -2,15 +2,19 @@
   <div class="brand">
     <a href="/"
       ><img src="/images/ic_launcher_small.png" alt="Moto Meter Brand Icon" />
-      <p>MotoMeter</p></a
-    >
+      <p>MotoMeter</p>
+    </a>
   </div>
   <div class="logging">
     <% if (!currentUser) { %>
     <a href="/register" class="btn-register">sign up</a>
     <a href="/login" class="btn-logging">login</a>
     <% } else { %>
-    <span class="user">Hello <%= currentUser.username %>!</span>
+    <span class="user"
+      >Hello
+      <a href="/home/<%=currentUser.username%>" class="user-link"
+        ><%=currentUser.username%><i class="fas fa-warehouse"></i></a
+    ></span>
     <a href="/logout" class="btn-logging">logout</a>
     <% } %>
   </div>

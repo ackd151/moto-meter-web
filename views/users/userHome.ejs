@@ -1,6 +1,16 @@
 <% layout("/layouts/boilerplate") %>
 <div class="user-page">
+  <div class="user-page__header">
+    <h1>Welcome back, <%=currentUser.username%>!</h1>
+  </div>
   <section class="user-page__profile-actions">
+    <div class="user-page__profiles">
+      <% if (user.bikeProfiles) { for (const profile of user.bikeProfiles) { %>
+      <a href="/home/<%=user.username%>/profiles/<%= profile._id%>"
+        ><h4><%= profile.title %></h4></a
+      >
+      <% } } %>
+    </div>
     <form
       action="/home/<%=user.username%>/profiles"
       method="POST"
@@ -46,11 +56,4 @@
       <button>Create</button>
     </form>
   </section>
-  <div class="user-page__profiles">
-    <% if (user.bikeProfiles) { for (const profile of user.bikeProfiles) { %>
-    <a href="/home/<%=user.username%>/profiles/<%= profile._id%>"
-      ><h4><%= profile.title %></h4></a
-    >
-    <% } } %>
-  </div>
 </div>

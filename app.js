@@ -69,7 +69,6 @@ passport.deserializeUser(User.deserializeUser()); /* site-wide vars */
 app.use(flash());
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
-  res.locals.url = req.originalUrl;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
@@ -77,14 +76,14 @@ app.use((req, res, next) => {
 
 //***********************************DEV********************************* */
 
-// app.use((req, res, next) => {
-//   req.user = {
-//     _id: "60947b208d479026b08dd764",
-//     username: "ackd151",
-//   };
-//   res.locals.currentUser = req.user;
-//   next();
-// });
+app.use((req, res, next) => {
+  req.user = {
+    _id: "60947b208d479026b08dd764",
+    username: "ackd151",
+  };
+  res.locals.currentUser = req.user;
+  next();
+});
 
 //*********************************************************************** */
 

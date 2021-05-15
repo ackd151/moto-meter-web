@@ -1,33 +1,48 @@
-<div class="profile-header">
-  <div class="profile-img">
-    <img src="/images/ktm.jpg" alt="profile picture" />
-    </div>
-    <div class="profile-title">
-    <h3><%= profile.title %></h3>
-</div>
+<section class="profile-header">
   <div class="profile-links">
-    <a
-      href="/profiles/<%=profile._id%>/inspections"
-      class="btn profile__action <%= url.indexOf("inspections") > 0 ? "active-action": "" %>"
+    <a 
+      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>"
+      class="btn <%=activePage === "profile" ? "active-action": ""%>"
     >
-      <i class="fas fa-clipboard-check"></i>pre-ride </a
-    >
-    <a
-      href="/profiles/<%= profile._id %>"
-      class="btn profile__action <%= url.indexOf("post-ride") > 0 ? "active-action": "" %>"
-      ><i class="fas fa-stopwatch"></i>post-ride</a
-    >
-    <a
-      href="/profiles/<%=profile._id%>/maintenance"
-      class="btn profile__action <%= url.indexOf("maintenance") > 0 ? "active-action": "" %>"
-    >
-      <i class="fas fa-tools"></i>maintenance
+    <div class="profile-home-link">
+      <div class="profile-img">
+        <img src="/images/ktm.jpg" alt="profile picture" />
+      </div>
+      <div class="profile-title">
+        <h3><%=profile.title%></h3>
+      </div>
+      <div>
+        <span class="profile-hours"><%=profile.hours%> hrs</span>
+      </div></div>
     </a>
-    <a
-      href="/profiles/<%=profile._id%>/notes"
-      class="btn profile__action <%= url.indexOf("notes") > 0 ? "active-action": "" %>"
-    >
-      <i class="fas fa-clipboard-list"></i>notes
-    </a>
+    <div class="profile-action-links">
+      <a 
+        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
+        class="btn profile__action <%= activePage === "inspections" ? "active-action": "" %>"
+      >
+        <i class="fas fa-clipboard-check"></i>pre-ride 
+      </a>
+
+      <a
+        href="/home/<%=currentUser.username%>/profiles/<%= profile._id %>/post-ride"
+        class="btn profile__action <%= activePage === "post-ride" ? "active-action": "" %>"
+      >
+        <i class="fas fa-stopwatch"></i>post-ride
+      </a>
+
+      <a
+        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
+        class="btn profile__action <%= activePage === "maintenance" ? "active-action": "" %>"
+      >
+        <i class="fas fa-tools"></i>maintenance
+      </a>
+
+      <a
+        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
+        class="btn profile__action <%= activePage === "notes" ? "active-action": "" %>"
+      >
+        <i class="fas fa-clipboard-list"></i>notes
+      </a>
+    </div>
   </div>
-</div>
+</section>

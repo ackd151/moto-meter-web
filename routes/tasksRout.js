@@ -8,10 +8,8 @@ const {
 const catchAsync = require("../utils/catchAsync");
 const { isLoggedIn } = require("../middleware/index");
 
-// GET "/profile/:profileId/maintenance" - render maintenance page
 router.get("/", isLoggedIn, catchAsync(getTaskPage));
 
-// POST "/profile/:profileId/maintenance" - create new task
 router.post("/", isLoggedIn, catchAsync(createTask));
 
 router.patch("/:taskId", isLoggedIn, catchAsync(updateTask));

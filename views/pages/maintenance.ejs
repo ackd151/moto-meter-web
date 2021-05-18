@@ -14,7 +14,7 @@
     <div class="tasks__new-task-form">
       <form
         class="hidden"
-        action="/profiles/<%=profile._id%>/maintenance"
+        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
         method="POST"
       >
         <div class="form-row">

@@ -1,0 +1,53 @@
+<section class="profile-tab">
+  <a
+    href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>"
+    class="btn profile-tab__info"
+  >
+    <h4><%=profile.title%></h4>
+    <img class="profile-tab__img" src="/images/ktm.jpg" alt="Bike image" />
+  </a>
+  <div class="profile-tab__data">
+    <p>Current Hours: <%=profile.hours%></p>
+    <div class="profile-tab__nearest-task">
+      <h4>Next Task:</h4>
+      <% if (profile.tasks && profile.tasks.length) { %> <% const task =
+      profile.tasks[0]; %>
+      <div
+        onclick="window.location.href = '/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance';"
+      >
+        <h4><%= task.title %></h4>
+        <p>
+          Due in:
+          <span class="due-in"><%= task.remainingHours %></span>
+          hours.
+        </p>
+      </div>
+      <% } else { %>
+      <p>No tasks created yet...</p>
+      <% } %>
+    </div>
+    <p>checklist placeholder</p>
+  </div>
+  <div class="profile-tab__action-buttons">
+    <a
+      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
+      class="btn profile__action"
+      >pre-ride</a
+    >
+    <a
+      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/post-ride"
+      class="btn profile__action"
+      >post-ride</a
+    >
+    <a
+      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
+      class="btn profile__action"
+      >maintenance</a
+    >
+    <a
+      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
+      class="btn profile__action"
+      >notes</a
+    >
+  </div>
+</section>

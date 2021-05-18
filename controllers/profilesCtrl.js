@@ -13,7 +13,6 @@ module.exports = {
     res.redirect(`/home/${req.params.username}/profiles/${newProfile._id}`);
   },
   async getProfile(req, res, next) {
-    // Fetch profile by id, populate tasks
     const profile = await Profile.findById(req.params.profileId).populate(
       "tasks"
     );

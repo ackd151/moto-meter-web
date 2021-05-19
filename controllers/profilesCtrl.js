@@ -26,9 +26,20 @@ module.exports = {
     res.render("pages/profile", { profile });
   },
   async updateProfile(req, res, next) {
-    await Profile.findByIdAndUpdate(req.params.profileId, {
-      hours: req.body.hours,
-    });
+    if (req.body.profile) {
+      const { year, make, model, hours } = req.body.profile;
+      await Profile.findByIdAndUpdate(req.params.profileId, {
+        year,
+        make,
+        model,
+        hours,
+      });
+    } else if (req.body.hours) {
+      const { hours } = req.body;
+      await Profile.findByIdAndUpdate(req.params.profileId, {
+        hours,
+      });
+    }
     res.redirect(
       `/home/${req.params.username}/profiles/${req.params.profileId}`
     );

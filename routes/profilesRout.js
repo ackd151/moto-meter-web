@@ -17,6 +17,6 @@ router.post("/", catchAsync(createProfile));
 router.get("/:profileId", ownsProfile, catchAsync(getProfile));
 router.get("/:profileId/post-ride", ownsProfile, getPostRide);
 
-router.patch("/:profileId", catchAsync(updateProfile));
+router.patch("/:profileId", ownsProfile, catchAsync(updateProfile));
 
 module.exports = router;

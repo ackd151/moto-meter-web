@@ -1,5 +1,27 @@
 <% layout("/layouts/boilerplate") %>
 <div class="action-page">
   <% include ../partials/profileHeader %>
-  <h1>Post Ride</h1>
+  <section class="post-ride__page">
+    <h1>Post Ride</h1>
+    <form
+      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
+      method="POST"
+      class="post-ride__form"
+    >
+      <h4>Update your engine hours</h4>
+      <div>
+        <label for="hours">New engine hours: </label>
+        <input
+          type="number"
+          step=".1"
+          id="hours"
+          name="hours"
+          value="<%= profile.hours %>"
+          min="<%= profile.hours %>"
+          required
+        />
+      </div>
+      <button class="btn">Update Hours</button>
+    </form>
+  </section>
 </div>

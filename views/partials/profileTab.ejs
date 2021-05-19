@@ -7,18 +7,25 @@
     <img class="profile-tab__img" src="/images/ktm.jpg" alt="Bike image" />
   </a>
   <div class="profile-tab__data">
-    <p>Current Hours: <%=profile.hours%></p>
+    <p>
+      Current Hours:
+      <a
+        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/post-ride"
+        ><span class="link"><%=profile.hours%></span></a
+      >
+    </p>
     <div class="profile-tab__nearest-task">
-      <h4>Next Task:</h4>
+      <p>Next Task:</p>
       <% if (profile.tasks && profile.tasks.length) { %> <% const task =
       profile.tasks[0]; %>
-      <div
-        onclick="window.location.href = '/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance';"
-      >
-        <h4><%= task.title %></h4>
+      <h4><%= task.title %></h4>
+      <div>
         <p>
           Due in:
-          <span class="due-in"><%= task.remainingHours %></span>
+          <a
+            href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
+            ><span class="link due-in"><%= task.remainingHours %></span></a
+          >
           hours.
         </p>
       </div>

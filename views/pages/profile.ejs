@@ -1,71 +1,76 @@
 <% layout("/layouts/boilerplate") %>
 <div class="action-page">
   <% include ../partials/profileHeader %>
-  <section class="main-content">
-    <h2 class="profile__title"><%= profile.title %></h2>
-    <div class="profile__action-box">
+  <section class="profile__page-grid">
+    <div class="profile__info">
+      <h2 class="profile__title"><%= profile.title %></h2>
       <div class="profile__image">
         <img src="/images/ktm.jpg" alt="profile picture" />
       </div>
-      <a
-        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
-        class="btn profile__action action-preride"
-      >
-        <i class="fas fa-clipboard-check"></i>pre-ride
-      </a>
-      <a
-        href="javascript:document.getElementById('hours').focus()"
-        class="btn profile__action action-postride"
-        ><i class="fas fa-stopwatch"></i>post-ride</a
-      >
-      <a
-        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
-        class="btn profile__action action-tasks"
-      >
-        <i class="fas fa-tools"></i>maintenance
-      </a>
-      <a
-        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
-        class="btn profile__action action-notes"
-      >
-        <i class="fas fa-clipboard-list"></i>notes
-      </a>
+      <p>
+        Current hours:
+        <a
+          href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/post-ride"
+          class="link"
+          ><%= profile.hours %></a
+        >
+      </p>
     </div>
-    <p>
-      Current hours: <span class="current-hours"><%= profile.hours %></span>
-    </p>
-    <div class="profile__update-hours-form">
-      <form action="/profiles/<%=profile._id%>?_method=PATCH" method="POST">
-        <h4>Update your engine hours</h4>
-        <label for="hours">New engine hours: </label>
-        <input
-          type="number"
-          step=".1"
-          id="hours"
-          name="hours"
-          value="<%= profile.hours %>"
-          min="<%= profile.hours %>"
-          required
-        />
-        <button>Update Hours</button>
+    <div class="profile__edit-form-div">
+      <h3 class="edit-form-trigger link">Edit Bike Profile</h3>
+      <form
+        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
+        method="POST"
+        class="profile-edit-form"
+      >
+        <h3 class="form-header">Edit Bike Profile</h3>
+        <div class="grid-item">
+          <label for="year">YEAR</label>
+          <input
+            type="text"
+            id="year"
+            name="profile[year]"
+            placeholder="manufacture year"
+            value="<%=profile.year%>"
+            required
+          />
+        </div>
+        <div class="grid-item">
+          <label for="make">MAKE</label>
+          <input
+            type="text"
+            id="make"
+            name="profile[make]"
+            placeholder="manufacturer"
+            value="<%=profile.make%>"
+            required
+          />
+        </div>
+
+        <div class="grid-item">
+          <label for="model">MODEL</label>
+          <input
+            type="text"
+            id="model"
+            name="profile[model]"
+            placeholder="model series"
+            value="<%=profile.model%>"
+            required
+          />
+        </div>
+        <div class="grid-item">
+          <label for="hours">HOURS</label>
+          <input
+            type="text"
+            id="hours"
+            name="profile[hours]"
+            placeholder="Current engine hours"
+            value="<%=profile.hours%>"
+            required
+          />
+        </div>
+        <button class="btn form-submit">SUBMIT EDITS</button>
       </form>
-    </div>
-    <div class="profile__nearest-task">
-      <h4>Next Task</h4>
-      <% if (profile.tasks && profile.tasks.length) { %> <% const task =
-      profile.tasks[0]; %>
-      <div
-        class="btn profile__nearest-task-info"
-        onclick="window.location.href = '/profiles/<%=profile._id%>/maintenance';"
-      >
-        <h3>Task: <%= task.title %></h3>
-        <p>
-          Due in: <span class="due-in"><%= task.remainingHours %></span> hours.
-        </p>
-      </div>
-      <% } else { %>
-      <p>No tasks created yet...</p>
-      <% } %>
     </div>
   </section>
 </div>

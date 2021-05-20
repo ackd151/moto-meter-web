@@ -454,12 +454,25 @@ textarea {
   justify-content: space-between;
 }
 
+.checklist-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pr-status {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  transform: translateY(0.1rem);
+}
+
 .red {
-  color: rgb(220, 100, 100);
+  background-color: rgb(220, 100, 100);
 }
 
 .green {
-  color: rgb(76, 211, 139);
+  background-color: rgb(76, 211, 139);
 }
 
 /* end - Pre-ride page */

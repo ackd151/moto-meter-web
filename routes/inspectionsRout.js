@@ -3,14 +3,13 @@ const router = express.Router({ mergeParams: true });
 const Profile = require("../models/profileModel");
 const Inspection = require("../models/inspectionModel");
 const { activePage } = require("../middleware/index");
-const { allComplete } = require("../utils/checklistUtils");
 
 router.use(activePage);
 
 router.get("/", async (req, res, next) => {
   const { profileId } = req.params;
   const profile = await Profile.findById(profileId).populate("inspections");
-  const completed = await allComplete();
+  const completed = await Inspection.inspectionsComplete(profileId);
   res.render("pages/inspection", { profile, completed });
 });
 

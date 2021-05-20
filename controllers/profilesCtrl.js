@@ -1,7 +1,7 @@
 const Profile = require("../models/profileModel");
 const User = require("../models/userModel");
+const Inspection = require("../models/inspectionModel");
 const compareTasks = require("../utils/compareTasks");
-const { resetInspections } = require("../utils/checklistUtils");
 
 module.exports = {
   async createProfile(req, res, next) {
@@ -41,7 +41,7 @@ module.exports = {
         hours,
       });
       // reset pre-ride checklist
-      resetInspections();
+      await Inspection.reset();
     }
     res.redirect(
       `/home/${req.params.username}/profiles/${req.params.profileId}`

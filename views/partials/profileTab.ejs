@@ -33,7 +33,11 @@
       <p>No tasks created yet...</p>
       <% } %>
     </div>
-    <p>checklist placeholder</p>
+    <div class="checklist-status">
+      <% if (profile.inspections.length) { %> 
+      <p>Pre-ride status: <span class="pr-status <%=profile.completed ? "green" : "red"%>"></span></p>
+      <% } %> 
+    </div>
   </div>
   <div class="profile-tab__action-buttons">
     <a

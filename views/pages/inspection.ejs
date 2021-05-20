@@ -1,5 +1,35 @@
 <% layout("/layouts/boilerplate") %>
 <div class="action-page">
   <% include ../partials/profileHeader %>
-  <h1>PRE-RIDE</h1>
+  <section class="inspections-page">
+    <div class="inspections">
+      <h1 class="<%=completed ? "green" : "red"%>">PRE-RIDE INSPECTION</h1>
+      <!-- prettier-ignore -->
+      <% if (profile.inspections.length) { %>
+      <form
+        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections?_method=PATCH"
+        method="POST"
+      >
+        <% for (const [index, inspection] of profile.inspections.entries()) { %>
+        <section class="checklist-item">
+          <label for="<%=index%>"><%=inspection.title%></label>
+          <input type="checkbox" name="cbs[]" id="<%=index%>" <%=
+          inspection.completed ? "checked" : "" %> value="<%=inspection._id%>"
+          onChange="this.form.submit()" />
+        </section>
+        <% } %>
+      </form>
+      <% } %>
+    </div>
+    <div class="new-inspection">
+      <form
+        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
+        method="POST"
+      >
+        <label for="title">Inspection:</label>
+        <input type="text" id="title" name="title" required />
+        <button class="btn">ADD</button>
+      </form>
+    </div>
+  </section>
 </div>

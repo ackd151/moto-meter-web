@@ -443,6 +443,27 @@ textarea {
 }
 /* end - Profile header */
 
+/** Pre-ride page **/
+.inspections-page {
+  display: grid;
+  grid-template-rows: auto min-content;
+}
+
+.checklist-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.red {
+  color: rgb(220, 100, 100);
+}
+
+.green {
+  color: rgb(76, 211, 139);
+}
+
+/* end - Pre-ride page */
+
 /** Post-ride page **/
 .post-ride__page {
   display: flex;

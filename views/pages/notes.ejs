@@ -6,7 +6,7 @@
       <h2>Notes</h2>
     </div>
     <form
-      action="/profiles/<%=profile._id%>/notes"
+      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
       method="POST"
       class="notes-form"
     >

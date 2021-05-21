@@ -23,6 +23,7 @@ module.exports = {
       task.remainingHours = await task.getRemainingHours();
     }
     tasks.sort(compareTasks);
+    console.log(tasks);
 
     res.render("pages/profile", { profile });
   },

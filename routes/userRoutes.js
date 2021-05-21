@@ -17,7 +17,9 @@ router.get("/:username", isLoggedIn, async (req, res, next) => {
     for (const task of tasks) {
       task.remainingHours = await task.getRemainingHours();
     }
+    console.log(tasks);
     tasks.sort(compareTasks);
+    console.log(tasks);
     // Get pre-ride status
     profile.completed = await Inspection.inspectionsComplete(profile._id);
   }

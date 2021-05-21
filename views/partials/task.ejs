@@ -1,13 +1,20 @@
 <article class="task-partial">
   <div class="task__info">
     <h3>Task: <%= task.title %></h3>
-    <p>Due in: <%= task.remainingHours %> hours.</p>
+    <p>
+      Due in:
+      <span
+        class="<%=task.remainingHours > 3 ? 'col-good' : task.remainingHours > 1.5 ? 'col-caution' : 'col-danger'%>"
+        ><%= task.remainingHours %></span
+      >
+      hours.
+    </p>
     <p>Interval: <%= task.interval %> hours.</p>
     <p>Last completed at: <%= task.lastCompletedAt %> hour mark.</p>
   </div>
   <div class="task__sign-off">
     <form
-      action="/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=PATCH"
+      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=PATCH"
       method="POST"
       class="task__sign-off-form"
     >
@@ -15,58 +22,58 @@
       <div class="sign-off-action">
         <input
           type="number"
-          id="newHours"
-          name="lastCompletedAt"
+          name="task[lastCompletedAt]"
           step="0.1"
           value="<%=profile.hours%>"
-          max="<%=profile.hours%>"
           required
         />
         <button class="btn sign-off-submit">
-          <i class="fas fa-check-square"></i>
+          <i class="far fa-check-square"></i>
         </button>
       </div>
     </form>
   </div>
   <div class="task__edit">
-    <span class="task__edit-label">Edit Task</span>
+    <p class="edit-form-trigger">Edit Task</p>
     <form
-      action="/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=PATCH"
+      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=PATCH"
       method="POST"
       class="task__edit-form"
     >
-      <div>
-        <label for="interval">New Interval:</label>
+      <p class="task__edit-label">Edit Task</p>
+      <div class="form-row">
+        <label for="title<%=index%>">New Title:</label>
+        <input
+          type="text"
+          id="title<%=index%>"
+          name="task[title]"
+          value="<%=task.title%>"
+          required
+        />
+      </div>
+      <div class="form-row">
+        <label for="interval<%=index%>">New Interval:</label>
         <input
           type="number"
           step="0.1"
-          id="interval"
-          name="interval"
+          id="interval<%=index%>"
+          name="task[interval]"
           value="<%=task.interval%>"
           required
         />
       </div>
-      <div>
-        <label for="lastAt">Last Completion Time:</label>
+      <div class="form-row">
+        <label for="lastAt<%=index%>">Last Completion Time:</label>
         <input
           type="number"
           step="0.1"
-          id="lastAt"
-          name="lastCompletedAt"
+          id="lastAt<%=index%>"
+          name="task[lastCompletedAt]"
           value="<%=task.lastCompletedAt%>"
           required
         />
       </div>
-      <button class="btn sign-off-submit">
-        <i class="fas fa-check-square"></i>
-      </button>
+      <button class="btn form-submit">SUBMIT EDITS</button>
     </form>
   </div>
 </article>
-<script>
-  document.querySelectorAll("input").forEach((input) => {
-    input.addEventListener("focus", function () {
-      this.value = "";
-    });
-  });
-</script>

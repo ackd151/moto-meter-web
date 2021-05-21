@@ -38,7 +38,7 @@ input {
   color: inherit;
   border: 1px solid rgb(76, 211, 139);
   outline-color: rgb(76, 211, 139);
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
   padding: 0.25rem;
   border-radius: 5px;
 }
@@ -91,6 +91,7 @@ textarea {
 }
 
 .btn {
+  /* padding: 0.25rem 0.5rem; */
   box-shadow: 0 2px 5px 1px rgba(0, 255, 255, 0.2);
   border-radius: 5px;
 }
@@ -106,11 +107,16 @@ textarea {
   box-shadow: 0 1px 5px 1px rgba(0, 255, 255, 0.2);
 }
 
-/* @media only screen and (max-width: 600px) {
-  .action-page {
-    width: 95%;
-  }
-} */
+.btn-primary {
+  border: 1px solid rgb(76, 211, 139);
+  width: 100%;
+}
+
+.form-label {
+  text-align: center;
+  background-color: rgb(95, 95, 95);
+  margin-bottom: 0.25rem;
+}
 
 @media only screen and (max-width: 1000px) {
   .non-action-page {
@@ -189,9 +195,36 @@ textarea {
   grid-template-rows: min-content auto min-content;
 }
 
-.new-profile-form {
-  border: 1px solid #afafaf;
+.user-home__new-profile {
+  position: relative;
+  border: 1px solid rgb(76, 211, 139);
   border-radius: 5px;
+}
+
+.user-home__new-profile:hover,
+.user-home__new-profile:active {
+  border-color: #afafaf;
+}
+
+.user-home__new-profile:hover > .new-profile-form,
+.user-home__new-profile:active > .new-profile-form {
+  visibility: visible;
+  opacity: 1;
+}
+
+.user-home__new-profile:hover > .edit-form-trigger,
+.user-home__new-profile:active > .edit-form-trigger {
+  margin-top: 0.5rem;
+  opacity: 0;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.new-profile-form {
+  transition: all 0.5s;
+  visibility: hidden;
+  opacity: 0;
   padding: 0.5rem;
   justify-content: center;
   align-items: center;
@@ -344,14 +377,15 @@ textarea {
 
 .profile__edit-form-div {
   position: relative;
-  border: 1px solid #afafaf;
+  border: 1px solid rgb(76, 211, 139);
   border-radius: 5px;
-  /* padding: 0.25rem; */
+}
+
+.profile__edit-form-div:hover {
+  border-color: #afafaf;
 }
 
 .profile-edit-form {
-  /* border: 1px solid #afafaf;
-  border-radius: 5px; */
   padding: 0.5rem;
   justify-content: center;
   align-items: center;
@@ -365,12 +399,12 @@ textarea {
 }
 
 .edit-form-trigger {
-  margin-top: 0.5rem;
   position: absolute;
-  /* top: 50%; */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   transition: all 0.5s;
+  color: rgb(76, 211, 139);
 }
 
 .profile__edit-form-div:hover > form,
@@ -381,7 +415,11 @@ textarea {
 
 .profile__edit-form-div:hover > .edit-form-trigger,
 .profile__edit-form-div:active > .edit-form-trigger {
+  margin-top: 0.5rem;
   opacity: 0;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
 }
 
 @media only screen and (max-width: 850px) {
@@ -462,17 +500,34 @@ textarea {
 
 .pr-status {
   display: inline-block;
+  border-radius: 50%;
   height: 1rem;
   width: 1rem;
-  transform: translateY(0.1rem);
+  transform: translate(0.5rem, 0.1rem);
 }
 
-.red {
+.pr-status:hover {
+  cursor: pointer;
+}
+
+.danger {
   background-color: rgb(220, 100, 100);
 }
 
-.green {
+.col-danger {
+  color: rgb(220, 100, 100);
+}
+
+.col-caution {
+  color: rgb(220, 174, 100);
+}
+
+.good {
   background-color: rgb(76, 211, 139);
+}
+
+.col-good {
+  color: rgb(76, 211, 139);
 }
 
 /* end - Pre-ride page */
@@ -504,46 +559,68 @@ textarea {
 /* end - Post-ride page */
 
 /** Maintenance page **/
-.tasks__box {
+.tasks__page-grid {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  gap: 1rem;
   overflow: auto;
 }
 .tasks__task-box {
-  overflow: auto;
+  overflow-y: auto;
 }
 
 /* Task partial */
 .task-partial {
   border: 1px solid #afafaf;
+  border-radius: 5px;
   margin-top: 0.5rem;
   padding: 0.5rem;
-  width: 100%;
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.task__edit {
+  position: relative;
+  grid-area: 1/2/3/3;
+}
+
+.task__sign-off {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  grid-area: 2/1/2/2;
 }
 
 .task__sign-off,
 .task__edit {
   border: 1px solid rgb(76, 211, 139);
-  width: 33%;
-  height: 100%;
   border-radius: 5px;
 }
 
+.task__sign-off:hover,
+.task__sign-off:active {
+  border-color: #afafaf;
+}
+
 .task__sign-off-form {
-  padding: 1rem 0;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .sign-off-label {
+  color: rgb(76, 211, 139);
   display: inline-block;
   transform: translate(130%);
   margin-right: 0.5rem;
   transition: all 0.5s 0.1s;
 }
 
-.task__sign-off-form:hover > .sign-off-label {
+.task__sign-off:hover .sign-off-label,
+.task__sign-off:active .sign-off-label {
+  color: #afafaf;
   transform: translate(0);
   transition: all 0.5s;
 }
@@ -554,34 +631,80 @@ textarea {
   opacity: 0;
 }
 
-.task__sign-off-form:hover > .sign-off-action {
+.task__sign-off:hover .sign-off-action,
+.task__sign-off:active .sign-off-action {
   transition: all 0.5s 0.3s;
   visibility: visible;
   opacity: 1;
 }
 
-#newHours {
-  vertical-align: middle;
-}
-
-.sign-off-submit {
+.btn.sign-off-submit {
+  /* transform: translateY(1px); */
+  padding: 0;
   background-color: transparent;
   vertical-align: middle;
   border-radius: 5px;
 }
 
 .fa-check-square {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   color: rgb(76, 211, 139);
 }
 
 .task__edit-label {
-  display: inline-block;
-  transform: translate(130%, 130%);
+  text-align: center;
+  background-color: rgb(95, 95, 95);
 }
 
 .task__edit-form {
+  transition: all 0.5s;
   visibility: hidden;
+  opacity: 0;
+  padding: 0.5rem;
+}
+
+.task__edit-form > .form-submit {
+  width: 100%;
+}
+
+.task__edit-label,
+.form-row input {
+  margin-bottom: 0.25rem;
+}
+
+/* edit form hover/active transition */
+.task__edit:hover,
+.task__edit:active {
+  border-color: #afafaf;
+}
+
+.task__edit:hover > .edit-form-trigger,
+.task__edit:active > .edit-form-trigger {
+  margin-top: 0.5rem;
+  opacity: 0;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.task__edit:hover > .task__edit-form,
+.task__edit:active > .task__edit-form {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media only screen and (max-width: 700px) {
+  .task-partial {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, min-content);
+  }
+
+  /* .task__sign-off {
+    grid-area: 2/1/2/2;
+  } */
+
+  .task__edit {
+    grid-area: 3/1/4/2;
+  }
 }
 
 /* Get rid of default button styling */
@@ -598,11 +721,41 @@ input[type="reset"] {
 }
 
 /* end - Task partial */
-/* end - Maintenance page */
 
-.tasks__new-task-form {
-  border: 1px solid #afafaf;
+.tasks__new-task {
+  position: relative;
+  border: 1px solid rgb(76, 211, 139);
+  border-radius: 5px;
 }
+
+.tasks__new-task:hover,
+.tasks__new-task:active {
+  border-color: #afafaf;
+}
+
+.tasks__new-task:hover > .new-task-form,
+.tasks__new-task:active > .new-task-form {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tasks__new-task:hover > .edit-form-trigger,
+.tasks__new-task:active > .edit-form-trigger {
+  margin-top: 0.5rem;
+  opacity: 0;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.new-task-form {
+  padding: 0.5rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+/* end - Maintenance page */
 
 /** Notes page **/
 .notes {
@@ -629,13 +782,7 @@ input[type="reset"] {
   justify-content: space-between;
 }
 
-.btn-save {
-  padding: 0.25rem 1rem;
-  background-color: rgb(76, 211, 139);
-  border-radius: 5px;
-}
-
-.btn-save i {
+.fa-save {
   margin-right: 0.5rem;
 }
 
@@ -644,13 +791,6 @@ input[type="reset"] {
 /** Inspection page **/
 
 /* end - Inspection page */
-
-/* form {
-  transition: visibility 1.5s, opacity 1.5s;
-  opacity: 1;
-  visibility: visible;
-  position: static;
-} */
 
 .form-row {
   display: flex;
@@ -664,7 +804,8 @@ input[type="reset"] {
   color: #afafaf;
 }
 
-.new-task-toggle:hover {
+.new-task-toggle:hover,
+.new-task-toggle:active {
   background-color: rgb(95, 95, 95);
   color: #fff;
   cursor: pointer;

@@ -9,6 +9,7 @@
       <% include ../partials/profileTab %> <% } } %>
     </div>
     <div class="user-home__new-profile">
+      <h3 class="edit-form-trigger">New Bike Profile</h3>
       <form
         action="/home/<%=user.username%>/profiles"
         method="POST"
@@ -49,7 +50,7 @@
             type="text"
             id="hours"
             name="profile[hours]"
-            placeholder="Current engine hours"
+            placeholder="current engine hours"
           />
         </div>
         <button class="btn form-submit">Create</button>

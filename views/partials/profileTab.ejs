@@ -35,7 +35,7 @@
     </div>
     <div class="checklist-status">
       <% if (profile.inspections.length) { %> 
-      <p>Pre-ride status: <span class="pr-status <%=profile.completed ? "green" : "red"%>"></span></p>
+      <p>Pre-ride status: <a href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"><span class="pr-status <%=profile.completed ? "good" : "danger"%>"></span></a></p>
       <% } %> 
     </div>
   </div>

@@ -12,6 +12,7 @@ module.exports = {
       task.remainingHours = await task.getRemainingHours();
     }
     tasks.sort(compareTasks);
+    console.log(tasks);
     res.render("pages/maintenance", { profile });
   },
   async createTask(req, res, next) {
@@ -29,11 +30,14 @@ module.exports = {
     );
   },
   async updateTask(req, res, next) {
-    const { lastCompletedAt, interval } = req.body;
+    const { title, lastCompletedAt, interval } = req.body.task;
     const task = await Task.findById(req.params.taskId);
+    task.title = title || task.title;
     task.interval = interval || task.interval;
     task.lastCompletedAt = lastCompletedAt || task.lastCompletedAt;
     await task.save();
-    res.redirect(`/profiles/${req.params.profileId}/maintenance`);
+    res.redirect(
+      `/home/${req.user.username}/profiles/${req.params.profileId}/maintenance`
+    );
   },
 };

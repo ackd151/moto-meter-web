@@ -15,6 +15,15 @@
           ><%= profile.hours %></a
         >
       </p>
+      <form
+        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=DELETE"
+        method="POST"
+        onsubmit="return deleteConfirmation();"
+      >
+        <button class="btn-delete">
+          <i class="fas fa-trash"></i>Delete this profile?
+        </button>
+      </form>
     </div>
     <div class="profile__edit-form-div">
       <h3 class="edit-form-trigger">Edit Bike Profile</h3>
@@ -74,3 +83,8 @@
     </div>
   </section>
 </div>
+<script>
+  function deleteConfirmation() {
+    return confirm("Are you sure? This action is irreversible...");
+  }
+</script>

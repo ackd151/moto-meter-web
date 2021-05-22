@@ -1,7 +1,6 @@
 const Profile = require("../models/profileModel");
 const User = require("../models/userModel");
 const Inspection = require("../models/inspectionModel");
-const compareTasks = require("../utils/compareTasks");
 
 module.exports = {
   async createProfile(req, res, next) {
@@ -14,16 +13,7 @@ module.exports = {
     res.redirect(`/home/${req.params.username}/profiles/${newProfile._id}`);
   },
   async getProfile(req, res, next) {
-    const profile = await Profile.findById(req.params.profileId).populate(
-      "tasks"
-    );
-    // Sort tasks
-    const { tasks } = profile;
-    for (const task of tasks) {
-      task.remainingHours = await task.getRemainingHours();
-    }
-    tasks.sort(compareTasks);
-    console.log(tasks);
+    const profile = await Profile.findById(req.params.profileId);
 
     res.render("pages/profile", { profile });
   },
@@ -51,5 +41,17 @@ module.exports = {
   async getPostRide(req, res, next) {
     const profile = await Profile.findById(req.params.profileId);
     res.render("pages/postRide", { profile });
+  },
+  async deleteProfile(req, res, next) {
+    console.log("In DELETE");
+    await User.findOneAndUpdate(
+      { username: req.params.username },
+      {
+        $pull: { bikeProfiles: req.params.profileId },
+      }
+    );
+    await Profile.findByIdAndDelete(req.params.profileId);
+    req.flash("success", "Bike profile successfully deleted.");
+    res.redirect(`/home/${req.user.username}`);
   },
 };

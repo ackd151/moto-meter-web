@@ -6,17 +6,20 @@ const {
   getProfile,
   updateProfile,
   getPostRide,
+  deleteProfile,
 } = require("../controllers/profilesCtrl");
 const { isLoggedIn, ownsProfile, activePage } = require("../middleware/index");
 const catchAsync = require("../utils/catchAsync");
 
 router.use(activePage, isLoggedIn);
 
+// move to user routes/ctrl
 router.post("/", catchAsync(createProfile));
 
 router.get("/:profileId", ownsProfile, catchAsync(getProfile));
-router.get("/:profileId/post-ride", ownsProfile, getPostRide);
-
 router.patch("/:profileId", ownsProfile, catchAsync(updateProfile));
+router.delete("/:profileId", ownsProfile, catchAsync(deleteProfile));
+
+router.get("/:profileId/post-ride", ownsProfile, getPostRide);
 
 module.exports = router;

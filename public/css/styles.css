@@ -112,10 +112,75 @@ textarea {
   width: 100%;
 }
 
+.btn-delete {
+  margin-top: 1rem;
+  padding: 0.25rem 1rem;
+  border: 1px solid rgb(220, 100, 100);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 1px rgb(255, 0, 0, 0.2);
+}
+
+.btn-delete:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 5px 1px rgb(255, 0, 0, 0.2);
+}
+
+.btn-delete:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 5px 1px rgb(255, 0, 0, 0.2);
+}
+
+.btn-task-delete {
+  transition: all 0.5s;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.25rem;
+  border: 1px solid rgb(220, 100, 100);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 1px rgb(255, 0, 0, 0.2);
+}
+
+.btn-task-delete:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 5px 1px rgb(255, 0, 0, 0.2);
+}
+
+.btn-task-delete:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 5px 1px rgb(255, 0, 0, 0.2);
+}
+
+.fa-trash {
+  font-size: inherit;
+  color: rgb(220, 100, 100);
+  margin: 0 0.5rem;
+}
+
 .form-label {
   text-align: center;
   background-color: rgb(95, 95, 95);
   margin-bottom: 0.25rem;
+}
+
+.danger {
+  background-color: rgb(220, 100, 100);
+}
+
+.col-danger {
+  color: rgb(220, 100, 100);
+}
+
+.col-caution {
+  color: rgb(220, 174, 100);
+}
+
+.good {
+  background-color: rgb(76, 211, 139);
+}
+
+.col-good {
+  color: rgb(76, 211, 139);
 }
 
 @media only screen and (max-width: 1000px) {
@@ -485,6 +550,7 @@ textarea {
 .inspections-page {
   display: grid;
   grid-template-rows: auto min-content;
+  gap: 1rem;
 }
 
 .checklist-item {
@@ -508,26 +574,6 @@ textarea {
 
 .pr-status:hover {
   cursor: pointer;
-}
-
-.danger {
-  background-color: rgb(220, 100, 100);
-}
-
-.col-danger {
-  color: rgb(220, 100, 100);
-}
-
-.col-caution {
-  color: rgb(220, 174, 100);
-}
-
-.good {
-  background-color: rgb(76, 211, 139);
-}
-
-.col-good {
-  color: rgb(76, 211, 139);
 }
 
 /* end - Pre-ride page */
@@ -579,6 +625,10 @@ textarea {
   grid-template-rows: repeat(2, min-content);
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+}
+
+.task__info {
+  position: relative;
 }
 
 .task__edit {

@@ -4,14 +4,18 @@ const {
   createTask,
   updateTask,
   getTaskPage,
+  deleteTask,
 } = require("../controllers/tasksCtrl");
 const catchAsync = require("../utils/catchAsync");
-const { isLoggedIn } = require("../middleware/index");
+const { isLoggedIn, ownsProfile } = require("../middleware/index");
 
-router.get("/", isLoggedIn, catchAsync(getTaskPage));
+router.use(isLoggedIn, ownsProfile);
 
-router.post("/", isLoggedIn, catchAsync(createTask));
+router.route("/").get(catchAsync(getTaskPage)).post(catchAsync(createTask));
 
-router.patch("/:taskId", isLoggedIn, catchAsync(updateTask));
+router
+  .route("/:taskId")
+  .patch(catchAsync(updateTask))
+  .delete(catchAsync(deleteTask));
 
 module.exports = router;

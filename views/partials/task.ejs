@@ -1,6 +1,15 @@
 <article class="task-partial">
   <div class="task__info">
     <h3>Task: <%= task.title %></h3>
+    <form
+      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=DELETE"
+      method="POST"
+      onsubmit="return deleteConfirmation();"
+    >
+      <button class="btn-task-delete">
+        <i class="fas fa-trash"></i>
+      </button>
+    </form>
     <p>
       Due in:
       <span

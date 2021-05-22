@@ -3,7 +3,7 @@
   <% include ../partials/profileHeader %>
   <section class="inspections-page">
     <div class="inspections">
-      <h1 class="<%=completed ? "green" : "red"%>">PRE-RIDE INSPECTION</h1>
+      <h1 class="<%=completed ? "good" : "danger"%>">PRE-RIDE INSPECTION</h1>
       <!-- prettier-ignore -->
       <% if (profile.inspections.length) { %>
       <form

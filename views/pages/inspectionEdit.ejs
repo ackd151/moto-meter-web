@@ -1,0 +1,32 @@
+<% layout("/layouts/boilerplate") %>
+<div class="action-page">
+  <% include ../partials/profileHeader %>
+  <section class="inspection-selection">
+    <% if (profile.inspections.length) { %>
+    <h2>Select inspections you wish to delete</h2>
+    <form
+      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/destroy?_method=DELETE"
+      method="POST"
+      onsubmit="return deleteConfirmation();"
+    >
+      <% for (const [index, inspection] of profile.inspections.entries()) { %>
+      <section class="checklist-item">
+        <label for="<%=index%>"><%=inspection.title%></label>
+        <input
+          type="checkbox"
+          name="cbs[]"
+          id="<%=index%>"
+          value="<%=inspection._id%>"
+        />
+      </section>
+      <% } %>
+      <button>Delete Selected</button>
+    </form>
+    <% } %>
+  </section>
+</div>
+<script>
+  function deleteConfirmation() {
+    return confirm("Are you sure? This action is irreversible...");
+  }
+</script>

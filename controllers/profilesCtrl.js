@@ -32,7 +32,7 @@ module.exports = {
         hours,
       });
       // reset pre-ride checklist
-      await Inspection.reset();
+      await Inspection.reset(req.params.profileId);
     }
     res.redirect(
       `/home/${req.params.username}/profiles/${req.params.profileId}`

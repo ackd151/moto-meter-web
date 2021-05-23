@@ -21,9 +21,9 @@ inspectionSchema.statics.inspectionsComplete = async function (profileId) {
   return true;
 };
 
-inspectionSchema.statics.reset = async function () {
-  const inspections = await this.find({});
-  for (const inspection of inspections) {
+inspectionSchema.statics.reset = async function (profileId) {
+  const profile = await Profile.findById(profileId).populate("inspections");
+  for (const inspection of profile.inspections) {
     inspection.completed = false;
     await inspection.save();
   }

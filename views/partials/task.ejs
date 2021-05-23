@@ -13,7 +13,21 @@
     <p>
       Due in:
       <span
-        class="<%=task.remainingHours > 3 ? 'col-good' : task.remainingHours > 1.5 ? 'col-caution' : 'col-danger'%>"
+        class="
+          <%=task.remainingHours
+          >
+          3
+          ?
+          'col-good'
+          :
+          task.remainingHours
+          >
+          1.5
+          ?
+          'col-caution'
+          :
+          'col-danger'%>
+        "
         ><%= task.remainingHours %></span
       >
       hours.
@@ -72,7 +86,7 @@
         />
       </div>
       <div class="form-row">
-        <label for="lastAt<%=index%>">Last Completion Time:</label>
+        <label for="lastAt<%=index%>">New Completed Time:</label>
         <input
           type="number"
           step="0.1"

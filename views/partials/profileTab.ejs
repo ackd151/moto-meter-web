@@ -24,7 +24,10 @@
           Due in:
           <a
             href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
-            ><span class="link due-in"><%= task.remainingHours %></span></a
+            ><span
+            class="<%=task.remainingHours > 3 ? 'col-good' : task.remainingHours > 1.5 ? 'col-caution' : 'col-danger'%>"
+            ><%= task.remainingHours %></span
+          ></a
           >
           hours.
         </p>

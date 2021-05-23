@@ -23,20 +23,46 @@ router.post("/", async (req, res, next) => {
   await newInspection.save();
   profile.inspections.push(newInspection);
   await profile.save();
+  req.flash("success", `Added "${newInspection.title}" inspection`);
   res.redirect(
     `/home/${req.user.username}/profiles/${profile._id}/inspections`
   );
 });
 
 router.patch("/", async (req, res, next) => {
-  const allInspections = await Inspection.find({});
+  const activeProfile = await Profile.findById(req.params.profileId).populate(
+    "inspections"
+  );
+  // const allInspections = activeProfile.inspections;
   const { cbs } = req.body;
-  for (const inspection of allInspections) {
+  for (const inspection of activeProfile.inspections) {
     cbs.includes(inspection._id.toString())
       ? (inspection.completed = true)
       : (inspection.completed = false);
     await inspection.save();
   }
+  res.redirect(
+    `/home/${req.user.username}/profiles/${req.params.profileId}/inspections`
+  );
+});
+
+router.get("/edit", async (req, res, next) => {
+  const profile = await Profile.findById(req.params.profileId).populate(
+    "inspections"
+  );
+  res.render("pages/inspectionEdit", { profile });
+});
+
+router.delete("/destroy", async (req, res, next) => {
+  const { cbs } = req.body;
+  await Profile.findByIdAndUpdate(req.params.profileId, {
+    $pull: { inspections: { $in: cbs } },
+  });
+  const response = await Inspection.deleteMany({ _id: { $in: cbs } });
+  req.flash(
+    "success",
+    `Successfully deleted ${response.deletedCount} inspections`
+  );
   res.redirect(
     `/home/${req.user.username}/profiles/${req.params.profileId}/inspections`
   );

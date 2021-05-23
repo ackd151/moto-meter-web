@@ -9,6 +9,25 @@
   box-sizing: inherit;
 }
 
+/** Scrollbar **/
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #000;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(151, 211, 151);
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(76, 211, 139);
+}
+/* end - Scrollbar */
+
 html {
   font-size: 100%;
 }
@@ -88,6 +107,11 @@ textarea {
 .link {
   color: rgb(76, 211, 139);
   font-size: 1.25rem;
+}
+
+.link:hover {
+  color: rgb(151, 211, 151);
+  transform: translateY(-1px);
 }
 
 .btn {
@@ -551,11 +575,33 @@ textarea {
   display: grid;
   grid-template-rows: auto min-content;
   gap: 1rem;
+  overflow-y: auto;
+}
+
+.checklist-header {
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.inspections {
+  border: 1px solid #afafaf;
+  border-radius: 5px;
+  overflow-y: auto;
+  padding: 1rem;
+  margin: 0 auto;
+  width: 70%;
+}
+
+.pre-ride-checklist {
+  height: 90%;
+  overflow-y: auto;
 }
 
 .checklist-item {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
+  margin-bottom: 0.5rem;
 }
 
 .checklist-status {
@@ -574,6 +620,66 @@ textarea {
 
 .pr-status:hover {
   cursor: pointer;
+}
+
+.inspection-actions {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #afafaf;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+/** custom checkboxes **/
+.checkbox {
+  display: block;
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox:hover {
+  color: rgb(76, 211, 139);
+}
+
+/* When the checkbox is checked */
+.checkbox input:checked ~ .checkmark {
+  color: rgb(76, 211, 139);
+  opacity: 1;
+}
+.checkbox input:checked ~ .checkmark:hover {
+  color: rgb(220, 100, 100);
+}
+
+/* end - custom checkboxes */
+
+@media only screen and (max-width: 500px) {
+  .inspections {
+    width: 100%;
+  }
 }
 
 /* end - Pre-ride page */

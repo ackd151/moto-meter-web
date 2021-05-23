@@ -3,33 +3,41 @@
   <% include ../partials/profileHeader %>
   <section class="inspections-page">
     <div class="inspections">
-      <h1 class="<%=completed ? "good" : "danger"%>">PRE-RIDE INSPECTION</h1>
+      <h1 class="checklist-header <%=completed ? "good" : "danger"%>">PRE-RIDE INSPECTION</h1>
       <!-- prettier-ignore -->
-      <% if (profile.inspections.length) { %>
+      <% if (profile.inspections.length) { %>    
       <form
         action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections?_method=PATCH"
         method="POST"
+        class="pre-ride-checklist"
       >
         <% for (const [index, inspection] of profile.inspections.entries()) { %>
         <section class="checklist-item">
-          <label for="<%=index%>"><%=inspection.title%></label>
           <input type="checkbox" name="cbs[]" id="<%=index%>" <%=
           inspection.completed ? "checked" : "" %> value="<%=inspection._id%>"
           onChange="this.form.submit()" />
+          <label for="<%=index%>"><%=inspection.title%></label>
+          <label class="checkbox"><%=inspection.title%>
+            <input type="checkbox">
+            <i class="fas fa-check checkmark"></i>
+            <!-- <span class="checkmark"></span> -->
+          </label>
         </section>
         <% } %>
       </form>
       <% } %>
     </div>
-    <div class="new-inspection">
+    <div class="inspection-actions">
       <form
         action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
         method="POST"
+        class="new-inspection-form"
       >
-        <label for="title">Inspection:</label>
+        <label for="title">New Inspection:</label>
         <input type="text" id="title" name="title" required />
         <button class="btn">ADD</button>
       </form>
+      <a href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/edit" class="link">Delete Inspection(s)?</a>
     </div>
   </section>
 </div>

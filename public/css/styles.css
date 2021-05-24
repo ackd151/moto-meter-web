@@ -115,7 +115,6 @@ textarea {
 }
 
 .btn {
-  /* padding: 0.25rem 0.5rem; */
   box-shadow: 0 2px 5px 1px rgba(0, 255, 255, 0.2);
   border-radius: 5px;
 }
@@ -134,6 +133,12 @@ textarea {
 .btn-primary {
   border: 1px solid rgb(76, 211, 139);
   width: 100%;
+}
+
+.btn-add {
+  vertical-align: middle;
+  padding: 0.12rem 0.5rem;
+  border: 1px solid rgb(76, 211, 139);
 }
 
 .btn-delete {
@@ -581,7 +586,7 @@ textarea {
 .checklist-header {
   text-align: center;
   border-radius: 5px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .inspections {
@@ -599,8 +604,6 @@ textarea {
 }
 
 .checklist-item {
-  /* display: flex;
-  justify-content: space-between; */
   margin-bottom: 0.5rem;
 }
 
@@ -623,11 +626,25 @@ textarea {
 }
 
 .inspection-actions {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto min-content;
   border: 1px solid #afafaf;
   border-radius: 5px;
   padding: 0.5rem;
+}
+
+.new-inspection-form {
+  display: grid;
+  grid-template-columns: 8rem auto min-content;
+  align-items: center;
+}
+
+.inspection-actions .link {
+  min-width: 10rem;
+  margin-left: 1rem;
+  justify-self: end;
+  font-size: 1rem;
+  align-self: center;
 }
 
 /** custom checkboxes **/
@@ -635,7 +652,6 @@ textarea {
   display: block;
   position: relative;
   padding-left: 2rem;
-  margin-bottom: 1rem;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -652,7 +668,6 @@ textarea {
   width: 0;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -660,21 +675,56 @@ textarea {
   opacity: 0;
 }
 
-/* On mouse-over, add a grey background color */
-.checkbox:hover {
-  color: rgb(76, 211, 139);
-}
-
-/* When the checkbox is checked */
 .checkbox input:checked ~ .checkmark {
   color: rgb(76, 211, 139);
   opacity: 1;
 }
-.checkbox input:checked ~ .checkmark:hover {
+
+.checkbox input:checked ~ .checkmark:hover,
+.checkbox input:checked ~ .title:hover {
   color: rgb(220, 100, 100);
 }
 
+.checkbox input:not(:checked) ~ .title:hover {
+  color: rgb(76, 211, 139);
+  opacity: 1;
+}
+
+.checklist-item hr {
+  border: none;
+  height: 1px;
+  color: #afafaf;
+  background-color: #afafaf;
+  margin: 1rem 0;
+}
+
+.checklist-item:last-of-type hr {
+  display: none;
+}
+
 /* end - custom checkboxes */
+
+.inspection-delete-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 92%;
+  overflow-y: auto;
+}
+
+.btn-inspection-delete {
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+@media only screen and (max-width: 700px) {
+  .inspection-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .inspection-actions a {
+    margin-top: 1rem;
+  }
+}
 
 @media only screen and (max-width: 500px) {
   .inspections {
@@ -795,7 +845,6 @@ textarea {
 }
 
 .btn.sign-off-submit {
-  /* transform: translateY(1px); */
   padding: 0;
   background-color: transparent;
   vertical-align: middle;

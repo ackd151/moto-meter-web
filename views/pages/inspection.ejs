@@ -13,15 +13,18 @@
       >
         <% for (const [index, inspection] of profile.inspections.entries()) { %>
         <section class="checklist-item">
-          <input type="checkbox" name="cbs[]" id="<%=index%>" <%=
-          inspection.completed ? "checked" : "" %> value="<%=inspection._id%>"
-          onChange="this.form.submit()" />
-          <label for="<%=index%>"><%=inspection.title%></label>
-          <label class="checkbox"><%=inspection.title%>
-            <input type="checkbox">
+          <label class="checkbox">
+            <input 
+              type="checkbox" 
+              name="cbs[]" 
+              id="<%=index%>" 
+              <%=inspection.completed ? "checked" : "" %>
+              value="<%=inspection._id%>"
+              onChange="this.form.submit()" />
+            <p class="title"><%=inspection.title%></p>
             <i class="fas fa-check checkmark"></i>
-            <!-- <span class="checkmark"></span> -->
           </label>
+          <hr>
         </section>
         <% } %>
       </form>
@@ -35,7 +38,7 @@
       >
         <label for="title">New Inspection:</label>
         <input type="text" id="title" name="title" required />
-        <button class="btn">ADD</button>
+        <button class="btn btn-add">ADD</button>
       </form>
       <a href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/edit" class="link">Delete Inspection(s)?</a>
     </div>

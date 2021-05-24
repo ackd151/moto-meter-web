@@ -10,6 +10,9 @@ const {
 } = require("../controllers/profilesCtrl");
 const { isLoggedIn, ownsProfile, activePage } = require("../middleware/index");
 const catchAsync = require("../utils/catchAsync");
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 router.use(activePage, isLoggedIn);
 
@@ -17,7 +20,12 @@ router.use(activePage, isLoggedIn);
 router.post("/", catchAsync(createProfile));
 
 router.get("/:profileId", ownsProfile, catchAsync(getProfile));
-router.patch("/:profileId", ownsProfile, catchAsync(updateProfile));
+router.patch(
+  "/:profileId",
+  ownsProfile,
+  upload.single("image"),
+  catchAsync(updateProfile)
+);
 router.delete("/:profileId", ownsProfile, catchAsync(deleteProfile));
 
 router.get("/:profileId/post-ride", ownsProfile, getPostRide);

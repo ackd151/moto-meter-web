@@ -18,6 +18,7 @@ const profileSchema = new Schema({
     type: Number,
     required: true,
   },
+  image: { path: String, filename: String },
   tasks: [
     {
       type: Schema.Types.ObjectId,

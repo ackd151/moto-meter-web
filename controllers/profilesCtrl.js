@@ -1,6 +1,9 @@
 const Profile = require("../models/profileModel");
 const User = require("../models/userModel");
 const Inspection = require("../models/inspectionModel");
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 module.exports = {
   async createProfile(req, res, next) {
@@ -20,12 +23,23 @@ module.exports = {
   async updateProfile(req, res, next) {
     if (req.body.profile) {
       const { year, make, model, hours } = req.body.profile;
-      await Profile.findByIdAndUpdate(req.params.profileId, {
-        year,
-        make,
-        model,
-        hours,
-      });
+      const profile = await Profile.findById(req.params.profileId);
+      profile.year = year;
+      profile.make = make;
+      profile.model = model;
+      profile.hours = hours;
+      if (req.file) {
+        const { path, filename } = req.file;
+        profile.image = { path, filename };
+      }
+      await profile.save();
+      // await Profile.findByIdAndUpdate(req.params.profileId, {
+      //   year,
+      //   make,
+      //   model,
+      //   hours,
+      //   image: { path, filename },
+      // });
     } else if (req.body.hours) {
       const { hours } = req.body;
       await Profile.findByIdAndUpdate(req.params.profileId, {

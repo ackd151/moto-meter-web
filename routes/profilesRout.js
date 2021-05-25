@@ -17,7 +17,7 @@ const upload = multer({ storage });
 router.use(activePage, isLoggedIn);
 
 // move to user routes/ctrl
-router.post("/", catchAsync(createProfile));
+router.post("/", upload.single("image"), catchAsync(createProfile));
 
 router.get("/:profileId", ownsProfile, catchAsync(getProfile));
 router.patch(

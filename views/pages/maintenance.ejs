@@ -11,50 +11,69 @@
             <% include ../partials/task %> 
         <% } } %>
     </div>
-    <div class="tasks__new-task">
-      <p class="edit-form-trigger">New Task</p>
-      <form
-        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
-        method="POST"
-        class="new-task-form"
-      >
-        <p class="form-label">New Task</p>
-        <div class="form-row">
-          <label for="title">Title / Description</label>
-          <input
-            type="text"
-            id="title"
-            name="task[title]"
-            placeholder="Task description"
-            required
-          />
-        </div>
-        <div class="form-row">
-          <label for="interval">Maintenance Interval (hrs): </label>
-          <input
-            type="number"
-            step=".1"
-            id="interval"
-            name="task[interval]"
-            placeholder="e.g 7.5"
-            required
-          />
-        </div>
-        <div class="form-row">
-          <label for="lastDoneAt">Last completed at (hrs): </label>
-          <input
-            type="number"
-            step=".1"
-            id="lastDoneAt"
-            name="task[lastCompletedAt]"
-            placeholder="e.g. 7.5"
-            required
-          />
-        </div>
-        <button class="btn btn-primary">Create Task</button>
-      </form>
+    <div class="modal-trigger">
+      <h3 class="btn btn-fw mb-sm">Add New Maintenance Task?</h3>
     </div>
   </section>
+  <!-- Modal Form -->
+  <div class="modal" id="modal">
+    <span class="close">&times;</span>
+    <form
+      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
+      method="POST"
+      class="modal-form"
+    >
+      <h3 class="form-header">Create New Task</h3>
+      <div class="modal-form-contents">
+        <div class="modal-form-window">
+          <div class="modal-form-items">
+            <div class="modal-form-line">
+              <label for="title" class="modal-form-label"
+                >Title / Description</label
+              >
+              <input
+                type="text"
+                class="modal-form-input"
+                id="title"
+                name="task[title]"
+                placeholder="Task description"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="interval" class="modal-form-label"
+                >Maintenance Interval (hrs):
+              </label>
+              <input
+                type="number"
+                class="modal-form-input"
+                step=".1"
+                id="interval"
+                name="task[interval]"
+                placeholder="e.g 7.5"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="lastDoneAt" class="modal-form-label"
+                >Last completed at (hrs):
+              </label>
+              <input
+                type="number"
+                class="modal-form-input"
+                step=".1"
+                id="lastDoneAt"
+                name="task[lastCompletedAt]"
+                placeholder="e.g. 7.5"
+                required
+              />
+            </div>
+          </div>
+          <button class="btn btn-fw">Create Task</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script>
@@ -65,7 +84,21 @@
   });
 </script>
 <script>
+  // Confirm deletion script
   function deleteConfirmation() {
     return confirm("Are you sure? This action is irreversible...");
   }
+
+  // Modal form script
+  const modal = document.getElementById("modal");
+  const trigger = document.querySelector(".modal-trigger");
+  const modalClose = document.querySelector(".close");
+
+  trigger.onclick = function () {
+    modal.style.display = "block";
+  };
+
+  modalClose.onclick = function () {
+    modal.style.display = "none";
+  };
 </script>

@@ -8,53 +8,94 @@
       <% if (user.bikeProfiles) { for (const profile of user.bikeProfiles) { %>
       <% include ../partials/profileTab %> <% } } %>
     </div>
-    <div class="user-home__new-profile">
-      <h3 class="edit-form-trigger">New Bike Profile</h3>
-      <form
-        action="/home/<%=user.username%>/profiles"
-        method="POST"
-        class="new-profile-form"
-      >
-        <h3 class="form-header">New Bike Profile</h3>
-        <div class="grid-item">
-          <label for="year">YEAR</label>
-          <input
-            type="text"
-            id="year"
-            name="profile[year]"
-            placeholder="manufacture year"
-          />
-        </div>
-        <div class="grid-item">
-          <label for="make">MAKE</label>
-          <input
-            type="text"
-            id="make"
-            name="profile[make]"
-            placeholder="manufacturer"
-          />
-        </div>
-
-        <div class="grid-item">
-          <label for="model">MODEL</label>
-          <input
-            type="text"
-            id="model"
-            name="profile[model]"
-            placeholder="model series"
-          />
-        </div>
-        <div class="grid-item">
-          <label for="hours">HOURS</label>
-          <input
-            type="text"
-            id="hours"
-            name="profile[hours]"
-            placeholder="current engine hours"
-          />
-        </div>
-        <button class="btn form-submit">Create</button>
-      </form>
+    <div class="modal-trigger">
+      <h3 class="btn btn-fw mb-sm">Create New Bike Profile?</h3>
     </div>
   </div>
+  <!-- Modal Form -->
+  <div class="modal" id="modal">
+    <span class="close">&times;</span>
+    <form
+      action="/home/<%=user.username%>/profiles"
+      method="POST"
+      class="modal-form"
+      enctype="multipart/form-data"
+    >
+      <h3 class="form-header">New Bike Profile</h3>
+      <div class="modal-form-contents">
+        <div class="modal-form-window">
+          <div class="modal-form-items">
+            <div class="modal-form-line">
+              <label for="year" class="modal-form-label">YEAR</label>
+              <input
+                type="text"
+                class="modal-form-input"
+                id="year"
+                name="profile[year]"
+                placeholder="manufacture year"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="make" class="modal-form-label">MAKE</label>
+              <input
+                type="text"
+                class="modal-form-input"
+                id="make"
+                name="profile[make]"
+                placeholder="manufacturer"
+                required
+              />
+            </div>
+
+            <div class="modal-form-line">
+              <label for="model" class="modal-form-label">MODEL</label>
+              <input
+                type="text"
+                class="modal-form-input"
+                id="model"
+                name="profile[model]"
+                placeholder="model series"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="hours" class="modal-form-label">HOURS</label>
+              <input
+                type="text"
+                class="modal-form-input"
+                id="hours"
+                name="profile[hours]"
+                placeholder="current engine hours"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="image" class="modal-form-label">IMAGE</label>
+              <input
+                type="file"
+                class="modal-form-input"
+                id="image"
+                name="image"
+              />
+            </div>
+          </div>
+          <button class="btn btn-fw">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+<script>
+  const modal = document.getElementById("modal");
+  const trigger = document.querySelector(".modal-trigger");
+  const modalClose = document.querySelector(".close");
+
+  trigger.onclick = function () {
+    modal.style.display = "block";
+  };
+
+  modalClose.onclick = function () {
+    modal.style.display = "none";
+  };
+</script>

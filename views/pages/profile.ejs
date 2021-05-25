@@ -25,71 +25,103 @@
         </button>
       </form>
     </div>
-    <div class="profile__edit-form-div">
-      <h3 class="edit-form-trigger">Edit Bike Profile</h3>
-      <form
-        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
-        method="POST"
-        class="profile-edit-form"
-        enctype="multipart/form-data"
-      >
-        <h3 class="form-header">Edit Bike Profile</h3>
-        <div class="grid-item">
-          <label for="year">YEAR</label>
-          <input
-            type="text"
-            id="year"
-            name="profile[year]"
-            placeholder="manufacture year"
-            value="<%=profile.year%>"
-            required
-          />
-        </div>
-        <div class="grid-item">
-          <label for="make">MAKE</label>
-          <input
-            type="text"
-            id="make"
-            name="profile[make]"
-            placeholder="manufacturer"
-            value="<%=profile.make%>"
-            required
-          />
-        </div>
-
-        <div class="grid-item">
-          <label for="model">MODEL</label>
-          <input
-            type="text"
-            id="model"
-            name="profile[model]"
-            placeholder="model series"
-            value="<%=profile.model%>"
-            required
-          />
-        </div>
-        <div class="grid-item">
-          <label for="hours">HOURS</label>
-          <input
-            type="text"
-            id="hours"
-            name="profile[hours]"
-            placeholder="Current engine hours"
-            value="<%=profile.hours%>"
-            required
-          />
-        </div>
-        <div class="grid-item">
-          <label for="image">IMAGE</label>
-          <input type="file" id="image" name="image" />
-        </div>
-        <button class="btn form-submit">SUBMIT EDITS</button>
-      </form>
+    <div class="modal-trigger">
+      <h3 class="btn btn-fw mb-sm">Edit This Profile?</h3>
     </div>
   </section>
+  <!-- Modal Form -->
+  <div class="modal" id="modal">
+    <span class="close">&times;</span>
+    <form
+      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
+      method="POST"
+      class="modal-form"
+      enctype="multipart/form-data"
+    >
+      <h3 class="form-header">Edit Bike Profile</h3>
+      <div class="modal-form-contents">
+        <div class="modal-form-window">
+          <div class="modal-form-items">
+            <div class="modal-form-line">
+              <label for="year" class="modal-form-label">YEAR</label>
+              <input
+                type="text"
+                class="modal-form-input"
+                id="year"
+                name="profile[year]"
+                placeholder="manufacture year"
+                value="<%=profile.year%>"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="make" class="modal-form-label">MAKE</label>
+              <input
+                type="text"
+                class="modal-form-input"
+                id="make"
+                name="profile[make]"
+                placeholder="manufacturer"
+                value="<%=profile.make%>"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="model" class="modal-form-label">MODEL</label>
+              <input
+                type="text"
+                class="modal-form-input"
+                id="model"
+                name="profile[model]"
+                placeholder="model series"
+                value="<%=profile.model%>"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="hours" class="modal-form-label">HOURS</label>
+              <input
+                type="text"
+                class="modal-form-input"
+                id="hours"
+                name="profile[hours]"
+                placeholder="Current engine hours"
+                value="<%=profile.hours%>"
+                required
+              />
+            </div>
+            <div class="modal-form-line">
+              <label for="image" class="modal-form-label">IMAGE</label>
+              <input
+                type="file"
+                class="modal-form-input"
+                id="image"
+                name="image"
+              />
+            </div>
+          </div>
+          <button class="btn form-submit">SUBMIT EDITS</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 <script>
+  // Confirm deletion script
   function deleteConfirmation() {
     return confirm("Are you sure? This action is irreversible...");
   }
+
+  // Modal form script
+  const modal = document.getElementById("modal");
+  const trigger = document.querySelector(".modal-trigger");
+  const modalClose = document.querySelector(".close");
+
+  trigger.onclick = function () {
+    modal.style.display = "block";
+  };
+
+  modalClose.onclick = function () {
+    modal.style.display = "none";
+  };
 </script>

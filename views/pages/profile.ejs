@@ -2,7 +2,7 @@
 <div class="action-page">
   <% include ../partials/profileHeader %>
   <section class="profile__page-grid">
-    <div class="profile__info">
+    <div class="profile__info bg-dark-border">
       <h2 class="profile__title"><%= profile.title %></h2>
       <div class="profile__image">
         <img src="<%=profile.image.path%>" alt="profile picture" />
@@ -26,7 +26,7 @@
       </form>
     </div>
     <div class="modal-trigger">
-      <h3 class="btn btn-fw mb-sm">Edit This Profile?</h3>
+      <h3 class="btn btn-fw mb-sm py-xs">Edit This Profile?</h3>
     </div>
   </section>
   <!-- Modal Form -->
@@ -36,6 +36,7 @@
       action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
       method="POST"
       class="modal-form"
+      autocomplete="off"
       enctype="multipart/form-data"
     >
       <h3 class="form-header">Edit Bike Profile</h3>
@@ -100,7 +101,7 @@
               />
             </div>
           </div>
-          <button class="btn form-submit">SUBMIT EDITS</button>
+          <button class="btn form-submit py-xs">SUBMIT EDITS</button>
         </div>
       </div>
     </form>

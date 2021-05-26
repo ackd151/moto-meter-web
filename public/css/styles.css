@@ -1,4 +1,17 @@
 /** vars **/
+:root {
+  --color-primary: rgb(33, 230, 193);
+  --color-primary-bg: rgba(33, 230, 193, 0.2);
+  --color-danger: rgb(255, 0, 54);
+  --color-danger-bg: rgba(255, 0, 54, 0.2);
+  --color-gray: rgb(175, 175, 175);
+  --color-bg: rgb(47, 47, 47);
+  --color-bg-mid: rgb(58, 58, 58);
+  --color-bg-dark: rgb(23, 29, 31);
+  --color-good: rgb(82, 255, 145);
+  --color-white: rgb(255, 255, 255);
+  --color-black: rgb(0, 0, 0);
+}
 
 /** element selctors**/
 *,
@@ -10,21 +23,17 @@
 }
 
 /** Scrollbar **/
-/* width */
 ::-webkit-scrollbar {
   width: 10px;
 }
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: var(--color-bg-dark);
 }
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(151, 211, 151);
+  background: var(--color-primary-bg);
 }
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(76, 211, 139);
+  background: var(--color-primary);
 }
 /* end - Scrollbar */
 
@@ -34,8 +43,8 @@ html {
 
 body {
   font-family: "Roboto", sans-serif;
-  color: #fff;
-  background-color: rgb(58, 58, 58);
+  color: var(--color-white);
+  background-color: var(--color-bg-mid);
   /* height: 100vh; */
   box-sizing: border-box;
 }
@@ -55,8 +64,8 @@ h4 {
 input {
   background-color: inherit;
   color: inherit;
-  border: 1px solid rgb(76, 211, 139);
-  outline-color: rgb(76, 211, 139);
+  border: 1px solid var(--color-primary);
+  outline-color: var(--color-primary);
   padding: 0.25rem;
   border-radius: 5px;
 }
@@ -70,7 +79,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px rgb(58, 58, 58) inset !important;
-  -webkit-text-fill-color: #fff !important;
+  -webkit-text-fill-color: var(--color-white) !important;
 }
 
 textarea {
@@ -106,18 +115,25 @@ textarea {
 }
 
 .link {
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
   font-size: 1.25rem;
 }
 
 .link:hover {
-  color: rgb(151, 211, 151);
+  color: var(--color-white);
   transform: translateY(-1px);
 }
 
 .btn {
+  border: 1px solid var(--color-primary);
   box-shadow: 0 2px 5px 1px rgba(0, 255, 255, 0.2);
   border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg-dark);
+  border-color: var(--color-bg-dark);
 }
 
 .btn:hover {
@@ -133,20 +149,14 @@ textarea {
 
 .btn-fw {
   text-align: center;
-  border: 1px solid rgb(76, 211, 139);
   width: 100%;
 }
 
-.btn-add {
-  vertical-align: middle;
-  padding: 0.12rem 0.5rem;
-  border: 1px solid rgb(76, 211, 139);
-}
-
 .btn-delete {
+  background-color: var(--color-danger-bg);
   margin-top: 1rem;
   padding: 0.25rem 1rem;
-  border: 1px solid rgb(220, 100, 100);
+  border: 1px solid var(--color-danger);
   border-radius: 5px;
   box-shadow: 0 2px 5px 1px rgb(255, 0, 0, 0.2);
 }
@@ -167,7 +177,8 @@ textarea {
   right: 0;
   top: 0;
   padding: 0.25rem;
-  border: 1px solid rgb(220, 100, 100);
+  border: 1px solid var(--color-danger);
+  background-color: var(--color-danger-bg);
   border-radius: 5px;
   box-shadow: 0 2px 5px 1px rgb(255, 0, 0, 0.2);
 }
@@ -184,8 +195,8 @@ textarea {
 
 .fa-trash {
   font-size: inherit;
-  color: rgb(220, 100, 100);
-  margin: 0 0.5rem;
+  color: var(--color-white);
+  margin: 0.25rem;
 }
 
 .form-label {
@@ -195,11 +206,11 @@ textarea {
 }
 
 .danger {
-  background-color: rgb(220, 100, 100);
+  background-color: var(--color-danger);
 }
 
 .col-danger {
-  color: rgb(220, 100, 100);
+  color: var(--color-danger);
 }
 
 .col-caution {
@@ -207,15 +218,47 @@ textarea {
 }
 
 .good {
-  background-color: rgb(76, 211, 139);
+  background-color: var(--color-good);
 }
 
 .col-good {
-  color: rgb(76, 211, 139);
+  color: var(--color-good);
 }
 
 .mb-sm {
   margin-bottom: 0.5rem;
+}
+
+.mt-sm {
+  margin-top: 0.5rem;
+}
+
+.my-sm {
+  margin: 0.5rem 0;
+}
+.p-xs {
+  padding: 0.25rem;
+}
+.py-xs {
+  padding: 0.25rem 0;
+}
+.py-sm {
+  padding: 0.5rem 0;
+}
+
+.vert-algn-mid {
+  vertical-align: middle;
+}
+
+.bg-dark-border {
+  border: 1px solid var(--color-gray);
+  background-color: var(--color-bg);
+  border-radius: 5px;
+}
+
+.empty-collection-msg {
+  text-align: center;
+  margin-top: 25%;
 }
 
 /** Modal forms **/
@@ -233,7 +276,7 @@ textarea {
   border-radius: 5px;
 }
 .close {
-  color: rgb(220, 100, 100);
+  color: var(--color-danger);
   position: absolute;
   top: 0;
   right: 0.75rem;
@@ -242,7 +285,7 @@ textarea {
 }
 .close:hover,
 .close:focus {
-  color: rgb(255, 0, 0);
+  color: var(--color-white);
   cursor: pointer;
 }
 .modal-form {
@@ -315,7 +358,7 @@ textarea {
   justify-content: space-between;
   align-items: center;
   padding: 0.25rem 1rem;
-  background-color: #000;
+  background-color: var(--color-bg-dark);
 }
 
 .navbar .brand a {
@@ -326,7 +369,7 @@ textarea {
 .navbar a,
 .navbar a:visited {
   text-decoration: none;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .navbar a:hover,
@@ -340,7 +383,7 @@ textarea {
 
 .btn-logging {
   padding: 0.5rem 1rem;
-  border: 2px solid #fff;
+  border: 2px solid var(--color-white);
   border-radius: 25%;
 }
 
@@ -354,12 +397,12 @@ textarea {
 }
 
 .logging .user .user-link {
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
   padding-right: 0;
 }
 
 .user-link > .fa-warehouse {
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
   padding-left: 1rem;
   font-size: 1.5rem;
 }
@@ -373,85 +416,9 @@ textarea {
   grid-template-rows: min-content auto min-content;
 }
 
-.user-home__new-profile {
-  position: relative;
-  border: 1px solid rgb(76, 211, 139);
-  border-radius: 5px;
-}
-
-.user-home__new-profile:hover,
-.user-home__new-profile:active {
-  border-color: #afafaf;
-}
-
-.user-home__new-profile:hover > .new-profile-form,
-.user-home__new-profile:active > .new-profile-form {
-  visibility: visible;
-  opacity: 1;
-}
-
-.user-home__new-profile:hover > .edit-form-trigger,
-.user-home__new-profile:active > .edit-form-trigger {
-  margin-top: 0.5rem;
-  opacity: 0;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-.new-profile-form {
-  transition: all 0.5s;
-  visibility: hidden;
-  opacity: 0;
-  padding: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, min-content);
-}
-
 .form-header {
   text-align: center;
-  grid-area: 1/1/2/3;
   background-color: rgb(95, 95, 95);
-}
-
-.grid-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.grid-item label {
-  padding-right: 1rem;
-  min-width: 4.5rem;
-}
-
-.grid-item input {
-  max-width: 85%;
-  flex: 1;
-}
-
-.form-submit {
-  grid-area: 4/1/5/3;
-  border: 1px solid rgb(76, 211, 139);
-}
-
-@media screen and (max-width: 850px) {
-  .new-profile-form {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, min-content);
-  }
-
-  .form-header {
-    grid-area: 1/1/2/2;
-  }
-
-  .form-submit {
-    grid-area: 6/1/7/2;
-  }
 }
 
 /* profileTab partial */
@@ -464,11 +431,10 @@ textarea {
 }
 
 .profile-tab {
-  border: 1px solid #afafaf;
-  border-radius: 5px;
   display: grid;
+  justify-content: flex-start;
   gap: 1rem;
-  grid-template-columns: min-content repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin-bottom: 1rem;
   padding: 0.5rem;
 }
@@ -476,16 +442,16 @@ textarea {
 .profile-tab__info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
-  border: 1px solid rgb(76, 211, 139);
-  border-radius: 5px;
-  padding: 0.25rem;
+}
+
+.profile-tab__info a {
+  padding: 0.5rem;
 }
 
 .profile-tab__data {
-  justify-self: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -503,8 +469,6 @@ textarea {
 }
 
 .profile__action {
-  border: 1px solid rgb(76, 211, 139);
-  border-radius: 5px;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -513,10 +477,6 @@ textarea {
 }
 
 @media screen and (max-width: 800px) {
-  /* .profile-tab__action-buttons {
-    grid-template-rows: repeat(4, min-content);
-    grid-template-columns: 1fr;
-  } */
   .profile-tab {
     grid-template-columns: min-content 1fr;
     grid-template-rows: repeat(2, min-content);
@@ -536,6 +496,7 @@ textarea {
   height: 100%;
   display: grid;
   grid-template-rows: 1fr min-content;
+  overflow-y: auto;
 }
 
 .profile__info {
@@ -543,20 +504,25 @@ textarea {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1rem;
+  overflow-y: auto;
 }
 
 .profile__image {
   text-align: center;
+  max-width: 60%;
+  max-height: 70%;
 }
 
 .profile__image > img {
-  max-width: 60%;
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 5px;
 }
 
 .profile__edit-form-div {
   position: relative;
-  border: 1px solid rgb(76, 211, 139);
+  border: 1px solid var(--color-primary);
   border-radius: 5px;
 }
 
@@ -583,7 +549,7 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.5s;
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
 }
 
 .profile__edit-form-div:hover > form,
@@ -632,7 +598,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid rgb(76, 211, 139);
+  border: 1px solid var(--color-primary);
   border-radius: 5px;
   padding: 0.25rem 1rem 0.25rem 0.25rem;
 }
@@ -650,7 +616,7 @@ textarea {
 }
 
 .active-action {
-  background-color: rgb(52, 70, 60);
+  background-color: var(--color-primary-bg);
 }
 
 @media screen and (max-width: 1000px) {
@@ -675,8 +641,6 @@ textarea {
 }
 
 .inspections {
-  border: 1px solid #afafaf;
-  border-radius: 5px;
   overflow-y: auto;
   padding: 1rem;
   margin: 0 auto;
@@ -713,7 +677,6 @@ textarea {
 .inspection-actions {
   display: grid;
   grid-template-columns: auto min-content;
-  border: 1px solid #afafaf;
   border-radius: 5px;
   padding: 0.5rem;
 }
@@ -761,17 +724,17 @@ textarea {
 }
 
 .checkbox input:checked ~ .checkmark {
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
   opacity: 1;
 }
 
 .checkbox input:checked ~ .checkmark:hover,
 .checkbox input:checked ~ .title:hover {
-  color: rgb(220, 100, 100);
+  color: var(--color-danger);
 }
 
 .checkbox input:not(:checked) ~ .title:hover {
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
   opacity: 1;
 }
 
@@ -828,8 +791,6 @@ textarea {
 }
 
 .post-ride__form {
-  border: 1px solid #afafaf;
-  border-radius: 5px;
   padding: 1rem;
   display: grid;
   grid-template-rows: min-content;
@@ -839,7 +800,7 @@ textarea {
 
 .post-ride__form > button {
   line-height: 2rem;
-  border: 1px solid rgb(76, 211, 139);
+  border: 1px solid var(--color-primary);
   border-radius: 5px;
 }
 
@@ -885,7 +846,7 @@ textarea {
 
 .task__sign-off,
 .task__edit {
-  border: 1px solid rgb(76, 211, 139);
+  border: 1px solid var(--color-primary);
   border-radius: 5px;
 }
 
@@ -902,7 +863,7 @@ textarea {
 }
 
 .sign-off-label {
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
   display: inline-block;
   transform: translate(130%);
   margin-right: 0.5rem;
@@ -929,16 +890,9 @@ textarea {
   opacity: 1;
 }
 
-.btn.sign-off-submit {
-  padding: 0;
-  background-color: transparent;
-  vertical-align: middle;
-  border-radius: 5px;
-}
-
 .fa-check-square {
   font-size: 1.75rem;
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
 }
 
 .task__edit-label {
@@ -1014,7 +968,7 @@ input[type="reset"] {
 
 .tasks__new-task {
   position: relative;
-  border: 1px solid rgb(76, 211, 139);
+  border: 1px solid var(--color-primary);
   border-radius: 5px;
 }
 
@@ -1060,8 +1014,6 @@ input[type="reset"] {
 .notes-form textarea {
   width: 100%;
   height: 95%;
-  border-radius: 5px;
-  background-color: rgb(58, 58, 58);
   padding: 1rem;
   /* overflow-y: auto; */
   color: #afafaf;
@@ -1097,7 +1049,7 @@ input[type="reset"] {
 .new-task-toggle:hover,
 .new-task-toggle:active {
   background-color: rgb(95, 95, 95);
-  color: #fff;
+  color: var(--color-white);
   cursor: pointer;
 }
 
@@ -1108,53 +1060,51 @@ input[type="reset"] {
   visibility: hidden;
   opacity: 0;
 }
-
-.register__page {
+/** Logging pages **/
+.logging-page {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   width: 100%;
-  height: 90%;
+  height: 100%;
   padding-bottom: 3rem;
 }
 
-.register__form {
+.logging-page-title {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  background-color: #afafaf;
+}
+
+.logging-form {
+  padding: 0.5rem;
+  border: 1px solid #afafaf;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   width: 50%;
 }
 
-.register__form > * {
-  width: auto;
+.logging-form-line {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-  line-height: 1.5;
+  justify-content: space-between;
+  margin: 0.25rem 0;
 }
 
-.register__form input {
-  padding: 0.25rem;
-  border-radius: 5px;
+.logging-form-input {
+  flex: 1;
+  max-width: 75%;
+}
+.logging-link {
+  color: var(--color-primary);
+}
+.logging-link:hover,
+.logging-link:active {
+  color: var(--color-white);
 }
 
-.register__form button {
-  width: 100%;
-  padding: 0.25rem 0;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.register__form a,
-.register__form a:visited {
-  text-decoration: none;
-  color: #afafaf;
-}
-
-.register__form a:hover,
-.register__form a:active {
-  color: #fff;
-}
+/* end Logging pages */
 
 .error-page {
   height: 50vh;
@@ -1167,10 +1117,10 @@ input[type="reset"] {
   text-align: center;
   width: auto;
   border: 1px solid rgb(0, 0, 0);
-  border-radius: 15px;
-  padding: 5rem 10rem;
+  border-radius: 5px;
+  padding: 1rem;
   color: rgb(0, 0, 0);
-  background-color: rgb(220, 100, 100);
+  background-color: var(--color-danger);
 }
 
 .flash {
@@ -1182,7 +1132,7 @@ input[type="reset"] {
   text-align: center;
   width: fit-content;
   padding: 0.25rem;
-  color: #fff;
+  color: var(--color-white);
   border-radius: 5px;
 }
 
@@ -1191,12 +1141,12 @@ input[type="reset"] {
 }
 
 .error-flash {
-  background-color: rgb(220, 100, 100);
+  background-color: var(--color-danger);
 }
 
 /** Footer section **/
 .footer {
-  background-color: rgb(0, 0, 0);
+  background-color: var(--color-bg-dark);
   color: #afafaf;
   padding: 0.75rem;
   text-align: center;
@@ -1205,10 +1155,10 @@ input[type="reset"] {
 
 .footer a {
   text-decoration: none;
-  color: rgb(76, 211, 139);
+  color: var(--color-primary);
 }
 
 .footer a:hover,
 .footer a:active {
-  color: #fff;
+  color: var(--color-white);
 }

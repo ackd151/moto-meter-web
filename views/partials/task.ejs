@@ -50,7 +50,7 @@
           value="<%=profile.hours%>"
           required
         />
-        <button class="btn sign-off-submit">
+        <button class="vert-algn-mid sign-off-submit">
           <i class="far fa-check-square"></i>
         </button>
       </div>
@@ -62,6 +62,7 @@
       action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=PATCH"
       method="POST"
       class="task__edit-form"
+      autocomplete="off"
     >
       <p class="task__edit-label">Edit Task</p>
       <div class="form-row">

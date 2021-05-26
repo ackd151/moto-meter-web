@@ -6,10 +6,15 @@
     </div>
     <div class="user-home__profiles">
       <% if (user.bikeProfiles) { for (const profile of user.bikeProfiles) { %>
-      <% include ../partials/profileTab %> <% } } %>
+      <% include ../partials/profileTab %> <% } } %> <% if (!user.bikeProfiles
+      || !user.bikeProfiles.length) { %>
+      <p class="empty-collection-msg">
+        No bike profiles created yet. Click below to create one.
+      </p>
+      <% } %>
     </div>
     <div class="modal-trigger">
-      <h3 class="btn btn-fw mb-sm">Create New Bike Profile?</h3>
+      <h3 class="btn btn-fw mb-sm py-xs">Create New Bike Profile?</h3>
     </div>
   </div>
   <!-- Modal Form -->
@@ -19,6 +24,7 @@
       action="/home/<%=user.username%>/profiles"
       method="POST"
       class="modal-form"
+      autocomplete="off"
       enctype="multipart/form-data"
     >
       <h3 class="form-header">New Bike Profile</h3>
@@ -80,7 +86,7 @@
               />
             </div>
           </div>
-          <button class="btn btn-fw">Create</button>
+          <button class="btn btn-fw py-xs">Create</button>
         </div>
       </div>
     </form>

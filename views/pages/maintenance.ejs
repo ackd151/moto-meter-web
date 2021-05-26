@@ -4,15 +4,20 @@
   <section class="tasks__page-grid">
     <h2 class="tasks__title">Maintenance Tasks</h2>
 
-    <div class="tasks__task-box">
+    <div class="tasks__task-box bg-dark-border">
       <!-- prettier-ignore -->
       <%  if (profile.tasks) { %> 
         <%  for (const [index, task] of profile.tasks.entries()) { %>
             <% include ../partials/task %> 
         <% } } %>
+      <% if (!profile.tasks || !profile.tasks.length) { %>
+      <p class="empty-collection-msg">
+        No maintenance tasks created yet. Click below to create one.
+      </p>
+      <% } %>
     </div>
     <div class="modal-trigger">
-      <h3 class="btn btn-fw mb-sm">Add New Maintenance Task?</h3>
+      <h3 class="btn btn-fw mb-sm py-xs">Add New Maintenance Task?</h3>
     </div>
   </section>
   <!-- Modal Form -->
@@ -22,6 +27,7 @@
       action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
       method="POST"
       class="modal-form"
+      autocomplete="off"
     >
       <h3 class="form-header">Create New Task</h3>
       <div class="modal-form-contents">
@@ -69,7 +75,7 @@
               />
             </div>
           </div>
-          <button class="btn btn-fw">Create Task</button>
+          <button class="btn btn-fw py-xs">Create Task</button>
         </div>
       </div>
     </form>

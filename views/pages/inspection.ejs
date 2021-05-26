@@ -2,9 +2,12 @@
 <div class="action-page">
   <% include ../partials/profileHeader %>
   <section class="inspections-page">
-    <div class="inspections">
+    <div class="inspections bg-dark-border">
       <h1 class="checklist-header <%=completed ? "good" : "danger"%>">PRE-RIDE INSPECTION</h1>
       <!-- prettier-ignore -->
+      <% if (!profile.inspections || !profile.inspections.length) { %>
+      <p class="empty-collection-msg">No inspections created for this profile. Add new inspection(s) below.</p>
+      <% } %>
       <% if (profile.inspections.length) { %>    
       <form
         action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections?_method=PATCH"
@@ -30,15 +33,16 @@
       </form>
       <% } %>
     </div>
-    <div class="inspection-actions">
+    <div class="inspection-actions bg-dark-border">
       <form
         action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
         method="POST"
         class="new-inspection-form"
+        autocomplete="off"
       >
         <label for="title">New Inspection:</label>
-        <input type="text" id="title" name="title" required />
-        <button class="btn btn-add">ADD</button>
+        <input type="text" class="p-xs" id="title" name="title" required />
+        <button class="btn p-xs">ADD</button>
       </form>
       <a href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/edit" class="link">Delete Inspection(s)?</a>
     </div>

@@ -1,11 +1,13 @@
-<section class="profile-tab">
+<section class="profile-tab bg-dark-border">
+  <div class="profile-tab__info">
   <a
     href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>"
-    class="btn profile-tab__info"
+    class="btn "
   >
     <h4><%=profile.title%></h4>
     <img class="profile-tab__img" src="<%=profile.image.path%>" alt="Bike image" />
   </a>
+</div>
   <div class="profile-tab__data">
     <p>
       Current Hours:

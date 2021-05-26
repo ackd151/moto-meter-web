@@ -33,7 +33,6 @@ router.patch("/", async (req, res, next) => {
   const activeProfile = await Profile.findById(req.params.profileId).populate(
     "inspections"
   );
-  // const allInspections = activeProfile.inspections;
   const { cbs } = req.body;
   for (const inspection of activeProfile.inspections) {
     cbs.includes(inspection._id.toString())

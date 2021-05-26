@@ -1,35 +1,63 @@
 <% layout("/layouts/boilerplate") %>
-<div class="page">
-  <form action="/register" method="POST" class="register__form">
-    <div class="page-title">
+<div class="logging-page">
+  <form
+    action="/register"
+    method="POST"
+    class="logging-form"
+    autocomplete="off"
+  >
+    <div class="logging-page-title">
       <h1>Register</h1>
     </div>
-    <div class="username">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="user[username]" required />
+    <div class="logging-form-line">
+      <label for="username" class="logging-form-label">Username</label>
+      <input
+        type="text"
+        class="logging-form-input"
+        id="username"
+        name="user[username]"
+        placeholder="username"
+        required
+      />
     </div>
-    <div class="email">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="user[email]" required />
+    <div class="logging-form-line">
+      <label for="email" class="logging-form-label">Email</label>
+      <input
+        type="email"
+        class="logging-form-input"
+        id="email"
+        name="user[email]"
+        placeholder="email address"
+        required
+      />
     </div>
-    <div class="password">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="user[password]" required />
-    </div>
-    <div class="password-ver">
-      <label for="password-ver">Password - verify</label>
+    <div class="logging-form-line">
+      <label for="password" class="logging-form-label">Password</label>
       <input
         type="password"
+        class="logging-form-input"
+        id="password"
+        name="user[password]"
+        placeholder="password min: 8 characters"
+        required
+      />
+    </div>
+    <div class="logging-form-line">
+      <label for="password-ver" class="logging-form-label">Password</label>
+      <input
+        type="password"
+        class="logging-form-input"
         id="password-ver"
         name="user[password2]"
+        placeholder="verify password"
         required
       />
     </div>
     <div>
-      <button class="btn">REGISTER</button>
-    </div>
-    <div>
-      <p>Already registered? <a href="/login">LOG IN</a></p>
+      <button class="btn btn-fw mt-sm py-xs">REGISTER</button>
     </div>
   </form>
+  <p class="mt-sm">
+    Already registered? <a href="/login" class="logging-link">LOG IN</a>
+  </p>
 </div>

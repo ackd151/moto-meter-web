@@ -1,8 +1,10 @@
 <% layout("/layouts/boilerplate") %>
 <div class="action-page">
   <% include ../partials/profileHeader %>
-  <section class="inspections">
-    <% if (profile.inspections.length) { %>
+  <section class="inspections bg-dark-border">
+    <% if (!profile.inspections || !profile.inspections.length) { %>
+    <p class="empty-collection-msg">No inspections created for this profile.</p>
+    <% } %> <% if (profile.inspections.length) { %>
     <h2 class="checklist-header">Select inspections you wish to delete</h2>
     <form
       action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/destroy?_method=DELETE"

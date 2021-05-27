@@ -12,7 +12,7 @@
       onsubmit="return deleteConfirmation();"
       class="inspection-delete-form"
     >
-      <div>
+      <div class="inspection-list mb-md">
         <% for (const [index, inspection] of profile.inspections.entries()) { %>
         <section class="checklist-item">
           <label class="checkbox">
@@ -29,9 +29,7 @@
         </section>
         <% } %>
       </div>
-      <button class="btn btn-delete btn-inspection-delete">
-        Delete Selected
-      </button>
+      <button class="btn btn-danger mb-xs py-xs">Delete Selected</button>
     </form>
     <% } %>
   </section>

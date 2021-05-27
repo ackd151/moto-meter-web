@@ -10,6 +10,7 @@ router.get("/", async (req, res, next) => {
   const { profileId } = req.params;
   const profile = await Profile.findById(profileId).populate("inspections");
   const completed = await Inspection.inspectionsComplete(profileId);
+  console.log(completed);
   res.render("pages/inspection", { profile, completed });
 });
 

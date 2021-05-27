@@ -1,12 +1,12 @@
-<article class="task-partial">
+<article class="task-partial bg-dark-border">
   <div class="task__info">
-    <h3>Task: <%= task.title %></h3>
+    <h3><%= task.title %></h3>
     <form
       action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=DELETE"
       method="POST"
       onsubmit="return deleteConfirmation();"
     >
-      <button class="btn-task-delete">
+      <button class="btn btn-danger btn-task-delete">
         <i class="fas fa-trash"></i>
       </button>
     </form>
@@ -50,7 +50,7 @@
           value="<%=profile.hours%>"
           required
         />
-        <button class="vert-algn-mid sign-off-submit">
+        <button class="btn vert-algn-mid sign-off-submit">
           <i class="far fa-check-square"></i>
         </button>
       </div>
@@ -97,7 +97,7 @@
           required
         />
       </div>
-      <button class="btn form-submit">SUBMIT EDITS</button>
+      <button class="btn btn-primary btn-fw">SUBMIT EDITS</button>
     </form>
   </div>
 </article>

@@ -15,6 +15,9 @@ const inspectionSchema = new Schema({
 
 inspectionSchema.statics.inspectionsComplete = async function (profileId) {
   const profile = await Profile.findById(profileId).populate("inspections");
+  if (!profile.inspections.length) {
+    return false;
+  }
   for (const inspection of profile.inspections) {
     if (!inspection.completed) return false;
   }

@@ -2,7 +2,7 @@
   <div class="profile-tab__info">
   <a
     href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>"
-    class="btn "
+    class="btn btn-primary"
   >
     <h4><%=profile.title%></h4>
     <img class="profile-tab__img" src="<%=profile.image.path%>" alt="Bike image" />
@@ -47,22 +47,22 @@
   <div class="profile-tab__action-buttons">
     <a
       href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
-      class="btn profile__action"
+      class="btn btn-primary profile__action"
       >pre-ride</a
     >
     <a
       href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/post-ride"
-      class="btn profile__action"
+      class="btn btn-primary profile__action"
       >post-ride</a
     >
     <a
       href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
-      class="btn profile__action"
+      class="btn btn-primary profile__action"
       >maintenance</a
     >
     <a
       href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
-      class="btn profile__action"
+      class="btn btn-primary profile__action"
       >notes</a
     >
   </div>

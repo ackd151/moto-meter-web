@@ -2,7 +2,7 @@
   <div class="profile-links">
     <a 
       href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>"
-      class="btn <%=activePage === "profile" ? "active-action": ""%>"
+      class="btn btn-primary <%=activePage === "profile" ? "active-action": ""%>"
     >
     <div class="profile-home-link">
       <div class="profile-img">
@@ -18,28 +18,28 @@
     <div class="profile-action-links">
       <a 
         href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
-        class="btn profile__action <%= activePage === "inspections" ? "active-action": "" %>"
+        class="btn btn-primary profile__action <%= activePage === "inspections" ? "active-action": "" %>"
       >
         <i class="fas fa-clipboard-check"></i>pre-ride 
       </a>
 
       <a
         href="/home/<%=currentUser.username%>/profiles/<%= profile._id %>/post-ride"
-        class="btn profile__action <%= activePage === "post-ride" ? "active-action": "" %>"
+        class="btn btn-primary profile__action <%= activePage === "post-ride" ? "active-action": "" %>"
       >
         <i class="fas fa-stopwatch"></i>post-ride
       </a>
 
       <a
         href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
-        class="btn profile__action <%= activePage === "maintenance" ? "active-action": "" %>"
+        class="btn btn-primary profile__action <%= activePage === "maintenance" ? "active-action": "" %>"
       >
         <i class="fas fa-tools"></i>maintenance
       </a>
 
       <a
         href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
-        class="btn profile__action <%= activePage === "notes" ? "active-action": "" %>"
+        class="btn btn-primary profile__action <%= activePage === "notes" ? "active-action": "" %>"
       >
         <i class="fas fa-clipboard-list"></i>notes
       </a>

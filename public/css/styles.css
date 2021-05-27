@@ -2,10 +2,13 @@
 :root {
   --color-primary: rgb(33, 230, 193);
   --color-primary-bg: rgba(33, 230, 193, 0.2);
+  --color-accent: rgb(33, 230, 225);
+  --color-caution: rgb(220, 174, 100);
   --color-danger: rgb(255, 0, 54);
   --color-danger-bg: rgba(255, 0, 54, 0.2);
   --color-gray: rgb(175, 175, 175);
   --color-bg: rgb(47, 47, 47);
+  --color-bg-light: rgb(95, 95, 95);
   --color-bg-mid: rgb(58, 58, 58);
   --color-bg-dark: rgb(23, 29, 31);
   --color-good: rgb(82, 255, 145);
@@ -37,6 +40,19 @@
 }
 /* end - Scrollbar */
 
+/* Get rid of default button styling */
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 html {
   font-size: 100%;
 }
@@ -53,13 +69,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
-/* h1,
-h2,
-h3,
-h4 {
-  margin-bottom: 0.5rem;
-} */
 
 input {
   background-color: inherit;
@@ -78,8 +87,13 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px rgb(58, 58, 58) inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--color-bg-mid) inset !important;
   -webkit-text-fill-color: var(--color-white) !important;
+}
+
+input:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 1px 3px var(--color-accent);
 }
 
 textarea {
@@ -125,72 +139,52 @@ textarea {
 }
 
 .btn {
-  border: 1px solid var(--color-primary);
-  box-shadow: 0 2px 5px 1px rgba(0, 255, 255, 0.2);
   border-radius: 5px;
+  transition: all 0.2s;
 }
-
-.btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-bg-dark);
-  border-color: var(--color-bg-dark);
-}
-
 .btn:hover {
   cursor: pointer;
   transform: translateY(-1px);
-  box-shadow: 0 3px 5px 1px rgba(0, 255, 255, 0.2);
 }
-
 .btn:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 5px 1px rgba(0, 255, 255, 0.2);
+}
+
+.btn-primary {
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 2px 4px var(--color-primary-bg);
+}
+.btn-primary:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 6px var(--color-accent);
+}
+.btn-primary:active {
+  box-shadow: 0 1px 2px var(--color-primary-bg);
+}
+
+.btn-danger {
+  background-color: var(--color-danger-bg);
+  border: 1px solid var(--color-danger);
+  box-shadow: 0 2px 4px var(--color-danger-bg);
+}
+.btn-danger:hover {
+  box-shadow: 0 4px 6px var(--color-danger-bg);
+}
+.btn-danger:active {
+  box-shadow: 0 1px 2px var(--color-danger-bg);
+}
+
+.btn-task-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.25rem;
 }
 
 .btn-fw {
   text-align: center;
   width: 100%;
-}
-
-.btn-delete {
-  background-color: var(--color-danger-bg);
-  margin-top: 1rem;
-  padding: 0.25rem 1rem;
-  border: 1px solid var(--color-danger);
-  border-radius: 5px;
-  box-shadow: 0 2px 5px 1px rgb(255, 0, 0, 0.2);
-}
-
-.btn-delete:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 5px 1px rgb(255, 0, 0, 0.2);
-}
-
-.btn-delete:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 5px 1px rgb(255, 0, 0, 0.2);
-}
-
-.btn-task-delete {
-  transition: all 0.5s;
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 0.25rem;
-  border: 1px solid var(--color-danger);
-  background-color: var(--color-danger-bg);
-  border-radius: 5px;
-  box-shadow: 0 2px 5px 1px rgb(255, 0, 0, 0.2);
-}
-
-.btn-task-delete:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 5px 1px rgb(255, 0, 0, 0.2);
-}
-
-.btn-task-delete:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 5px 1px rgb(255, 0, 0, 0.2);
 }
 
 .fa-trash {
@@ -201,32 +195,20 @@ textarea {
 
 .form-label {
   text-align: center;
-  background-color: rgb(95, 95, 95);
+  background-color: var(--color-bg-light);
   margin-bottom: 0.25rem;
 }
 
-.danger {
-  background-color: var(--color-danger);
-}
-
-.col-danger {
-  color: var(--color-danger);
-}
-
-.col-caution {
-  color: rgb(220, 174, 100);
-}
-
-.good {
-  background-color: var(--color-good);
-}
-
-.col-good {
-  color: var(--color-good);
+.mb-xs {
+  margin-bottom: 0.25rem;
 }
 
 .mb-sm {
   margin-bottom: 0.5rem;
+}
+
+.mb-md {
+  margin-bottom: 1rem;
 }
 
 .mt-sm {
@@ -271,8 +253,8 @@ textarea {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgb(58, 58, 58);
-  border: 1px solid #afafaf;
+  background-color: var(--color-bg-mid);
+  border: 1px solid var(--color-gray);
   border-radius: 5px;
 }
 .close {
@@ -300,7 +282,7 @@ textarea {
   align-items: center;
 }
 .modal-form-window {
-  background-color: rgb(47, 47, 47);
+  background-color: var(--color-bg);
   padding: 1rem;
   border-radius: 5px;
   height: 50%;
@@ -374,7 +356,7 @@ textarea {
 
 .navbar a:hover,
 .navbar a:active {
-  color: #afafaf;
+  color: var(--color-gray);
 }
 
 .logging a:not(:last-child) {
@@ -392,7 +374,7 @@ textarea {
 }
 
 .user {
-  color: #afafaf;
+  color: var(--color-gray);
   padding-right: 1rem;
 }
 
@@ -418,7 +400,8 @@ textarea {
 
 .form-header {
   text-align: center;
-  background-color: rgb(95, 95, 95);
+  background-color: var(--color-bg-light);
+  border-radius: 5px;
 }
 
 /* profileTab partial */
@@ -519,68 +502,6 @@ textarea {
   max-height: 100%;
   border-radius: 5px;
 }
-
-.profile__edit-form-div {
-  position: relative;
-  border: 1px solid var(--color-primary);
-  border-radius: 5px;
-}
-
-.profile__edit-form-div:hover {
-  border-color: #afafaf;
-}
-
-.profile-edit-form {
-  padding: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, min-content);
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s;
-}
-
-.edit-form-trigger {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.5s;
-  color: var(--color-primary);
-}
-
-.profile__edit-form-div:hover > form,
-.profile__edit-form-div:active > form {
-  visibility: visible;
-  opacity: 1;
-}
-
-.profile__edit-form-div:hover > .edit-form-trigger,
-.profile__edit-form-div:active > .edit-form-trigger {
-  margin-top: 0.5rem;
-  opacity: 0;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-@media screen and (max-width: 850px) {
-  .profile-edit-form {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, min-content);
-  }
-
-  .form-header {
-    grid-area: 1/1/2/2;
-  }
-
-  .form-submit {
-    grid-area: 6/1/7/2;
-  }
-}
 /* end - Profile page */
 
 /** Profile header partial **/
@@ -598,8 +519,6 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--color-primary);
-  border-radius: 5px;
   padding: 0.25rem 1rem 0.25rem 0.25rem;
 }
 
@@ -616,7 +535,17 @@ textarea {
 }
 
 .active-action {
-  background-color: var(--color-primary-bg);
+  background-color: var(--color-bg);
+  border-color: var(--color-gray);
+  box-shadow: 0 2px 4px var(--color-bg-dark);
+}
+
+.active-action:hover,
+.active-action:active {
+  transform: translate(0, 0);
+  color: inherit;
+  border-color: var(--color-gray);
+  box-shadow: 0 2px 4px var(--color-bg-dark);
 }
 
 @media screen and (max-width: 1000px) {
@@ -626,7 +555,7 @@ textarea {
 }
 /* end - Profile header */
 
-/** Pre-ride page **/
+/** Pre-ride / Inspections page **/
 .inspections-page {
   display: grid;
   grid-template-rows: auto min-content;
@@ -635,6 +564,8 @@ textarea {
 }
 
 .checklist-header {
+  border: 1px solid var(--color-bg-light);
+  background-color: var(--color-bg-light);
   text-align: center;
   border-radius: 5px;
   margin-bottom: 1rem;
@@ -645,6 +576,10 @@ textarea {
   padding: 1rem;
   margin: 0 auto;
   width: 70%;
+}
+
+.inspection-list {
+  overflow-y: auto;
 }
 
 .pre-ride-checklist {
@@ -706,7 +641,6 @@ textarea {
   -ms-user-select: none;
   user-select: none;
 }
-
 /* Hide the browser's default checkbox */
 .checkbox input {
   position: absolute;
@@ -715,41 +649,34 @@ textarea {
   height: 0;
   width: 0;
 }
-
 .checkmark {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
-
 .checkbox input:checked ~ .checkmark {
   color: var(--color-primary);
   opacity: 1;
 }
-
 .checkbox input:checked ~ .checkmark:hover,
 .checkbox input:checked ~ .title:hover {
   color: var(--color-danger);
 }
-
 .checkbox input:not(:checked) ~ .title:hover {
   color: var(--color-primary);
   opacity: 1;
 }
-
 .checklist-item hr {
   border: none;
   height: 1px;
-  color: #afafaf;
-  background-color: #afafaf;
+  color: var(--color-gray);
+  background-color: var(--color-gray);
   margin: 1rem 0;
 }
-
 .checklist-item:last-of-type hr {
   display: none;
 }
-
 /* end - custom checkboxes */
 
 .inspection-delete-form {
@@ -760,10 +687,6 @@ textarea {
   overflow-y: auto;
 }
 
-.btn-inspection-delete {
-  width: 100%;
-  margin-bottom: 0.25rem;
-}
 @media screen and (max-width: 700px) {
   .inspection-actions {
     grid-template-columns: 1fr;
@@ -779,8 +702,7 @@ textarea {
     width: 100%;
   }
 }
-
-/* end - Pre-ride page */
+/* end - Pre-ride / Inspections page */
 
 /** Post-ride page **/
 .post-ride__page {
@@ -797,13 +719,6 @@ textarea {
   grid-template-columns: 1fr;
   gap: 1rem;
 }
-
-.post-ride__form > button {
-  line-height: 2rem;
-  border: 1px solid var(--color-primary);
-  border-radius: 5px;
-}
-
 /* end - Post-ride page */
 
 /** Maintenance page **/
@@ -815,11 +730,12 @@ textarea {
 }
 .tasks__task-box {
   overflow-y: auto;
+  padding: 0.5rem;
 }
 
 /* Task partial */
 .task-partial {
-  border: 1px solid #afafaf;
+  border: 1px solid var(--color-gray);
   border-radius: 5px;
   margin-top: 0.5rem;
   padding: 0.5rem;
@@ -852,7 +768,7 @@ textarea {
 
 .task__sign-off:hover,
 .task__sign-off:active {
-  border-color: #afafaf;
+  border-color: var(--color-gray);
 }
 
 .task__sign-off-form {
@@ -872,7 +788,7 @@ textarea {
 
 .task__sign-off:hover .sign-off-label,
 .task__sign-off:active .sign-off-label {
-  color: #afafaf;
+  color: var(--color-gray);
   transform: translate(0);
   transition: all 0.5s;
 }
@@ -895,9 +811,13 @@ textarea {
   color: var(--color-primary);
 }
 
+.fa-check-square:hover {
+  color: var(--color-accent);
+}
+
 .task__edit-label {
   text-align: center;
-  background-color: rgb(95, 95, 95);
+  background-color: var(--color-bg-light);
 }
 
 .task__edit-form {
@@ -907,19 +827,24 @@ textarea {
   padding: 0.5rem;
 }
 
-.task__edit-form > .form-submit {
-  width: 100%;
-}
-
 .task__edit-label,
 .form-row input {
   margin-bottom: 0.25rem;
 }
 
 /* edit form hover/active transition */
+.edit-form-trigger {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+  color: var(--color-primary);
+}
+
 .task__edit:hover,
 .task__edit:active {
-  border-color: #afafaf;
+  border-color: var(--color-gray);
 }
 
 .task__edit:hover > .edit-form-trigger,
@@ -942,63 +867,11 @@ textarea {
     grid-template-rows: repeat(3, min-content);
   }
 
-  /* .task__sign-off {
-    grid-area: 2/1/2/2;
-  } */
-
   .task__edit {
     grid-area: 3/1/4/2;
   }
 }
-
-/* Get rid of default button styling */
-button,
-input[type="submit"],
-input[type="reset"] {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-}
-
 /* end - Task partial */
-
-.tasks__new-task {
-  position: relative;
-  border: 1px solid var(--color-primary);
-  border-radius: 5px;
-}
-
-.tasks__new-task:hover,
-.tasks__new-task:active {
-  border-color: #afafaf;
-}
-
-.tasks__new-task:hover > .new-task-form,
-.tasks__new-task:active > .new-task-form {
-  visibility: visible;
-  opacity: 1;
-}
-
-.tasks__new-task:hover > .edit-form-trigger,
-.tasks__new-task:active > .edit-form-trigger {
-  margin-top: 0.5rem;
-  opacity: 0;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-.new-task-form {
-  padding: 0.5rem;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s;
-}
-
 /* end - Maintenance page */
 
 /** Notes page **/
@@ -1016,7 +889,7 @@ input[type="reset"] {
   height: 95%;
   padding: 1rem;
   /* overflow-y: auto; */
-  color: #afafaf;
+  color: var(--color-gray);
 }
 
 .tray {
@@ -1027,12 +900,7 @@ input[type="reset"] {
 .fa-save {
   margin-right: 0.5rem;
 }
-
 /* end - Notes page */
-
-/** Inspection page **/
-
-/* end - Inspection page */
 
 .form-row {
   display: flex;
@@ -1041,25 +909,26 @@ input[type="reset"] {
 
 .new-task-toggle {
   z-index: 10;
-  background-color: rgb(58, 58, 58);
+  background-color: var(--color-bg-mid);
   text-align: center;
-  color: #afafaf;
+  color: var(--color-gray);
 }
 
 .new-task-toggle:hover,
 .new-task-toggle:active {
-  background-color: rgb(95, 95, 95);
+  background-color: var(--color-bg-light);
   color: var(--color-white);
   cursor: pointer;
 }
 
-.hidden {
+/* .hidden {
   position: absolute;
   top: -500px;
-  /* display: none; */
+  display: none;
   visibility: hidden;
   opacity: 0;
-}
+} */
+
 /** Logging pages **/
 .logging-page {
   display: flex;
@@ -1071,15 +940,9 @@ input[type="reset"] {
   padding-bottom: 3rem;
 }
 
-.logging-page-title {
-  text-align: center;
-  margin-bottom: 0.5rem;
-  background-color: #afafaf;
-}
-
 .logging-form {
   padding: 0.5rem;
-  border: 1px solid #afafaf;
+  border: 1px solid var(--color-gray);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -1101,7 +964,8 @@ input[type="reset"] {
 }
 .logging-link:hover,
 .logging-link:active {
-  color: var(--color-white);
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 /* end Logging pages */
@@ -1116,10 +980,10 @@ input[type="reset"] {
 .error-content {
   text-align: center;
   width: auto;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid var(--color-black);
   border-radius: 5px;
   padding: 1rem;
-  color: rgb(0, 0, 0);
+  color: var(--color-black);
   background-color: var(--color-danger);
 }
 
@@ -1137,7 +1001,7 @@ input[type="reset"] {
 }
 
 .success-flash {
-  background-color: rgb(151, 211, 151);
+  background-color: var(--color-good);
 }
 
 .error-flash {
@@ -1147,7 +1011,7 @@ input[type="reset"] {
 /** Footer section **/
 .footer {
   background-color: var(--color-bg-dark);
-  color: #afafaf;
+  color: var(--color-gray);
   padding: 0.75rem;
   text-align: center;
   grid-area: 3 / 1 / 4 / 2;
@@ -1160,5 +1024,33 @@ input[type="reset"] {
 
 .footer a:hover,
 .footer a:active {
-  color: var(--color-white);
+  color: var(--color-accent);
+}
+
+.good {
+  background-color: var(--color-good);
+}
+
+.col-good {
+  color: var(--color-good);
+}
+
+.good-border {
+  border-color: var(--color-good);
+}
+
+.danger-border {
+  border-color: var(--color-danger);
+}
+
+.danger {
+  background-color: var(--color-danger);
+}
+
+.col-danger {
+  color: var(--color-danger);
+}
+
+.col-caution {
+  color: var(--color-caution);
 }

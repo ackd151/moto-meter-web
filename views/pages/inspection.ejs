@@ -3,7 +3,7 @@
   <% include ../partials/profileHeader %>
   <section class="inspections-page">
     <div class="inspections bg-dark-border">
-      <h1 class="checklist-header <%=completed ? "good" : "danger"%>">PRE-RIDE INSPECTION</h1>
+      <h1 class="checklist-header <%=!profile.inspections.length ? "" : completed ? "good-border" : "danger-border"%>">PRE-RIDE INSPECTION</h1>
       <!-- prettier-ignore -->
       <% if (!profile.inspections || !profile.inspections.length) { %>
       <p class="empty-collection-msg">No inspections created for this profile. Add new inspection(s) below.</p>
@@ -42,7 +42,7 @@
       >
         <label for="title">New Inspection:</label>
         <input type="text" class="p-xs" id="title" name="title" required />
-        <button class="btn p-xs">ADD</button>
+        <button class="btn btn-primary p-xs">ADD</button>
       </form>
       <a href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/edit" class="link">Delete Inspection(s)?</a>
     </div>

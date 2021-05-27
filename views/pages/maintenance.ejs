@@ -4,7 +4,7 @@
   <section class="tasks__page-grid">
     <h2 class="tasks__title">Maintenance Tasks</h2>
 
-    <div class="tasks__task-box bg-dark-border">
+    <div class="tasks__task-box">
       <!-- prettier-ignore -->
       <%  if (profile.tasks) { %> 
         <%  for (const [index, task] of profile.tasks.entries()) { %>
@@ -17,7 +17,9 @@
       <% } %>
     </div>
     <div class="modal-trigger">
-      <h3 class="btn btn-fw mb-sm py-xs">Add New Maintenance Task?</h3>
+      <h3 class="btn btn-primary btn-fw mb-sm py-xs">
+        Add New Maintenance Task?
+      </h3>
     </div>
   </section>
   <!-- Modal Form -->
@@ -75,7 +77,7 @@
               />
             </div>
           </div>
-          <button class="btn btn-fw py-xs">Create Task</button>
+          <button class="btn btn-primary btn-fw py-xs">Create Task</button>
         </div>
       </div>
     </form>

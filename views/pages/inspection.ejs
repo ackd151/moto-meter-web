@@ -2,6 +2,11 @@
 <div class="action-page">
   <% include ../partials/profileHeader %>
   <section class="inspections-page">
+    <div>
+      <span class="link modal-trigger right" id="help-trigger"
+        >help <i class="far fa-question-circle"></i
+      ></span>
+    </div>
     <div class="inspections bg-dark-border">
       <h1 class="checklist-header <%=!profile.inspections.length ? "" : completed ? "good-border" : "danger-border"%>">PRE-RIDE INSPECTION</h1>
       <!-- prettier-ignore -->
@@ -46,5 +51,81 @@
       </form>
       <a href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/edit" class="link">Delete Inspection(s)?</a>
     </div>
-  </section>
+  </section><!-- Modal help -->
+  <div class="modal" id="help-modal">
+    <span class="close" id="help-close">&times;</span>
+    <h3 class="form-header">Pre Ride Help</h3>
+    <div class="modal-form-contents">
+      <div class="modal-help-window">
+        <section class="help-list">
+          <p>
+            This page is used as a pre-operational inspection checklist.
+          </p>
+          <p>
+            Enter an inspection title/description at the bottom of the page and select <span class="btn-fake">ADD</span> to add an inspection to the list.
+          </p>
+          <p>
+            Select individual inspections in the list to toggle complete/incomplete.
+          </p>
+          <p>
+            Select the <span class="highlight">Delete Inspection(s)?</span> link at the bottom to navigate to a page that will allow you to delete specific inspections.
+          </p>
+          <p>Profile buttons:</p>
+          <p>
+            <span class="btn-fake">pre-ride</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            pre-ride inspections page
+          </p>
+          <p>
+            <span class="btn-fake">post-ride</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            update engine hours after a ride-day.
+          </p>
+          <p>
+            <span class="btn-fake">maintenance</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            create maintenance tasks to track.
+          </p>
+          <p>
+            <span class="btn-fake">notes</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            record notes, torques, specs, maintenance steps...
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
 </div>
+<script>
+  // Modal display script
+  const formModal = document.getElementById("form-modal");
+  const helpModal = document.getElementById("help-modal");
+  const triggers = document.querySelectorAll(".modal-trigger");
+  const closers = document.querySelectorAll(".close");
+  // Display
+  for (const trigger of triggers) {
+    trigger.onclick = function (event) {
+      switch (event.target.id) {
+        case "form-trigger":
+          formModal.style.display = "block";
+          break;
+        case "help-trigger":
+          helpModal.style.display = "block";
+          break;
+      }
+    };
+  }
+  // Hide
+  for (const close of closers) {
+    close.onclick = function (event) {
+      switch (event.target.id) {
+        case "form-close":
+          formModal.style.display = "none";
+          break;
+        case "help-close":
+          helpModal.style.display = "none";
+          break;
+      }
+    };
+  }
+</script>

@@ -1,7 +1,13 @@
 <% layout("/layouts/boilerplate") %>
 <div class="action-page">
   <% include ../partials/profileHeader %>
-  <section class="profile__page-grid">
+  <section class="profile-page-grid">
+    <div class="page-header">
+      <h2>Profile Overview</h2>
+      <span class="link modal-trigger" id="help-trigger"
+        >help <i class="far fa-question-circle"></i
+      ></span>
+    </div>
     <div class="profile__info bg-dark-border">
       <h2 class="profile__title"><%= profile.title %></h2>
       <div class="profile__image">
@@ -20,18 +26,71 @@
         method="POST"
         onsubmit="return deleteConfirmation();"
       >
-        <button class="btn-delete">
+        <button class="btn btn-danger mt-md p-xs">
           <i class="fas fa-trash"></i>Delete this profile?
         </button>
       </form>
     </div>
     <div class="modal-trigger">
-      <h3 class="btn btn-primary btn-fw mb-sm py-xs">Edit This Profile?</h3>
+      <h3 class="btn btn-primary btn-fw mb-sm py-xs" id="form-trigger">
+        Edit This Profile?
+      </h3>
     </div>
   </section>
+  <!-- Modal help -->
+  <div class="modal" id="help-modal">
+    <span class="close" id="help-close">&times;</span>
+    <h3 class="form-header">Profile Overview Help</h3>
+    <div class="modal-form-contents">
+      <div class="modal-help-window">
+        <section class="help-list">
+          <p>This page shows basic profile information.</p>
+          <p>
+            The most important profile data is current hours, from which
+            maintenance task due times are calculated. Update the hours in the
+            post-ride page (preferred) or by editing the profile directly.
+          </p>
+          <p>
+            Select the
+            <span class="btn-fake">Edit This Profile</span> button at the bottom
+            of the screen to make changes to the current profile.
+          </p>
+          <p>
+            Select the
+            <span class="btn-fake-danger"
+              ><i class="fas fa-trash"></i>Delete this profile?</span
+            >
+            button in the main window to permanently remove this profile from
+            your garage.
+          </p>
+          <p>Profile buttons:</p>
+          <p>
+            <span class="btn-fake">pre-ride</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            pre-ride inspections page
+          </p>
+          <p>
+            <span class="btn-fake">post-ride</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            update engine hours after a ride-day.
+          </p>
+          <p>
+            <span class="btn-fake">maintenance</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            create maintenance tasks to track.
+          </p>
+          <p>
+            <span class="btn-fake">notes</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            record notes, torques, specs, maintenance steps...
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
   <!-- Modal Form -->
-  <div class="modal" id="modal">
-    <span class="close">&times;</span>
+  <div class="modal" id="form-modal">
+    <span class="close" id="form-close">&times;</span>
     <form
       action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
       method="POST"
@@ -115,16 +174,35 @@
     return confirm("Are you sure? This action is irreversible...");
   }
 
-  // Modal form script
-  const modal = document.getElementById("modal");
-  const trigger = document.querySelector(".modal-trigger");
-  const modalClose = document.querySelector(".close");
-
-  trigger.onclick = function () {
-    modal.style.display = "block";
-  };
-
-  modalClose.onclick = function () {
-    modal.style.display = "none";
-  };
+  // Modal display script
+  const formModal = document.getElementById("form-modal");
+  const helpModal = document.getElementById("help-modal");
+  const triggers = document.querySelectorAll(".modal-trigger");
+  const closers = document.querySelectorAll(".close");
+  // Display
+  for (const trigger of triggers) {
+    trigger.onclick = function (event) {
+      switch (event.target.id) {
+        case "form-trigger":
+          formModal.style.display = "block";
+          break;
+        case "help-trigger":
+          helpModal.style.display = "block";
+          break;
+      }
+    };
+  }
+  // Hide
+  for (const close of closers) {
+    close.onclick = function (event) {
+      switch (event.target.id) {
+        case "form-close":
+          formModal.style.display = "none";
+          break;
+        case "help-close":
+          helpModal.style.display = "none";
+          break;
+      }
+    };
+  }
 </script>

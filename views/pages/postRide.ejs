@@ -1,27 +1,115 @@
 <% layout("/layouts/boilerplate") %>
 <div class="action-page">
   <% include ../partials/profileHeader %>
-  <section class="post-ride__page">
-    <h1>Post Ride</h1>
-    <form
-      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
-      method="POST"
-      class="post-ride__form bg-dark-border"
-    >
-      <h4>Update your engine hours</h4>
-      <div>
-        <label for="hours">New engine hours: </label>
-        <input
-          type="number"
-          step=".1"
-          id="hours"
-          name="hours"
-          value="<%= profile.hours %>"
-          min="<%= profile.hours %>"
-          required
-        />
+  <div class="center-flex">
+    <section class="post-ride__page">
+      <div class="page-header">
+        <h2>Post Ride</h2>
+        <span class="link modal-trigger" id="help-trigger"
+          >help <i class="far fa-question-circle"></i
+        ></span>
       </div>
-      <button class="btn btn-primary py-xs">Update Hours</button>
-    </form>
-  </section>
+      <form
+        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
+        method="POST"
+        class="post-ride__form bg-dark-border"
+      >
+        <h4>Update your engine hours</h4>
+        <div>
+          <label for="hours">New engine hours: </label>
+          <input
+            type="number"
+            step=".1"
+            id="hours"
+            name="hours"
+            value="<%= profile.hours %>"
+            min="<%= profile.hours %>"
+            required
+          />
+        </div>
+        <button class="btn btn-primary py-xs">Update Hours</button>
+      </form>
+    </section>
+  </div>
+  <!-- Modal help -->
+  <div class="modal" id="help-modal">
+    <span class="close" id="help-close">&times;</span>
+    <h3 class="form-header">Post Ride Help</h3>
+    <div class="modal-form-contents">
+      <div class="modal-help-window">
+        <section class="help-list">
+          <p>
+            This page is used to update the engine/operating hours after a ride
+            day.
+          </p>
+          <p>
+            Enter the new hourmeter reading and select
+            <span class="btn-fake">Update Hours</span> to update the current
+            profile.
+          </p>
+          <p>Profile buttons:</p>
+          <p>
+            <span class="btn-fake">pre-ride</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            pre-ride inspections page
+          </p>
+          <p>
+            <span class="btn-fake">post-ride</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            update engine hours after a ride-day.
+          </p>
+          <p>
+            <span class="btn-fake">maintenance</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            create maintenance tasks to track.
+          </p>
+          <p>
+            <span class="btn-fake">notes</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            record notes, torques, specs, maintenance steps...
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
 </div>
+<script>
+  // Clear inputs on focus
+  document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("focus", function () {
+      this.value = "";
+    });
+  });
+
+  // Modal display script
+  const formModal = document.getElementById("form-modal");
+  const helpModal = document.getElementById("help-modal");
+  const triggers = document.querySelectorAll(".modal-trigger");
+  const closers = document.querySelectorAll(".close");
+  // Display
+  for (const trigger of triggers) {
+    trigger.onclick = function (event) {
+      switch (event.target.id) {
+        case "form-trigger":
+          formModal.style.display = "block";
+          break;
+        case "help-trigger":
+          helpModal.style.display = "block";
+          break;
+      }
+    };
+  }
+  // Hide
+  for (const close of closers) {
+    close.onclick = function (event) {
+      switch (event.target.id) {
+        case "form-close":
+          formModal.style.display = "none";
+          break;
+        case "help-close":
+          helpModal.style.display = "none";
+          break;
+      }
+    };
+  }
+</script>

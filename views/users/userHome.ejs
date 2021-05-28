@@ -1,27 +1,86 @@
 <% layout("/layouts/boilerplate") %>
 <div class="non-action-page">
   <div class="user-home__page-grid">
-    <div class="user-home__header">
-      <h1>Welcome back, <%=currentUser.username%>!</h1>
+    <div class="page-header">
+      <h2>
+        My
+        <span class="highlight"><i class="fas fa-warehouse"></i></span>
+      </h2>
+      <span class="link modal-trigger" id="help-trigger"
+        >help <i class="far fa-question-circle"></i
+      ></span>
     </div>
     <div class="user-home__profiles">
+      <!-- prettier-ignore -->
       <% if (user.bikeProfiles) { for (const profile of user.bikeProfiles) { %>
-      <% include ../partials/profileTab %> <% } } %> <% if (!user.bikeProfiles
-      || !user.bikeProfiles.length) { %>
+      <% include ../partials/profileTab %> <% } } %> 
+      <% if (!user.bikeProfiles || !user.bikeProfiles.length) { %>
       <p class="empty-collection-msg">
         No bike profiles created yet. Click below to create one.
       </p>
       <% } %>
     </div>
     <div class="modal-trigger">
-      <h3 class="btn btn-primary btn-fw mb-sm py-xs">
+      <h3 class="btn btn-primary btn-fw mb-sm py-xs" id="form-trigger">
         Create New Bike Profile?
       </h3>
     </div>
   </div>
+  <!-- Modal help -->
+  <div class="modal" id="help-modal">
+    <span class="close" id="help-close">&times;</span>
+    <h3 class="form-header">User Home Help</h3>
+    <div class="modal-form-contents">
+      <div class="modal-help-window">
+        <section class="help-list">
+          <p>
+            This page represents your garage
+            <span class="highlight"><i class="fas fa-warehouse"></i></span>. All
+            tracked profiles will appear here.
+          </p>
+          <p>
+            Select
+            <span class="btn-fake">Create New Bike Profile?</span> button at the
+            bottom of the screen to add bike profiles to your garage.
+          </p>
+          <p>
+            Each profile pane shows the current engine hours, the nearest
+            maintenance task (if created) and the pre-ride inspection status (if
+            created).
+          </p>
+          <p>
+            Selecting the profile image will take you to that profile's overview
+            page where it may be <span class="highlight">edited</span> or
+            <span class="col-danger">deleted</span> if needed.
+          </p>
+          <p>Profile buttons:</p>
+          <p>
+            <span class="btn-fake">pre-ride</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            pre-ride inspections page
+          </p>
+          <p>
+            <span class="btn-fake">post-ride</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            update engine hours after a ride-day.
+          </p>
+          <p>
+            <span class="btn-fake">maintenance</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            create maintenance tasks to track.
+          </p>
+          <p>
+            <span class="btn-fake">notes</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            record notes, torques, specs, maintenance steps...
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
   <!-- Modal Form -->
-  <div class="modal" id="modal">
-    <span class="close">&times;</span>
+  <div class="modal" id="form-modal">
+    <span class="close" id="form-close">&times;</span>
     <form
       action="/home/<%=user.username%>/profiles"
       method="POST"
@@ -95,15 +154,35 @@
   </div>
 </div>
 <script>
-  const modal = document.getElementById("modal");
-  const trigger = document.querySelector(".modal-trigger");
-  const modalClose = document.querySelector(".close");
-
-  trigger.onclick = function () {
-    modal.style.display = "block";
-  };
-
-  modalClose.onclick = function () {
-    modal.style.display = "none";
-  };
+  // Modal display script
+  const formModal = document.getElementById("form-modal");
+  const helpModal = document.getElementById("help-modal");
+  const triggers = document.querySelectorAll(".modal-trigger");
+  const closers = document.querySelectorAll(".close");
+  // Display
+  for (const trigger of triggers) {
+    trigger.onclick = function (event) {
+      switch (event.target.id) {
+        case "form-trigger":
+          formModal.style.display = "block";
+          break;
+        case "help-trigger":
+          helpModal.style.display = "block";
+          break;
+      }
+    };
+  }
+  // Hide
+  for (const close of closers) {
+    close.onclick = function (event) {
+      switch (event.target.id) {
+        case "form-close":
+          formModal.style.display = "none";
+          break;
+        case "help-close":
+          helpModal.style.display = "none";
+          break;
+      }
+    };
+  }
 </script>

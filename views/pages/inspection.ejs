@@ -51,7 +51,8 @@
       </form>
       <a href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/edit" class="link">Delete Inspection(s)?</a>
     </div>
-  </section><!-- Modal help -->
+  </section>
+  <!-- Modal help -->
   <div class="modal" id="help-modal">
     <span class="close" id="help-close">&times;</span>
     <h3 class="form-header">Pre Ride Help</h3>
@@ -67,10 +68,16 @@
           <p>
             Select individual inspections in the list to toggle complete/incomplete.
           </p>
+          <p>Submitting a new hour meter reading in the <span class="btn-fake">post-ride</span> section will reset the inspections.</p>
           <p>
             Select the <span class="highlight">Delete Inspection(s)?</span> link at the bottom to navigate to a page that will allow you to delete specific inspections.
           </p>
           <p>Profile buttons:</p>
+          <p>
+            <span class="btn-fake">profile</span>
+            <span class="highlight"><i class="fas fa-chevron-right"></i></span>
+            profile overview/edit page.
+          </p>
           <p>
             <span class="btn-fake">pre-ride</span>
             <span class="highlight"><i class="fas fa-chevron-right"></i></span>
@@ -84,7 +91,7 @@
           <p>
             <span class="btn-fake">maintenance</span>
             <span class="highlight"><i class="fas fa-chevron-right"></i></span>
-            create maintenance tasks to track.
+            create/edit/sign-off maintenance tasks.
           </p>
           <p>
             <span class="btn-fake">notes</span>

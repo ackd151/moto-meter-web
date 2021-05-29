@@ -20,6 +20,7 @@ router.use(activePage, isLoggedIn);
 router.post("/", upload.single("image"), catchAsync(createProfile));
 
 router.get("/:profileId", ownsProfile, catchAsync(getProfile));
+
 router.patch(
   "/:profileId",
   ownsProfile,

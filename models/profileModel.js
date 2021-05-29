@@ -18,7 +18,13 @@ const profileSchema = new Schema({
     type: Number,
     required: true,
   },
-  image: { path: String, filename: String },
+  image: {
+    path: {
+      type: String,
+      default: "/images/my18-KTM.jpg",
+    },
+    filename: String,
+  },
   tasks: [
     {
       type: Schema.Types.ObjectId,

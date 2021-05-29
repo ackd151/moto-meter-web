@@ -1057,6 +1057,7 @@ textarea {
 }
 .btn-fake-danger {
   border: 1px solid var(--color-danger);
+  background-color: var(--color-danger-bg);
   border-radius: 5px;
   padding: 0.25rem;
 }

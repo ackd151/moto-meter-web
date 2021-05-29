@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 const Inspection = require("../models/inspectionModel");
 const multer = require("multer");
 const { storage } = require("../cloudinary");
-const upload = multer({ storage });
+// const upload = multer({ storage });
 const cloudinary = require("cloudinary").v2;
 
 module.exports = {
@@ -22,7 +22,6 @@ module.exports = {
   },
   async getProfile(req, res, next) {
     const profile = await Profile.findById(req.params.profileId);
-
     res.render("pages/profile", { profile });
   },
   async updateProfile(req, res, next) {

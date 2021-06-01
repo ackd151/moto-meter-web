@@ -65,8 +65,8 @@
           <p>
             After toggling inspections you wish to delete, select
             <span class="btn-fake-danger"
-              ><i class="fas fa-trash"></i>Delete Selected</span
-            >
+              ><i class="fas fa-trash"> </i>Delete Selected
+            </span>
             to permanently remove them.
           </p>
           <p>Profile buttons:</p>
@@ -103,6 +103,11 @@
 <script>
   // Delete confirmation script
   function deleteConfirmation() {
+    const cbs = document.querySelectorAll("input:checked");
+    if (!cbs.length) {
+      alert("You have not selected any inspections to delete.");
+      return false;
+    }
     return confirm("Are you sure? This action is irreversible...");
   }
 

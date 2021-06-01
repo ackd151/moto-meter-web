@@ -1,21 +1,47 @@
 <nav class="navbar">
   <div class="brand">
     <a href="/"
-      ><img src="/images/ic_launcher_small.png" alt="Moto Meter Brand Icon" />
-      <p>MotoMeter</p>
+      ><img
+        src="/images/ic_launcher_small.png"
+        alt="Moto Meter Brand Icon"
+        class="brand-icon"
+      />
+      <p class="brand-text">MotoMeter</p>
     </a>
   </div>
   <div class="logging">
     <% if (!currentUser) { %>
-    <a href="/register" class="btn-register">sign up</a>
-    <a href="/login" class="btn-logging">login</a>
+    <a href="/register" class="btn-logging btn-reg">sign up</a>
+    <a href="/login" class="btn-logging btn-log">login</a>
     <% } else { %>
     <span class="user"
       >Hello
       <a href="/home/<%=currentUser.username%>" class="user-link"
         ><%=currentUser.username%><i class="fas fa-warehouse"></i></a
     ></span>
-    <a href="/logout" class="btn-logging">logout</a>
+    <a href="/logout" class="btn-logging btn-logout">logout</a>
     <% } %>
   </div>
+  <div class="menu">
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-caret-square-down"></i>
+    </button>
+    <div class="menu-content" id="menu">
+      <% if (!currentUser) { %>
+      <a href="/register">sign&nbsp;up</a>
+      <a href="/login">login</a>
+      <% } else { %>
+      <a href="/home/<%=currentUser.username%>"
+        ><i class="fas fa-warehouse"></i
+      ></a>
+      <a href="/logout">logout</a>
+      <% } %>
+    </div>
+  </div>
 </nav>
+<script>
+  // Toggle drop menu script
+  function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+  }
+</script>

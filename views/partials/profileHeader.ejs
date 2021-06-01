@@ -20,28 +20,28 @@
         href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
         class="btn btn-primary profile__action <%= activePage === "inspections" ? "active-action": "" %>"
       >
-        <i class="fas fa-clipboard-check"></i>pre-ride 
+        <i class="fas fa-clipboard-check"></i><span class="pa-text">pre-ride</span> 
       </a>
 
       <a
         href="/home/<%=currentUser.username%>/profiles/<%= profile._id %>/post-ride"
         class="btn btn-primary profile__action <%= activePage === "post-ride" ? "active-action": "" %>"
       >
-        <i class="fas fa-stopwatch"></i>post-ride
+        <i class="fas fa-stopwatch"></i><span class="pa-text">post-ride</span>
       </a>
 
       <a
         href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
         class="btn btn-primary profile__action <%= activePage === "maintenance" ? "active-action": "" %>"
       >
-        <i class="fas fa-tools"></i>maintenance
+        <i class="fas fa-tools"></i><span class="pa-text">maintenance</span>
       </a>
 
       <a
         href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
         class="btn btn-primary profile__action <%= activePage === "notes" ? "active-action": "" %>"
       >
-        <i class="fas fa-clipboard-list"></i>notes
+        <i class="fas fa-clipboard-list"></i><span class="pa-text">notes</span>
       </a>
     </div>
   </div>

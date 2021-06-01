@@ -1,9 +1,8 @@
 const Profile = require("../models/profileModel");
 const User = require("../models/userModel");
 const Inspection = require("../models/inspectionModel");
-const multer = require("multer");
-const { storage } = require("../cloudinary");
-// const upload = multer({ storage });
+// const multer = require("multer");
+// const { storage } = require("../cloudinary");
 const cloudinary = require("cloudinary").v2;
 
 module.exports = {

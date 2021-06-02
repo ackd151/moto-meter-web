@@ -9,7 +9,7 @@ const {
   getTargetId,
 } = require("../middleware/index");
 
-router.use(ownsProfile, activePage);
+router.use(isLoggedIn, getTargetId, ownsProfile, activePage);
 
 router.route("/").get(catchAsync(getNotes)).post(catchAsync(postNotes));
 

@@ -103,7 +103,7 @@
   <div class="modal" id="form-modal">
     <span class="close" id="form-close">&times;</span>
     <form
-      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
+      action="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance"
       method="POST"
       class="modal-form"
       autocomplete="off"

@@ -9,13 +9,32 @@ module.exports = {
     }
     next();
   },
+  /* 
+    Profile urls are built using profile.title and are not unique, must get appropriate 
+    target id by looking only at active user's profile urls.
+  */
+  async getTargetId(req, res, next) {
+    const user = await User.findOne({ username: req.params.username }).populate(
+      "bikeProfiles"
+    );
+    console.log(user.bikeProfiles);
+    console.log(req.params.profileUrl);
+    for (const profile of user.bikeProfiles) {
+      if (profile.url === req.params.profileUrl) {
+        req.targetId = profile._id;
+      }
+    }
+    next();
+  },
   async ownsProfile(req, res, next) {
+    console.log(req.user.username);
+    console.log(req.targetId);
     const isOwner = req.user.bikeProfiles.some((profile) =>
       profile._id.equals(req.targetId)
     );
     if (!isOwner) {
       req.flash("error", "Hey, that's not yours!");
-      return res.redirect(`/${res.locals.currentUser.username}`);
+      return res.redirect(`/${req.user.username}`);
     }
     next();
   },
@@ -31,21 +50,6 @@ module.exports = {
       page = "notes";
     }
     res.locals.activePage = page;
-    next();
-  },
-  /* 
-    Profile urls are built using profile.title and are not unique, must get appropriate 
-    target id by looking only at active user's profile urls.
-  */
-  async getTargetId(req, res, next) {
-    const user = await User.findOne({ username: req.params.username }).populate(
-      "bikeProfiles"
-    );
-    for (const p of user.bikeProfiles) {
-      if (p.url === req.params.profileUrl) {
-        req.targetId = p._id;
-      }
-    }
     next();
   },
 };

@@ -7,9 +7,14 @@ const {
   deleteTask,
 } = require("../controllers/tasksCtrl");
 const catchAsync = require("../utils/catchAsync");
-const { isLoggedIn, ownsProfile } = require("../middleware/index");
+const {
+  isLoggedIn,
+  getTargetId,
+  ownsProfile,
+  activePage,
+} = require("../middleware");
 
-router.use(isLoggedIn, ownsProfile);
+router.use(isLoggedIn, getTargetId, ownsProfile, activePage);
 
 router.route("/").get(catchAsync(getTaskPage)).post(catchAsync(createTask));
 

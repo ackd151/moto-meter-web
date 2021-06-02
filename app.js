@@ -75,14 +75,14 @@ app.use((req, res, next) => {
 
 //***********************************DEV********************************* */
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: "60b6c5c91b9571329c173ddd",
-    username: "ackd151",
-  };
-  res.locals.currentUser = req.user;
-  next();
-});
+// app.use((req, res, next) => {
+//   req.user = {
+//     _id: "60b6c5c91b9571329c173ddd",
+//     username: "ackd151",
+//   };
+//   res.locals.currentUser = req.user;
+//   next();
+// });
 
 //*********************************************************************** */
 

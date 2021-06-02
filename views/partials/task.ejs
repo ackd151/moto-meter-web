@@ -2,7 +2,7 @@
   <div class="task__info">
     <h3><%= task.title %></h3>
     <form
-      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=DELETE"
+      action="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance/<%=task._id%>?_method=DELETE"
       method="POST"
       onsubmit="return deleteConfirmation();"
     >
@@ -37,7 +37,7 @@
   </div>
   <div class="task__sign-off">
     <form
-      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=PATCH"
+      action="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance/<%=task._id%>?_method=PATCH"
       method="POST"
       class="task__sign-off-form"
     >
@@ -59,7 +59,7 @@
   <div class="task__edit">
     <p class="edit-form-trigger">Edit Task</p>
     <form
-      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance/<%=task._id%>?_method=PATCH"
+      action="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance/<%=task._id%>?_method=PATCH"
       method="POST"
       class="task__edit-form"
       autocomplete="off"

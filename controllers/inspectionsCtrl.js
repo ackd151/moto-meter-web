@@ -7,7 +7,6 @@ module.exports = {
       "inspections"
     );
     const completed = await Inspection.inspectionsComplete(profile._id);
-    console.log(completed);
     res.render("pages/inspection", { profile, completed });
   },
   async postInspections(req, res, next) {
@@ -16,7 +15,6 @@ module.exports = {
     );
     const { title } = req.body;
     const newInspection = new Inspection({ title });
-    console.log(newInspection);
     await newInspection.save();
     profile.inspections.push(newInspection);
     await profile.save();

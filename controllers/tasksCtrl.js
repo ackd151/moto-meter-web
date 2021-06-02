@@ -4,8 +4,7 @@ const compareTasks = require("../utils/compareTasks");
 
 module.exports = {
   async getTaskPage(req, res, next) {
-    const { profileId } = req.params;
-    const profile = await Profile.findById(profileId).populate("tasks");
+    const profile = await Profile.findById(req.targetId).populate("tasks");
     // Sort tasks
     const { tasks } = profile;
     for (const task of tasks) {
@@ -15,37 +14,31 @@ module.exports = {
     res.render("pages/maintenance", { profile });
   },
   async createTask(req, res, next) {
-    const { profileId } = req.params;
     // Fetch associated Profile
-    const profile = await Profile.findById(profileId);
+    const profile = await Profile.findById(req.targetId);
     // Create task from req.body and push to profile
     const newTask = new Task(req.body.task);
     await newTask.save();
     profile.tasks.push(newTask);
     await profile.save();
     req.flash("success", "New maintenance task added.");
-    res.redirect(
-      `/home/${req.user.username}/profiles/${profileId}/maintenance`
-    );
+    res.redirect(`/${req.user.username}/garage/${profile.url}/maintenance`);
   },
   async updateTask(req, res, next) {
+    const profile = await Profile.findById(req.targetId);
     const { title, lastCompletedAt, interval } = req.body.task;
     const task = await Task.findById(req.params.taskId);
     task.title = title || task.title;
     task.interval = interval || task.interval;
     task.lastCompletedAt = lastCompletedAt || task.lastCompletedAt;
     await task.save();
-    res.redirect(
-      `/home/${req.user.username}/profiles/${req.params.profileId}/maintenance`
-    );
+    res.redirect(`/${req.user.username}/garage/${profile.url}/maintenance`);
   },
   async deleteTask(req, res, next) {
-    await Profile.findByIdAndUpdate(req.params.profileId, {
+    const profile = await Profile.findByIdAndUpdate(req.params.profileId, {
       $pull: { tasks: req.params.taskId },
     });
     await Task.findByIdAndDelete(req.params.taskId);
-    res.redirect(
-      `/home/${req.user.username}/profiles/${req.params.profileId}/maintenance`
-    );
+    res.redirect(`/${req.user.username}/garage/${profile.url}/maintenance`);
   },
 };

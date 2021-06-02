@@ -1,14 +1,14 @@
 const Profile = require("../models/profileModel");
 const User = require("../models/userModel");
 const Inspection = require("../models/inspectionModel");
-// const multer = require("multer");
-// const { storage } = require("../cloudinary");
 const cloudinary = require("cloudinary").v2;
 
 module.exports = {
   async createProfile(req, res, next) {
     const user = await User.findOne({ username: req.params.username });
-    const newProfile = new Profile(req.body.profile);
+    let profileInfo = req.body.profile;
+    profileInfo.url = `${profileInfo.year}_${profileInfo.make}_${profileInfo.model}`;
+    const newProfile = new Profile(profileInfo);
     if (req.file) {
       const { path, filename } = req.file;
       newProfile.image = { path, filename };
@@ -17,20 +17,21 @@ module.exports = {
     await newProfile.save();
     await user.save();
     req.flash("success", "New dirtbike profile created.");
-    res.redirect(`/home/${req.params.username}/profiles/${newProfile._id}`);
+    res.redirect(`/${req.params.username}/garage/${newProfile.url}`);
   },
   async getProfile(req, res, next) {
-    const profile = await Profile.findById(req.params.profileId);
+    const profile = await Profile.findById(req.targetId);
     res.render("pages/profile", { profile });
   },
   async updateProfile(req, res, next) {
+    const profile = await Profile.findById(req.targetId);
     if (req.body.profile) {
       const { year, make, model, hours } = req.body.profile;
-      const profile = await Profile.findById(req.params.profileId);
       profile.year = year;
       profile.make = make;
       profile.model = model;
       profile.hours = hours;
+      profile.url = `${year}_${make}_${model}`;
       if (req.file) {
         // Remove old image from cloudinary if new image supplied
         const oldImage = profile.image;
@@ -40,27 +41,22 @@ module.exports = {
         const { path, filename } = req.file;
         profile.image = { path, filename };
       }
-      await profile.save();
     } else if (req.body.hours) {
-      const { hours } = req.body;
-      await Profile.findByIdAndUpdate(req.params.profileId, {
-        hours,
-      });
+      profile.hours = req.body.hours;
       // reset pre-ride checklist
-      await Inspection.reset(req.params.profileId);
+      await Inspection.reset(profile._id);
     }
+    await profile.save();
     req.flash("success", "Bike profile edited successfully.");
-    res.redirect(
-      `/home/${req.params.username}/profiles/${req.params.profileId}`
-    );
+    res.redirect(`/${req.params.username}/garage/${profile.url}`);
   },
   async getPostRide(req, res, next) {
-    const profile = await Profile.findById(req.params.profileId);
+    const profile = await Profile.findById(req.targetId);
     res.render("pages/postRide", { profile });
   },
   async deleteProfile(req, res, next) {
+    const profile = await Profile.findById(req.targetId);
     // Remove image from cloudinary
-    const profile = await Profile.findById(req.params.profileId);
     const { filename } = profile.image;
     if (filename) {
       cloudinary.uploader.destroy(filename);
@@ -69,12 +65,12 @@ module.exports = {
     await User.findOneAndUpdate(
       { username: req.params.username },
       {
-        $pull: { bikeProfiles: req.params.profileId },
+        $pull: { bikeProfiles: profile._id },
       }
     );
     // Remove profile from db
-    await Profile.findByIdAndDelete(req.params.profileId);
+    await Profile.findByIdAndDelete(profile._id);
     req.flash("success", "Bike profile successfully deleted.");
-    res.redirect(`/home/${req.user.username}`);
+    res.redirect(`/${req.user.username}`);
   },
 };

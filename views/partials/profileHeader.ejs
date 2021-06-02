@@ -1,7 +1,7 @@
 <section class="profile-header">
   <div class="profile-links">
     <a 
-      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>"
+      href="/<%=currentUser.username%>/garage/<%=profile.url%>"
       class="btn btn-primary <%=activePage === "profile" ? "active-action": ""%>"
     >
     <div class="profile-home-link">
@@ -17,28 +17,28 @@
     </a>
     <div class="profile-action-links">
       <a 
-        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
+        href="/<%=currentUser.username%>/garage/<%=profile.url%>/inspections"
         class="btn btn-primary profile__action <%= activePage === "inspections" ? "active-action": "" %>"
       >
         <i class="fas fa-clipboard-check"></i><span class="pa-text">pre-ride</span> 
       </a>
 
       <a
-        href="/home/<%=currentUser.username%>/profiles/<%= profile._id %>/post-ride"
+        href="/<%=currentUser.username%>/garage/<%= profile.url %>/post-ride"
         class="btn btn-primary profile__action <%= activePage === "post-ride" ? "active-action": "" %>"
       >
         <i class="fas fa-stopwatch"></i><span class="pa-text">post-ride</span>
       </a>
 
       <a
-        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
+        href="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance"
         class="btn btn-primary profile__action <%= activePage === "maintenance" ? "active-action": "" %>"
       >
         <i class="fas fa-tools"></i><span class="pa-text">maintenance</span>
       </a>
 
       <a
-        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
+        href="/<%=currentUser.username%>/garage/<%=profile.url%>/notes"
         class="btn btn-primary profile__action <%= activePage === "notes" ? "active-action": "" %>"
       >
         <i class="fas fa-clipboard-list"></i><span class="pa-text">notes</span>

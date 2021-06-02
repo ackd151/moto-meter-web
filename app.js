@@ -15,7 +15,6 @@ const app = express();
 
 /* Import Routes */
 const indexRoutes = require("./routes/indexRout");
-const userRoutes = require("./routes/userRoutes");
 const profileRoutes = require("./routes/profilesRout");
 const taskRoutes = require("./routes/tasksRout");
 const inspectionRoutes = require("./routes/inspectionsRout");
@@ -76,24 +75,23 @@ app.use((req, res, next) => {
 
 //***********************************DEV********************************* */
 
-// app.use((req, res, next) => {
-//   req.user = {
-//     _id: "60947b208d479026b08dd764",
-//     username: "ackd151",
-//   };
-//   res.locals.currentUser = req.user;
-//   next();
-// });
+app.use((req, res, next) => {
+  req.user = {
+    _id: "60b6c5c91b9571329c173ddd",
+    username: "ackd151",
+  };
+  res.locals.currentUser = req.user;
+  next();
+});
 
 //*********************************************************************** */
 
 /* Mount Routes */
 app.use("/", indexRoutes);
-app.use("/home", userRoutes);
-app.use("/home/:username/profiles", profileRoutes);
-app.use("/home/:username/profiles/:profileId/maintenance", taskRoutes);
-app.use("/home/:username/profiles/:profileId/inspections", inspectionRoutes);
-app.use("/home/:username/profiles/:profileId/notes", noteRoutes);
+app.use("/:username/garage", profileRoutes);
+app.use("/:username/garage/:profileUrl/maintenance", taskRoutes);
+app.use("/:username/garage/:profileUrl/inspections", inspectionRoutes);
+app.use("/:username/garage/:profileUrl/notes", noteRoutes);
 
 /* Invalid routes */
 app.all("*", (req, res, next) => {

@@ -1,4 +1,7 @@
 const User = require("../models/userModel");
+const Profile = require("../models/profileModel");
+const Inspection = require("../models/inspectionModel");
+const compareTasks = require("../utils/compareTasks");
 
 module.exports = {
   async getHome(req, res, next) {
@@ -27,15 +30,14 @@ module.exports = {
       req.flash("error", `${msg}`);
       return res.redirect("/register");
     }
-    res.redirect(`/home/${req.body.user.username}`);
+    res.redirect(`/${req.body.user.username}`);
   },
   getLogin(req, res, next) {
     res.render("users/login");
   },
   async postLogin(req, res, next) {
     req.flash("success", `Welcome back, ${req.user.username}!`);
-    const redirectUrl =
-      req.session.intendedRoute || `home/${req.user.username}`;
+    const redirectUrl = req.session.intendedRoute || `${req.user.username}`;
     delete req.session.intendedRoute;
     res.redirect(redirectUrl);
   },
@@ -43,5 +45,26 @@ module.exports = {
     req.logout();
     req.flash("success", "Logged out.");
     res.redirect("/");
+  },
+  async getUserHome(req, res, next) {
+    const user = await User.findOne({ username: req.params.username }).populate(
+      {
+        path: "bikeProfiles",
+        populate: { path: "tasks" },
+      }
+    );
+    // Sort profile tasks, populate remainingHours on each, and get pre-ride status
+    for (const [index, profile] of user.bikeProfiles.entries()) {
+      const { tasks } = profile;
+      // Calculate remaining hours
+      for (const task of tasks) {
+        task.remainingHours = await task.getRemainingHours();
+      }
+      // Sort
+      tasks.sort(compareTasks);
+      // Get pre-ride status
+      profile.completed = await Inspection.inspectionsComplete(profile._id);
+    }
+    res.render("users/userHome", { user });
   },
 };

@@ -3,14 +3,15 @@ const Inspection = require("../models/inspectionModel");
 
 module.exports = {
   async getInspections(req, res, next) {
-    const { profileId } = req.params;
-    const profile = await Profile.findById(profileId).populate("inspections");
-    const completed = await Inspection.inspectionsComplete(profileId);
+    const profile = await Profile.findById(req.targetId).populate(
+      "inspections"
+    );
+    const completed = await Inspection.inspectionsComplete(profile._id);
     console.log(completed);
     res.render("pages/inspection", { profile, completed });
   },
   async postInspections(req, res, next) {
-    const profile = await Profile.findById(req.params.profileId).populate(
+    const profile = await Profile.findById(req.targetId).populate(
       "inspections"
     );
     const { title } = req.body;
@@ -20,12 +21,10 @@ module.exports = {
     profile.inspections.push(newInspection);
     await profile.save();
     req.flash("success", `Added "${newInspection.title}" inspection`);
-    res.redirect(
-      `/home/${req.user.username}/profiles/${profile._id}/inspections`
-    );
+    res.redirect(`/${req.user.username}/garage/${profile.url}/inspections`);
   },
   async updateInspections(req, res, next) {
-    const activeProfile = await Profile.findById(req.params.profileId).populate(
+    const activeProfile = await Profile.findById(req.targetId).populate(
       "inspections"
     );
     const { cbs } = req.body;
@@ -36,18 +35,18 @@ module.exports = {
       await inspection.save();
     }
     res.redirect(
-      `/home/${req.user.username}/profiles/${req.params.profileId}/inspections`
+      `/${req.user.username}/garage/${activeProfile.url}/inspections`
     );
   },
   async getInspectionsEdit(req, res, next) {
-    const profile = await Profile.findById(req.params.profileId).populate(
+    const profile = await Profile.findById(req.targetId).populate(
       "inspections"
     );
     res.render("pages/inspectionEdit", { profile });
   },
   async deleteInspections(req, res, next) {
     const { cbs } = req.body;
-    await Profile.findByIdAndUpdate(req.params.profileId, {
+    const profile = await Profile.findByIdAndUpdate(req.targetId, {
       $pull: { inspections: { $in: cbs } },
     });
     const response = await Inspection.deleteMany({ _id: { $in: cbs } });
@@ -55,8 +54,6 @@ module.exports = {
       "success",
       `Successfully deleted ${response.deletedCount} inspections`
     );
-    res.redirect(
-      `/home/${req.user.username}/profiles/${req.params.profileId}/inspections`
-    );
+    res.redirect(`/${req.user.username}/garage/${profile.url}/inspections`);
   },
 };

@@ -10,7 +10,7 @@
         ></span>
       </div>
       <form
-        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
+        action="/<%=currentUser.username%>/garage/<%=profile.url%>?_method=PATCH"
         method="POST"
         class="post-ride__form bg-dark-border"
       >

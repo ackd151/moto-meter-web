@@ -1,7 +1,7 @@
 <section class="profile-tab bg-dark-border">
   <div class="profile-tab__info">
   <a
-    href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>"
+    href="/<%=currentUser.username%>/garage/<%=profile.url%>"
     class="btn btn-primary"
   >
     <h4><%=profile.title%></h4>
@@ -12,7 +12,7 @@
     <p>
       Current Hours:
       <a
-        href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/post-ride"
+        href="/<%=currentUser.username%>/garage/<%=profile.url%>/post-ride"
         ><span class="link"><%=profile.hours%></span></a
       >
     </p>
@@ -25,7 +25,7 @@
         <p>
           Due in:
           <a
-            href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
+            href="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance"
             ><span
             class="<%=task.remainingHours > 3 ? 'col-good' : task.remainingHours > 1.5 ? 'col-caution' : 'col-danger'%>"
             ><%= task.remainingHours %></span
@@ -40,28 +40,28 @@
     </div>
     <div class="checklist-status">
       <% if (profile.inspections.length) { %> 
-      <p>Pre-ride status: <a href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"><span class="pr-status <%=profile.completed ? "good" : "danger"%>"></span></a></p>
+      <p>Pre-ride status: <a href="/<%=currentUser.username%>/garage/<%=profile.url%>/inspections"><span class="pr-status <%=profile.completed ? "good" : "danger"%>"></span></a></p>
       <% } %> 
     </div>
   </div>
   <div class="profile-tab__action-buttons">
     <a
-      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections"
+      href="/<%=currentUser.username%>/garage/<%=profile.url%>/inspections"
       class="btn btn-primary profile__action"
       >pre-ride</a
     >
     <a
-      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/post-ride"
+      href="/<%=currentUser.username%>/garage/<%=profile.url%>/post-ride"
       class="btn btn-primary profile__action"
       >post-ride</a
     >
     <a
-      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/maintenance"
+      href="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance"
       class="btn btn-primary profile__action"
       >maintenance</a
     >
     <a
-      href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/notes"
+      href="/<%=currentUser.username%>/garage/<%=profile.url%>/notes"
       class="btn btn-primary profile__action"
       >notes</a
     >

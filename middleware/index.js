@@ -1,5 +1,4 @@
 const User = require("../models/userModel");
-const Profile = require("../models/profileModel");
 
 module.exports = {
   isLoggedIn(req, res, next) {
@@ -11,13 +10,12 @@ module.exports = {
     next();
   },
   async ownsProfile(req, res, next) {
-    const user = await User.findOne({ username: req.user.username });
-    const isOwner = user.bikeProfiles.some((profile) =>
-      profile._id.equals(req.params.profileId)
+    const isOwner = req.user.bikeProfiles.some((profile) =>
+      profile._id.equals(req.targetId)
     );
     if (!isOwner) {
       req.flash("error", "Hey, that's not yours!");
-      return res.redirect(`/home/${res.locals.currentUser.username}`);
+      return res.redirect(`/${res.locals.currentUser.username}`);
     }
     next();
   },
@@ -33,6 +31,21 @@ module.exports = {
       page = "notes";
     }
     res.locals.activePage = page;
+    next();
+  },
+  /* 
+    Profile urls are built using profile.title and are not unique, must get appropriate 
+    target id by looking only at active user's profile urls.
+  */
+  async getTargetId(req, res, next) {
+    const user = await User.findOne({ username: req.params.username }).populate(
+      "bikeProfiles"
+    );
+    for (const p of user.bikeProfiles) {
+      if (p.url === req.params.profileUrl) {
+        req.targetId = p._id;
+      }
+    }
     next();
   },
 };

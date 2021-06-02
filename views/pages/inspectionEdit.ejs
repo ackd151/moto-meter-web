@@ -15,7 +15,7 @@
       <% } %> <% if (profile.inspections.length) { %>
       <h2 class="checklist-header">Select inspections you wish to delete</h2>
       <form
-        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/inspections/destroy?_method=DELETE"
+        action="/<%=currentUser.username%>/garage/<%=profile.url%>/inspections/destroy?_method=DELETE"
         method="POST"
         onsubmit="return deleteConfirmation();"
         class="inspection-delete-form"

@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-const { ownsProfile, activePage } = require("../middleware/index");
+const {
+  isLoggedIn,
+  ownsProfile,
+  activePage,
+  getTargetId,
+} = require("../middleware");
 const {
   getInspections,
   postInspections,
@@ -9,9 +14,7 @@ const {
   deleteInspections,
 } = require("../controllers/inspectionsCtrl");
 
-// const { isLoggedIn, ownsProfile, activePage } = require("../middleware/index");
-
-router.use(ownsProfile, activePage);
+router.use(isLoggedIn, getTargetId, ownsProfile, activePage);
 
 router
   .route("/")

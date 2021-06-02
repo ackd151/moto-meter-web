@@ -16,7 +16,7 @@
     <% } else { %>
     <span class="user"
       >Hello
-      <a href="/home/<%=currentUser.username%>" class="user-link"
+      <a href="/<%=currentUser.username%>" class="user-link"
         ><%=currentUser.username%><i class="fas fa-warehouse"></i></a
     ></span>
     <a href="/logout" class="btn-logging btn-logout">logout</a>
@@ -31,9 +31,7 @@
       <a href="/register">sign&nbsp;up</a>
       <a href="/login">login</a>
       <% } else { %>
-      <a href="/home/<%=currentUser.username%>"
-        ><i class="fas fa-warehouse"></i
-      ></a>
+      <a href="/<%=currentUser.username%>"><i class="fas fa-warehouse"></i></a>
       <a href="/logout">logout</a>
       <% } %>
     </div>

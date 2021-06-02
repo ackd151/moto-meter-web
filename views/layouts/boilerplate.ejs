@@ -24,5 +24,15 @@
       <%- body -%>
       <% include ../partials/footer %>
     </div>
+    <script>
+      // Hide flash messages
+      const flash = document.querySelector(".flash");
+      if (flash) {
+        setTimeout(hideFlash, 3000);
+      }
+      function hideFlash() {
+        flash.style.display = "none";
+      }
+    </script>
   </body>
 </html>

@@ -7,8 +7,10 @@ const {
   getLogin,
   postLogin,
   getLogout,
+  getUserHome,
 } = require("../controllers/indexCtrl");
 const passport = require("passport");
+const { isLoggedIn } = require("../middleware/index");
 const catchAsync = require("../utils/catchAsync");
 
 router.get("/", getHome);
@@ -27,5 +29,7 @@ router
   );
 
 router.get("/logout", getLogout);
+
+router.get("/:username", isLoggedIn, catchAsync(getUserHome));
 
 module.exports = router;

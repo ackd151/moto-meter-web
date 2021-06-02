@@ -16,13 +16,13 @@
       <p>
         Current hours:
         <a
-          href="/home/<%=currentUser.username%>/profiles/<%=profile._id%>/post-ride"
+          href="/<%=currentUser.username%>/garage/<%=profile.url%>/post-ride"
           class="link"
           ><%= profile.hours %></a
         >
       </p>
       <form
-        action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=DELETE"
+        action="/<%=currentUser.username%>/garage/<%=profile.url%>?_method=DELETE"
         method="POST"
         onsubmit="return deleteConfirmation();"
       >
@@ -98,7 +98,7 @@
   <div class="modal" id="form-modal">
     <span class="close" id="form-close">&times;</span>
     <form
-      action="/home/<%=currentUser.username%>/profiles/<%=profile._id%>?_method=PATCH"
+      action="/<%=currentUser.username%>/garage/<%=profile.url%>?_method=PATCH"
       method="POST"
       class="modal-form"
       autocomplete="off"

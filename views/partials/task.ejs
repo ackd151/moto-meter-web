@@ -1,15 +1,20 @@
 <article class="task-partial bg-dark-border">
   <div class="task__info">
+    <div class="task-modify-panel">
+      <p class="edit-form-trigger link" onclick="displayEdit('<%=task._id%>')">
+        Edit Task
+      </p>
+      <form
+        action="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance/<%=task._id%>?_method=DELETE"
+        method="POST"
+        onsubmit="return deleteConfirmation();"
+      >
+        <button class="btn btn-danger btn-task-delete">
+          <i class="fas fa-trash"></i>
+        </button>
+      </form>
+    </div>
     <h3><%= task.title %></h3>
-    <form
-      action="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance/<%=task._id%>?_method=DELETE"
-      method="POST"
-      onsubmit="return deleteConfirmation();"
-    >
-      <button class="btn btn-danger btn-task-delete">
-        <i class="fas fa-trash"></i>
-      </button>
-    </form>
     <p>
       Due in:
       <span
@@ -56,8 +61,8 @@
       </div>
     </form>
   </div>
-  <div class="task__edit">
-    <p class="edit-form-trigger">Edit Task</p>
+  <div class="task__edit" id="<%=task._id%>">
+    <span class="edit-close">&times;</span>
     <form
       action="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance/<%=task._id%>?_method=PATCH"
       method="POST"

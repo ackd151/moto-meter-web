@@ -45,7 +45,7 @@ const profileSchema = new Schema({
 });
 
 profileSchema.virtual("title").get(function () {
-  return `${this.year} ${this.make} ${this.model}`;
+  return this.url.split("_").join(" ");
 });
 
 module.exports = model("Profile", profileSchema);

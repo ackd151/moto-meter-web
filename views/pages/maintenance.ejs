@@ -168,12 +168,12 @@
     });
   });
 
-  // Confirm deletion script
+  // Confirm deletion
   function deleteConfirmation() {
     return confirm("Are you sure? This action is irreversible...");
   }
 
-  // Modal display script
+  // Modal display
   const formModal = document.getElementById("form-modal");
   const helpModal = document.getElementById("help-modal");
   const triggers = document.querySelectorAll(".modal-trigger");
@@ -202,6 +202,19 @@
           helpModal.style.display = "none";
           break;
       }
+    };
+  }
+
+  // Display task edit form
+  function displayEdit(taskId) {
+    const editForm = document.getElementById(taskId);
+    editForm.style.display = "block";
+  }
+  // Hide display edit forms
+  const editClosers = document.querySelectorAll(".edit-close");
+  for (const close of editClosers) {
+    close.onclick = function (event) {
+      event.target.parentNode.style.display = "none";
     };
   }
 </script>

@@ -17,8 +17,6 @@ module.exports = {
     const user = await User.findOne({ username: req.params.username }).populate(
       "bikeProfiles"
     );
-    console.log(user.bikeProfiles);
-    console.log(req.params.profileUrl);
     for (const profile of user.bikeProfiles) {
       if (profile.url === req.params.profileUrl) {
         req.targetId = profile._id;
@@ -27,8 +25,6 @@ module.exports = {
     next();
   },
   async ownsProfile(req, res, next) {
-    console.log(req.user.username);
-    console.log(req.targetId);
     const isOwner = req.user.bikeProfiles.some((profile) =>
       profile._id.equals(req.targetId)
     );

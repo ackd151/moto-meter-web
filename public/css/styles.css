@@ -173,7 +173,6 @@ textarea {
 .btn-primary:active {
   box-shadow: 0 1px 2px var(--color-primary-bg);
 }
-
 .btn-danger {
   background-color: var(--color-danger-bg);
   border: 1px solid var(--color-danger);
@@ -185,25 +184,15 @@ textarea {
 .btn-danger:active {
   box-shadow: 0 1px 2px var(--color-danger-bg);
 }
-
-.btn-task-delete {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 0.25rem;
-}
-
 .btn-fw {
   text-align: center;
   width: 100%;
 }
-
 .fa-trash {
   font-size: inherit;
   color: var(--color-white);
   margin: 0.25rem;
 }
-
 .form-label {
   text-align: center;
   background-color: var(--color-bg-light);
@@ -213,23 +202,18 @@ textarea {
 .mb-xs {
   margin-bottom: 0.25rem;
 }
-
 .mb-sm {
   margin-bottom: 0.5rem;
 }
-
 .mb-md {
   margin-bottom: 1rem;
 }
-
 .mt-sm {
   margin-top: 0.5rem;
 }
-
 .mt-md {
   margin-top: 1rem;
 }
-
 .my-sm {
   margin: 0.5rem 0;
 }
@@ -375,7 +359,6 @@ textarea {
   font-size: 1.75rem;
   font-weight: 600;
 }
-
 .brand a:hover,
 .brand a:active {
   color: rgb(225, 225, 225);
@@ -421,15 +404,9 @@ textarea {
   padding-right: 1rem;
 }
 
-.logging .user .user-link {
-  color: var(--color-primary);
-  padding-right: 0;
-}
-
 .user-link > .fa-warehouse {
-  color: var(--color-primary);
-  padding-left: 1rem;
-  font-size: 1.5rem;
+  padding-left: 0.5rem;
+  font-size: 1.25rem;
 }
 
 .menu {
@@ -556,6 +533,21 @@ textarea {
   .profile-tab__action-buttons {
     grid-area: 2/1/3/3;
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (max-width: 500px) {
+  .profile-tab__action-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 400px) {
+  .profile-tab {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, min-content);
+    justify-items: center;
+  }
+  .profile-tab__action-buttons {
+    grid-area: 3/1/4/2;
   }
 }
 /* end - profileTab partial */
@@ -855,46 +847,34 @@ textarea {
   padding: 0.5rem;
   display: grid;
   grid-template-rows: repeat(2, min-content);
-  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  position: relative;
 }
 .task-partial:not(:last-of-type) {
   margin-bottom: 0.5rem;
 }
-
 .task__info {
   position: relative;
 }
-
-.task__edit {
-  position: relative;
-  grid-area: 1/2/3/3;
-}
-
 .task__sign-off {
   display: flex;
   justify-content: center;
   grid-area: 2/1/2/2;
 }
-
-.task__sign-off,
-.task__edit {
+.task__sign-off {
   border: 1px solid var(--color-primary);
   border-radius: 5px;
 }
-
 .task__sign-off:hover,
 .task__sign-off:active {
   border-color: var(--color-gray);
 }
-
 .task__sign-off-form {
   padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .sign-off-label {
   color: var(--color-primary);
   display: inline-block;
@@ -902,91 +882,79 @@ textarea {
   margin-right: 0.5rem;
   transition: all 0.5s 0.1s;
 }
-
 .task__sign-off:hover .sign-off-label,
 .task__sign-off:active .sign-off-label {
   color: var(--color-gray);
   transform: translate(0);
   transition: all 0.5s;
 }
-
 .sign-off-action {
   transition: all 0.1s;
   visibility: hidden;
   opacity: 0;
 }
-
 .task__sign-off:hover .sign-off-action,
 .task__sign-off:active .sign-off-action {
   transition: all 0.5s 0.3s;
   visibility: visible;
   opacity: 1;
 }
-
 .fa-check-square {
   font-size: 1.75rem;
   color: var(--color-primary);
 }
-
 .fa-check-square:hover {
   color: var(--color-accent);
 }
-
+.task-modify-panel {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.edit-form-trigger {
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+.task__edit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 10;
+  background-color: var(--color-bg);
+  border-radius: 5px;
+}
+.edit-close {
+  color: var(--color-danger);
+  position: absolute;
+  top: 0;
+  right: 0.6rem;
+  font-size: 1.85rem;
+  font-weight: bold;
+}
+.edit-close:hover,
+.edit-close:focus {
+  color: var(--color-white);
+  cursor: pointer;
+}
 .task__edit-label {
   text-align: center;
   background-color: var(--color-bg-light);
+  border-radius: 5px;
 }
-
 .task__edit-form {
-  transition: all 0.5s;
-  visibility: hidden;
-  opacity: 0;
+  height: 100%;
   padding: 0.5rem;
 }
-
+.task__edit-form button {
+  margin-top: 0.5rem;
+}
 .task__edit-label,
 .form-row input {
   margin-bottom: 0.25rem;
-}
-
-/* edit form hover/active transition */
-.edit-form-trigger {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.5s;
-  color: var(--color-primary);
-}
-
-.task__edit:hover,
-.task__edit:active {
-  border-color: var(--color-gray);
-}
-
-.task__edit:hover > .edit-form-trigger,
-.task__edit:active > .edit-form-trigger {
-  margin-top: 0.5rem;
-  opacity: 0;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-.task__edit:hover > .task__edit-form,
-.task__edit:active > .task__edit-form {
-  visibility: visible;
-  opacity: 1;
-}
-
-@media screen and (max-width: 700px) {
-  .task-partial {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, min-content);
-  }
-
-  .task__edit {
-    grid-area: 3/1/4/2;
-  }
 }
 /* end - Task partial */
 /* end - Maintenance page */
@@ -996,11 +964,9 @@ textarea {
   width: 100%;
   height: 100%;
 }
-
 .notes-form {
   height: 95%;
 }
-
 .notes-form textarea {
   width: 100%;
   height: 95%;
@@ -1008,12 +974,10 @@ textarea {
   /* overflow-y: auto; */
   color: var(--color-gray);
 }
-
 .tray {
   display: flex;
   justify-content: space-between;
 }
-
 .fa-save {
   margin-right: 0.5rem;
 }
@@ -1023,14 +987,12 @@ textarea {
   display: flex;
   justify-content: space-between;
 }
-
 .new-task-toggle {
   z-index: 10;
   background-color: var(--color-bg-mid);
   text-align: center;
   color: var(--color-gray);
 }
-
 .new-task-toggle:hover,
 .new-task-toggle:active {
   background-color: var(--color-bg-light);
@@ -1048,7 +1010,6 @@ textarea {
   height: 100%;
   padding-bottom: 3rem;
 }
-
 .logging-form {
   padding: 0.5rem;
   border: 1px solid var(--color-gray);
@@ -1057,13 +1018,11 @@ textarea {
   flex-direction: column;
   width: 50%;
 }
-
 .logging-form-line {
   display: flex;
   justify-content: space-between;
   margin: 0.25rem 0;
 }
-
 .logging-form-input {
   flex: 1;
   max-width: 75%;
@@ -1076,7 +1035,6 @@ textarea {
   color: var(--color-accent);
   text-decoration: underline;
 }
-
 @media screen and (max-width: 700px) {
   .logging-form {
     width: 75%;
@@ -1096,7 +1054,6 @@ textarea {
     margin-top: 1.5rem;
   }
 }
-
 /* end Logging pages */
 
 .error-page {
@@ -1105,7 +1062,6 @@ textarea {
   justify-content: center;
   align-items: center;
 }
-
 .error-content {
   text-align: center;
   width: auto;
@@ -1125,11 +1081,9 @@ textarea {
   transform: translateX(-50%);
   text-align: center;
 }
-
 .success-flash {
   color: var(--color-good);
 }
-
 .error-flash {
   color: var(--color-danger);
 }
@@ -1173,12 +1127,10 @@ textarea {
   text-align: center;
   grid-area: 3 / 1 / 4 / 2;
 }
-
 .footer a {
   text-decoration: none;
   color: var(--color-primary);
 }
-
 .footer a:hover,
 .footer a:active {
   color: var(--color-accent);
@@ -1187,27 +1139,21 @@ textarea {
 .good {
   background-color: var(--color-good);
 }
-
 .col-good {
   color: var(--color-good);
 }
-
 .good-border {
   border-color: var(--color-good);
 }
-
 .danger-border {
   border-color: var(--color-danger);
 }
-
 .danger {
   background-color: var(--color-danger);
 }
-
 .col-danger {
   color: var(--color-danger);
 }
-
 .col-caution {
   color: var(--color-caution);
 }

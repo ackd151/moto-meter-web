@@ -455,6 +455,70 @@ textarea {
 }
 /* end - Navbar */
 
+/** Home Page **/
+.home-page {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid var(--color-gray);
+  border-radius: 5px;
+  background-color: var(--color-bg);
+  padding: 1rem;
+}
+
+.home-page-title {
+  color: var(--color-primary);
+}
+
+.animate-color {
+  color: var(--color-primary);
+  animation: color-fade 1s linear;
+}
+.animate-color:nth-of-type(1) {
+  animation-delay: 2s;
+}
+.animate-color:nth-of-type(2) {
+  animation-delay: 3s;
+}
+.animate-color:nth-of-type(3) {
+  animation-delay: 4s;
+}
+.animate-color:nth-of-type(4) {
+  animation-delay: 5s;
+}
+.animate-color:nth-of-type(5) {
+  animation-delay: 6s;
+}
+
+@keyframes color-fade {
+  0% {
+    color: var(--color-primary);
+  }
+  50% {
+    color: var(--color-white);
+  }
+  100% {
+    color: var(--color-primary);
+  }
+}
+
+.sub-title {
+  animation-name: from-right;
+}
+
+.intro-bullets {
+  margin: 0.5rem;
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 1rem;
+}
+
+.intro-bullets i {
+  color: var(--color-primary);
+  justify-self: center;
+}
+
+/* end - Home page */
+
 /** User home page **/
 .user-home__page-grid {
   gap: 1rem;

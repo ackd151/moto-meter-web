@@ -27,7 +27,7 @@ const Profile = require("./models/profileModel");
 const Task = require("./models/taskModel");
 
 /* Set up db */
-const dbUrl = "mongodb://localhost:27017/motoMeterDB"; // process.env.DB_URL;
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/motoMeterDB";
 mongoose.connect(dbUrl, {
   //"mongodb://localhost:27017/motoMeterDB"
   useNewUrlParser: true,

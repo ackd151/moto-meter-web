@@ -11,6 +11,7 @@ const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const logger = require("morgan");
 const ExpressError = require("./utils/ExpressError");
+const MongoStore = require("connect-mongo");
 const app = express();
 
 /* Import Routes */
@@ -25,8 +26,10 @@ const User = require("./models/userModel");
 const Profile = require("./models/profileModel");
 const Task = require("./models/taskModel");
 
-/* Set up db (local) */
-mongoose.connect("mongodb://localhost:27017/motoMeterDB", {
+/* Set up db */
+const dbUrl = "mongodb://localhost:27017/motoMeterDB"; // process.env.DB_URL;
+mongoose.connect(dbUrl, {
+  //"mongodb://localhost:27017/motoMeterDB"
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -44,8 +47,19 @@ app.engine("ejs", engine);
 app.use(logger("tiny"));
 app.use(methodOverride("_method"));
 
+// Use mongo for session store
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  secret: process.env.SESSION_SECRET,
+  touchAfter: 24 * 60 * 60,
+});
+store.on("error", function (e) {
+  console.log("Session Store Error", e);
+});
+
 /* Session config */
 const sessionOptions = {
+  store,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,

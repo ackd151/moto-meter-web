@@ -2,7 +2,7 @@
   <div class="profile-links">
     <a 
       href="/<%=currentUser.username%>/garage/<%=profile.url%>"
-      class="btn btn-primary <%=activePage === "profile" ? "active-action": ""%>"
+      class="btn btn-primary profile-link-lg <%=activePage === "profile" ? "active-action": ""%>"
     >
     <div class="profile-home-link">
       <div class="profile-img">
@@ -16,6 +16,13 @@
       </div></div>
     </a>
     <div class="profile-action-links">
+      <a 
+      href="/<%=currentUser.username%>/garage/<%=profile.url%>"
+      class="btn btn-primary profile__action profile-link-sm <%=activePage === "profile" ? "active-action": ""%>"
+      >
+        <i class="fas fa-motorcycle"></i><span class="pa-text">profile</span> 
+      </a>
+
       <a 
         href="/<%=currentUser.username%>/garage/<%=profile.url%>/inspections"
         class="btn btn-primary profile__action <%= activePage === "inspections" ? "active-action": "" %>"

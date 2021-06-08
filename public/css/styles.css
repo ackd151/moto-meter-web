@@ -253,7 +253,7 @@ textarea {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: var(--color-bg-mid);
+  background-color: var(--color-bg);
   border: 1px solid var(--color-gray);
   border-radius: 5px;
 }
@@ -616,6 +616,7 @@ textarea {
   text-align: center;
   background-color: var(--color-bg-light);
   border-radius: 5px;
+  margin-bottom: 0.5rem;
 }
 
 /* profileTab partial */
@@ -1124,7 +1125,7 @@ textarea {
   width: 100%;
   height: 95%;
   padding: 1rem;
-  /* overflow-y: auto; */
+  overflow-y: auto;
   color: var(--color-gray);
 }
 .tray {
@@ -1319,7 +1320,7 @@ textarea {
 }
 
 /** Mobile / Tablet / Landscape  **/
-@media screen and (max-width: 400px), screen and (max-height: 400px) {
+@media screen and (max-width: 500px), screen and (max-height: 500px) {
   html {
     font-size: 62.5%;
   }
@@ -1346,14 +1347,35 @@ textarea {
   .pa-text {
     margin-left: 1rem;
   }
+  /* end - profile header */
+
+  .footer {
+    padding: 0.25rem;
+  }
+
+  .grid {
+    gap: 0.5rem;
+  }
 }
-@media screen and (max-height: 400px) {
+@media screen and (max-height: 500px) {
   .inspection-actions {
     grid-template-columns: auto min-content;
     padding: 0.25rem;
   }
   .inspection-actions .link {
     margin-top: 0;
+  }
+
+  /* Overflows on landscape */
+  .notes-form {
+    height: 85%;
+  }
+  .pre-ride-checklist,
+  .inspection-delete-form {
+    height: 80%;
+  }
+  .profile__image {
+    max-height: 50%;
   }
 }
 /* end - Mobile / Tablet / Landscape  */

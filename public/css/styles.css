@@ -1168,6 +1168,7 @@ textarea {
   padding: 0.5rem;
   border: 1px solid var(--color-gray);
   border-radius: 5px;
+  background-color: var(--color-bg);
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -1234,6 +1235,7 @@ textarea {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
+  z-index: 1000;
 }
 .success-flash {
   color: var(--color-good);
@@ -1353,8 +1355,13 @@ textarea {
     padding: 0.25rem;
   }
 
-  .grid {
+  .grid,
+  .intro-bullets {
     gap: 0.5rem;
+  }
+
+  .gallery {
+    display: none;
   }
 }
 @media screen and (max-height: 500px) {
@@ -1365,6 +1372,19 @@ textarea {
   .inspection-actions .link {
     margin-top: 0;
   }
+
+  /** home page **/
+  .home-page {
+    width: 95%;
+    padding: 0.5rem;
+  }
+  .intro-questions p:not(:last-of-type) {
+    margin-bottom: 0.25rem;
+  }
+  .gallery {
+    display: none;
+  }
+  /* end - home page */
 
   /* Overflows on landscape */
   .notes-form {
@@ -1378,4 +1398,26 @@ textarea {
     max-height: 50%;
   }
 }
+/* extreme small landscape */
+@media screen and (max-height: 300px) {
+  .notes {
+    height: 80%;
+  }
+  .notes-form {
+    height: 85%;
+  }
+  .pre-ride-checklist,
+  .inspection-delete-form {
+    height: 70%;
+  }
+  .profile__image {
+    max-height: 45%;
+  }
+}
 /* end - Mobile / Tablet / Landscape  */
+
+/* * {
+  background: #000 !important;
+  color: #0f0 !important;
+  outline: solid #f00 1px !important;
+} */

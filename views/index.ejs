@@ -78,7 +78,7 @@
       </div>
     </div>
   </div>
-  <!-- Modal help -->
+  <!-- Modal gallery -->
   <div class="modal" id="gallery-modal">
     <span class="close" id="gallery-close">&times;</span>
     <h3 class="form-header">App Gallery</h3>
@@ -98,10 +98,10 @@
           class="thumbnail"
         />
         <!-- <img
-            src="/images/post-sm.png"
-            alt="Post-ride page thumbnail"
-            class="thumbnail"
-          /> -->
+          src="/images/post-sm.png"
+          alt="Post-ride page thumbnail"
+          class="thumbnail"
+        /> -->
         <img
           src="/images/notes-sm.png"
           alt="Notes page thumbnail"
@@ -141,9 +141,11 @@
       mainImage.src = "/images/garage.png";
     } else if (src.indexOf("maint") > -1) {
       mainImage.src = "/images/maint.png";
-    } else if (src.indexOf("post") > -1) {
-      mainImage.src = "/images/post.png";
-    } else if (src.indexOf("notes") > -1) {
+    }
+    // else if (src.indexOf("post") > -1) {
+    //   mainImage.src = "/images/post.png";
+    // }
+    else if (src.indexOf("notes") > -1) {
       mainImage.src = "/images/notes.png";
     } else if (src.indexOf("pre") > -1) {
       mainImage.src = "/images/pre.png";

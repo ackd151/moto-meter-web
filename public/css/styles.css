@@ -256,6 +256,7 @@ textarea {
   background-color: var(--color-bg);
   border: 1px solid var(--color-gray);
   border-radius: 5px;
+  overflow-y: auto;
 }
 .close {
   color: var(--color-danger);
@@ -509,7 +510,7 @@ textarea {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(5, min-content);
+  grid-template-columns: repeat(4, min-content);
   gap: 0.5rem;
   margin: 0 auto;
 }
@@ -524,13 +525,14 @@ textarea {
 .modal-gallery-contents {
   border-radius: 5px;
   margin-top: 1rem;
-  height: 95%;
+  height: 90%;
   width: 100%;
   background-color: var(--color-bg);
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .modal-gallery .thumbnail {
   border: 1px solid var(--color-gray);
 }
@@ -539,11 +541,24 @@ textarea {
   text-align: center;
   grid-area: 1/2/3/3;
   border: 5px solid var(--color-gray);
-  /* transform: scale(1.25); */
 }
 .thumbnail:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) and (min-height: 800px) {
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, min-content);
+    gap: 2rem;
+  }
+}
+@media screen and (max-width: 600px) and (max-height: 850px),
+  screen and (max-height: 600px) {
+  .gallery {
+    display: none;
+  }
 }
 
 .intro-cta {
@@ -627,16 +642,16 @@ textarea {
   height: 100px;
   border-radius: 5px;
 }
-
 .profile-tab {
   display: grid;
   justify-content: flex-start;
   gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 1rem;
   padding: 0.5rem;
 }
-
+.profile-tab:not(:last-of-type) {
+  margin-bottom: 1rem;
+}
 .profile-tab__info {
   display: flex;
   flex-direction: column;
@@ -644,28 +659,23 @@ textarea {
   justify-content: center;
   text-align: center;
 }
-
 .profile-tab__info a {
   padding: 0.5rem;
 }
-
 .profile-tab__data {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .profile-tab__nearest-task > p,
 .profile-tab__nearest-task > h4 {
   display: inline-block;
 }
-
 .profile-tab__action-buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
 }
-
 .profile__action {
   padding: 0.5rem;
   display: flex;
@@ -673,7 +683,6 @@ textarea {
   justify-content: center;
   align-items: center;
 }
-
 .profile-link-sm {
   display: none;
 }
@@ -816,7 +825,7 @@ textarea {
   overflow-y: auto;
   padding: 1rem;
   margin: 0 auto;
-  width: 70%;
+  width: 100%;
 }
 
 .inspection-list {
@@ -1321,11 +1330,25 @@ textarea {
   color: var(--color-caution);
 }
 
-/** Mobile / Tablet / Landscape  **/
-@media screen and (max-width: 500px), screen and (max-height: 500px) {
+/** Responsive font-size **/
+@media screen and (max-width: 1000px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 75%;
+  }
+}
+@media screen and (max-width: 600px) {
   html {
     font-size: 62.5%;
   }
+}
+
+/** Mobile / Tablet / Landscape  **/
+@media screen and (max-width: 700px), screen and (max-height: 550px) {
   .brand-icon-1 {
     display: none;
   }
@@ -1359,12 +1382,12 @@ textarea {
   .intro-bullets {
     gap: 0.5rem;
   }
-
-  .gallery {
-    display: none;
+  .home-page {
+    width: 95%;
   }
 }
-@media screen and (max-height: 500px) {
+/** Landscape **/
+@media screen and (max-height: 775px) and (orientation: landscape) {
   .inspection-actions {
     grid-template-columns: auto min-content;
     padding: 0.25rem;
@@ -1381,37 +1404,59 @@ textarea {
   .intro-questions p:not(:last-of-type) {
     margin-bottom: 0.25rem;
   }
-  .gallery {
-    display: none;
-  }
   /* end - home page */
 
   /* Overflows on landscape */
   .notes-form {
-    height: 85%;
-  }
-  .pre-ride-checklist,
-  .inspection-delete-form {
     height: 80%;
+  }
+  .pre-ride-checklist {
+    height: 73%;
+  }
+  .inspection-delete-form {
+    height: 78%;
   }
   .profile__image {
     max-height: 50%;
   }
+  .modal-form-contents {
+    display: block;
+    height: 88%;
+  }
+  .help-list p {
+    margin-bottom: 0.5rem;
+  }
 }
-/* extreme small landscape */
+/* extreme small screens */
 @media screen and (max-height: 300px) {
   .notes {
-    height: 80%;
+    height: 60%;
   }
   .notes-form {
     height: 85%;
   }
-  .pre-ride-checklist,
+  .pre-ride-checklist {
+    height: 59%;
+  }
+  .inspections {
+    padding: 0.5rem;
+  }
   .inspection-delete-form {
-    height: 70%;
+    height: 69%;
+  }
+  .checklist-item hr {
+    margin: 0.5rem 0;
   }
   .profile__image {
     max-height: 45%;
+  }
+  .profile-tab__img {
+    height: 80px;
+  }
+}
+@media screen and (max-width: 300px) {
+  .inspection-delete-form {
+    height: 90%;
   }
 }
 /* end - Mobile / Tablet / Landscape  */

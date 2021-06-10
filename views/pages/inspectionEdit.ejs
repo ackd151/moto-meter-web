@@ -13,7 +13,7 @@
         No inspections created for this profile.
       </p>
       <% } %> <% if (profile.inspections.length) { %>
-      <h2 class="checklist-header">Select inspections you wish to delete</h2>
+      <h2 class="checklist-header">Select inspections to delete</h2>
       <form
         action="/<%=currentUser.username%>/garage/<%=profile.url%>/inspections/destroy?_method=DELETE"
         method="POST"

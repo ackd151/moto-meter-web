@@ -366,8 +366,7 @@ textarea {
   display: none;
 }
 
-.brand a:hover,
-.brand a:active {
+.brand a:hover {
   color: rgb(225, 225, 225);
 }
 
@@ -387,21 +386,18 @@ textarea {
   background-color: var(--color-white);
   border: 2px solid var(--color-white);
 }
-.btn-reg:hover,
-.btn-reg:active {
+.btn-reg:hover {
   background-color: rgb(225, 225, 225);
   border-color: rgb(225, 225, 225);
 }
 .btn-log {
   border: 2px solid var(--color-white);
 }
-.btn-log:hover,
-.btn-log:active {
+.btn-log:hover {
   background-color: rgb(53, 59, 61);
 }
 
-.btn-logout:hover,
-.btn-logout:active {
+.btn-logout:hover {
   color: rgb(225, 225, 225);
   text-decoration: underline;
 }
@@ -451,8 +447,7 @@ textarea {
 .menu-content a {
   padding: 0.5rem 1rem;
 }
-.menu-content a:hover,
-.menu-content a:active {
+.menu-content a:hover {
   color: rgb(225, 225, 225);
 }
 
@@ -783,15 +778,14 @@ textarea {
   box-shadow: 0 2px 4px var(--color-bg-dark);
 }
 
-.active-action:hover,
-.active-action:active {
+.active-action:hover {
   transform: translate(0, 0);
   color: inherit;
   border-color: var(--color-gray);
   box-shadow: 0 2px 4px var(--color-bg-dark);
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 425px) {
   .pa-text,
   .profile-hours {
     display: none;
@@ -823,7 +817,7 @@ textarea {
 
 .inspections {
   overflow-y: auto;
-  padding: 1rem;
+  padding: 0.5rem;
   margin: 0 auto;
   width: 100%;
 }
@@ -838,7 +832,7 @@ textarea {
 }
 
 .checklist-item {
-  margin-bottom: 0.5rem;
+  margin: 0 0.5rem 0.5rem;
 }
 
 .checklist-status {
@@ -933,7 +927,7 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 92%;
+  height: 91%;
   overflow-y: auto;
 }
 
@@ -943,7 +937,7 @@ textarea {
   }
 
   .inspection-actions a {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
 }
 
@@ -1018,6 +1012,9 @@ textarea {
 }
 .task__info {
   position: relative;
+}
+.task__info p {
+  margin-top: 0.25rem;
 }
 .task__sign-off {
   display: flex;
@@ -1156,8 +1153,7 @@ textarea {
   text-align: center;
   color: var(--color-gray);
 }
-.new-task-toggle:hover,
-.new-task-toggle:active {
+.new-task-toggle:hover {
   background-color: var(--color-bg-light);
   color: var(--color-white);
   cursor: pointer;
@@ -1194,8 +1190,7 @@ textarea {
 .logging-link {
   color: var(--color-primary);
 }
-.logging-link:hover,
-.logging-link:active {
+.logging-link:hover {
   color: var(--color-accent);
   text-decoration: underline;
 }
@@ -1296,8 +1291,7 @@ textarea {
   text-decoration: none;
   color: var(--color-primary);
 }
-.footer a:hover,
-.footer a:active {
+.footer a:hover {
   color: var(--color-accent);
 }
 
@@ -1331,19 +1325,17 @@ textarea {
 }
 
 /** Responsive font-size **/
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 825px) {
   html {
     font-size: 87.5%;
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   html {
     font-size: 75%;
   }
-}
-@media screen and (max-width: 600px) {
-  html {
-    font-size: 62.5%;
+  input {
+    font-size: 112.5%;
   }
 }
 
@@ -1354,6 +1346,12 @@ textarea {
   }
   .brand-icon-2 {
     display: block;
+  }
+  .flash {
+    top: 2.5rem;
+  }
+  .action-page {
+    padding-top: 0;
   }
 
   /** alter profile-header nav partial **/
@@ -1380,7 +1378,7 @@ textarea {
 
   .grid,
   .intro-bullets {
-    gap: 0.5rem;
+    gap: 0.25rem;
   }
   .home-page {
     width: 95%;
@@ -1395,6 +1393,9 @@ textarea {
   .inspection-actions .link {
     margin-top: 0;
   }
+  .checklist-header {
+    margin-bottom: 0.5rem;
+  }
 
   /** home page **/
   .home-page {
@@ -1407,14 +1408,20 @@ textarea {
   /* end - home page */
 
   /* Overflows on landscape */
+  .notes {
+    height: 93%;
+  }
   .notes-form {
-    height: 80%;
+    height: 83%;
   }
   .pre-ride-checklist {
-    height: 73%;
+    height: 70%;
+  }
+  .checklist-item hr {
+    margin: 0.5rem 0;
   }
   .inspection-delete-form {
-    height: 78%;
+    height: 83%;
   }
   .profile__image {
     max-height: 50%;
@@ -1428,11 +1435,15 @@ textarea {
   }
 }
 /* extreme small screens */
+/* height tested with mock galaxy fold */
 @media screen and (max-height: 300px) {
   .notes {
     height: 60%;
   }
   .notes-form {
+    height: 85%;
+  }
+  .modal-form-contents {
     height: 85%;
   }
   .pre-ride-checklist {
@@ -1442,10 +1453,7 @@ textarea {
     padding: 0.5rem;
   }
   .inspection-delete-form {
-    height: 69%;
-  }
-  .checklist-item hr {
-    margin: 0.5rem 0;
+    height: 74%;
   }
   .profile__image {
     max-height: 45%;
@@ -1453,10 +1461,29 @@ textarea {
   .profile-tab__img {
     height: 80px;
   }
+  .profile__action {
+    padding: 0.25rem;
+  }
 }
 @media screen and (max-width: 300px) {
   .inspection-delete-form {
+    height: 93%;
+  }
+}
+/* tested with mock iPhone 5 */
+@media screen and (max-height: 600px) and (max-width: 350px) {
+  .notes-form {
+    height: 93%;
+  }
+}
+
+/* Landscape large */
+@media screen and (min-height: 425px) and (orientation: landscape) {
+  .pre-ride-checklist {
     height: 90%;
+  }
+  .inspection-delete-form {
+    height: 91%;
   }
 }
 /* end - Mobile / Tablet / Landscape  */

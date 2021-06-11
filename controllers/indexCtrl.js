@@ -67,4 +67,36 @@ module.exports = {
     }
     res.render("users/userHome", { user });
   },
+  async createProfile(req, res, next) {
+    const user = await User.findOne({ username: req.params.username }).populate(
+      "bikeProfiles"
+    );
+    let profileInfo = req.body.profile;
+    profileInfo.url = `${profileInfo.year}_${profileInfo.make}_${profileInfo.model}`;
+    // enforce unique url per user !Needs fix w/ regex and max! Dups can still happen after deletion
+    let dup = 0;
+    for (const profile of user.bikeProfiles) {
+      // console.log(
+      //   profileInfo.url,
+      //   profile.url,
+      //   profileInfo.url.indexOf(profile.url)
+      // );
+      if (profile.url.indexOf(profileInfo.url) >= 0) {
+        ++dup;
+      }
+    }
+    if (dup) {
+      profileInfo.url += `_(${dup + 1})`;
+    }
+    const newProfile = new Profile(profileInfo);
+    if (req.file) {
+      const { path, filename } = req.file;
+      newProfile.image = { path, filename };
+    }
+    user.bikeProfiles.push(newProfile);
+    await newProfile.save();
+    await user.save();
+    req.flash("success", "New dirtbike profile created.");
+    res.redirect(`/${req.params.username}/garage/${newProfile.url}`);
+  },
 };

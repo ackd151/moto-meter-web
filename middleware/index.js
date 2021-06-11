@@ -59,10 +59,6 @@ module.exports = {
       const errorField = yearIsntNum ? "YEAR" : "HOURS";
       req.flash("error", `The ${errorField} value must be a number!`);
       if (req.file) await cloudinary.uploader.destroy(req.file.filename);
-      // redirect to garage or profile depending on post/patch
-      // const redirectUrl = `/${req.user.username}`;
-      // // if (req.method === "PATCH") {`/${req.user.username}`
-
       return res.redirect(req.originalUrl.split("?")[0]);
     }
     next();

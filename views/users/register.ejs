@@ -5,6 +5,7 @@
     method="POST"
     class="logging-form"
     autocomplete="off"
+    onsubmit="validatePasswords"
   >
     <h2 class="form-header mb-sm">Register</h2>
     <div class="logging-form-line">
@@ -36,8 +37,10 @@
         class="logging-form-input"
         id="password"
         name="user[password]"
-        placeholder="password min: 8 characters"
+        placeholder="password: 8-16 characters"
         required
+        minlength="8"
+        maxlength="16"
       />
     </div>
     <div class="logging-form-line">
@@ -49,6 +52,8 @@
         name="user[password2]"
         placeholder="verify password"
         required
+        minlength="8"
+        maxlength="16"
       />
     </div>
     <div>

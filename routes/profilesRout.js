@@ -13,6 +13,7 @@ const {
   ownsProfile,
   activePage,
   getTargetId,
+  validateProfile,
 } = require("../middleware");
 const catchAsync = require("../utils/catchAsync");
 const multer = require("multer");
@@ -22,7 +23,12 @@ const upload = multer({ storage });
 router.use(activePage, isLoggedIn);
 
 // move to user routes/ctrl
-router.post("/", upload.single("image"), catchAsync(createProfile));
+router.post(
+  "/",
+  upload.single("image"),
+  validateProfile,
+  catchAsync(createProfile)
+);
 
 router.get("/:profileUrl", getTargetId, ownsProfile, catchAsync(getProfile));
 
@@ -31,6 +37,7 @@ router.patch(
   getTargetId,
   ownsProfile,
   upload.single("image"),
+  validateProfile,
   catchAsync(updateProfile)
 );
 router.delete(

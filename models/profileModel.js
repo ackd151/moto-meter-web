@@ -3,7 +3,7 @@ const { Schema, model } = mongoose;
 
 const profileSchema = new Schema({
   year: {
-    type: String,
+    type: Number,
     required: true,
   },
   make: {

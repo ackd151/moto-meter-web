@@ -785,7 +785,8 @@ textarea {
   box-shadow: 0 2px 4px var(--color-bg-dark);
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 500px) {
+  /* 425 */
   .pa-text,
   .profile-hours {
     display: none;

@@ -13,11 +13,11 @@ module.exports = {
     // enforce unique url per user !Needs fix w/ regex and max! Dups can still happen after deletion
     let dup = 0;
     for (const profile of user.bikeProfiles) {
-      console.log(
-        profileInfo.url,
-        profile.url,
-        profileInfo.url.indexOf(profile.url)
-      );
+      // console.log(
+      //   profileInfo.url,
+      //   profile.url,
+      //   profileInfo.url.indexOf(profile.url)
+      // );
       if (profile.url.indexOf(profileInfo.url) >= 0) {
         ++dup;
       }

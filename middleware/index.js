@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const { cloudinary } = require("../cloudinary");
 
 module.exports = {
   isLoggedIn(req, res, next) {
@@ -46,6 +47,24 @@ module.exports = {
       page = "notes";
     }
     res.locals.activePage = page;
+    next();
+  },
+  async validateProfile(req, res, next) {
+    console.log(req.originalUrl);
+    console.log(req.originalUrl.split("?")[0]);
+    const { year, hours } = req.body.profile;
+    const yearIsntNum = isNaN(parseInt(year));
+    const hoursIsntNum = isNaN(parseInt(hours));
+    if (yearIsntNum || hoursIsntNum) {
+      const errorField = yearIsntNum ? "YEAR" : "HOURS";
+      req.flash("error", `The ${errorField} value must be a number!`);
+      if (req.file) await cloudinary.uploader.destroy(req.file.filename);
+      // redirect to garage or profile depending on post/patch
+      // const redirectUrl = `/${req.user.username}`;
+      // // if (req.method === "PATCH") {`/${req.user.username}`
+
+      return res.redirect(req.originalUrl.split("?")[0]);
+    }
     next();
   },
 };

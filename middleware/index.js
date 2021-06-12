@@ -49,15 +49,21 @@ module.exports = {
     res.locals.activePage = page;
     next();
   },
+  // if client-side validations circumvented
   async validateProfile(req, res, next) {
-    console.log(req.originalUrl);
-    console.log(req.originalUrl.split("?")[0]);
     const { year, hours } = req.body.profile;
-    const yearIsntNum = isNaN(parseInt(year));
-    const hoursIsntNum = isNaN(parseInt(hours));
-    if (yearIsntNum || hoursIsntNum) {
-      const errorField = yearIsntNum ? "YEAR" : "HOURS";
-      req.flash("error", `The ${errorField} value must be a number!`);
+    const regExpInt = /^\d+$/;
+    const regExpFloat = /(?<=^| )\d+(\.\d)?(?=$| )/;
+    const yearIsNum = regExpInt.test(parseInt(year));
+    const hoursIsNum = regExpFloat.test(parseFloat(hours));
+    if (!yearIsNum || !hoursIsNum) {
+      const errorField = !yearIsNum ? "YEAR" : "HOURS";
+      req.flash(
+        "error",
+        `The ${errorField} value must be a number${
+          !hoursIsNum ? ", with at most one decimal place" : ""
+        }!`
+      );
       if (req.file) await cloudinary.uploader.destroy(req.file.filename);
       return res.redirect(req.originalUrl.split("?")[0]);
     }

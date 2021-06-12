@@ -67,6 +67,7 @@
       class="modal-form"
       autocomplete="off"
       enctype="multipart/form-data"
+      onsubmit="return validateProfile()"
     >
       <h3 class="form-header">New Bike Profile</h3>
       <div class="modal-form-contents">
@@ -133,8 +134,9 @@
     </form>
   </div>
 </div>
+<script src="/scripts/profileFormValidation.js"></script>
 <script>
-  // Modal display script
+  //// Modal display script
   const formModal = document.getElementById("form-modal");
   const helpModal = document.getElementById("help-modal");
   const triggers = document.querySelectorAll(".modal-trigger");

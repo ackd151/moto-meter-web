@@ -78,6 +78,7 @@
       class="modal-form"
       autocomplete="off"
       enctype="multipart/form-data"
+      onsubmit="return validateProfile()"
     >
       <h3 class="form-header">Edit Bike Profile</h3>
       <div class="modal-form-contents">
@@ -149,6 +150,7 @@
     </form>
   </div>
 </div>
+<script src="/scripts/profileFormValidation.js"></script>
 <script>
   // Confirm deletion script
   function deleteConfirmation() {

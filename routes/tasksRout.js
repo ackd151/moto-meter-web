@@ -12,15 +12,19 @@ const {
   getTargetId,
   ownsProfile,
   activePage,
+  validateTask,
 } = require("../middleware");
 
 router.use(isLoggedIn, getTargetId, ownsProfile, activePage);
 
-router.route("/").get(catchAsync(getTaskPage)).post(catchAsync(createTask));
+router
+  .route("/")
+  .get(catchAsync(getTaskPage))
+  .post(validateTask, catchAsync(createTask));
 
 router
   .route("/:taskId")
-  .patch(catchAsync(updateTask))
+  .patch(validateTask, catchAsync(updateTask))
   .delete(catchAsync(deleteTask));
 
 module.exports = router;

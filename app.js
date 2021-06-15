@@ -102,7 +102,7 @@ app.use((req, res, next) => {
 
 /* Mount Routes */
 app.use("/", indexRoutes);
-app.use("/:username/garage", profileRoutes);
+app.use("/:username/garage/:profileUrl", profileRoutes);
 app.use("/:username/garage/:profileUrl/maintenance", taskRoutes);
 app.use("/:username/garage/:profileUrl/inspections", inspectionRoutes);
 app.use("/:username/garage/:profileUrl/notes", noteRoutes);

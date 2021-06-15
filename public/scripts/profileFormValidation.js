@@ -1,4 +1,4 @@
-//// New profile form validation
+/** Client-side profile create/edit form validation **/
 
 // number input elements
 const yearInput = document.getElementById("year");

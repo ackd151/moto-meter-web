@@ -13,9 +13,11 @@
         action="/<%=currentUser.username%>/garage/<%=profile.url%>?_method=PATCH"
         method="POST"
         class="post-ride__form bg-dark-border"
+        onsubmit="return validatePostRide()"
       >
         <h4>Update your engine hours</h4>
         <div>
+          <p>Currently: <span id="current-hours"><%= profile.hours %></span></p>
           <label for="hours">New engine hours: </label>
           <input
             type="number"
@@ -23,7 +25,6 @@
             id="hours"
             name="hours"
             value="<%= profile.hours %>"
-            min="<%= profile.hours %>"
             required
           />
         </div>
@@ -54,6 +55,7 @@
     </div>
   </div>
 </div>
+<script src="/scripts/postRideValidation.js"></script>
 <script>
   // Clear inputs on focus
   document.querySelectorAll("input").forEach((input) => {

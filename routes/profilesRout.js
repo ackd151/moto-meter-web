@@ -1,5 +1,4 @@
 const express = require("express");
-const { get } = require("mongoose");
 const router = express.Router({ mergeParams: true });
 const {
   createProfile,
@@ -20,38 +19,14 @@ const multer = require("multer");
 const { storage } = require("../cloudinary");
 const upload = multer({ storage });
 
-router.use(activePage, isLoggedIn);
+router.use(activePage, isLoggedIn, getTargetId, ownsProfile);
 
-// move to user routes/ctrl
-router.post(
-  "/",
-  upload.single("image"),
-  validateProfile,
-  catchAsync(createProfile)
-);
+router
+  .route("/")
+  .get(catchAsync(getProfile))
+  .patch(upload.single("image"), validateProfile, catchAsync(updateProfile))
+  .delete(catchAsync(deleteProfile));
 
-router.get("/:profileUrl", getTargetId, ownsProfile, catchAsync(getProfile));
-
-router.patch(
-  "/:profileUrl",
-  getTargetId,
-  ownsProfile,
-  upload.single("image"),
-  validateProfile,
-  catchAsync(updateProfile)
-);
-router.delete(
-  "/:profileUrl",
-  getTargetId,
-  ownsProfile,
-  catchAsync(deleteProfile)
-);
-
-router.get(
-  "/:profileUrl/post-ride",
-  getTargetId,
-  ownsProfile,
-  catchAsync(getPostRide)
-);
+router.get("/post-ride", catchAsync(getPostRide));
 
 module.exports = router;

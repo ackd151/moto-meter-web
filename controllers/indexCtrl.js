@@ -4,7 +4,7 @@ const Inspection = require("../models/inspectionModel");
 const compareTasks = require("../utils/compareTasks");
 
 module.exports = {
-  async getHome(req, res, next) {
+  getHome(req, res, next) {
     res.render("index");
   },
   getRegister(req, res, next) {
@@ -35,7 +35,7 @@ module.exports = {
   getLogin(req, res, next) {
     res.render("users/login");
   },
-  async postLogin(req, res, next) {
+  postLogin(req, res, next) {
     req.flash("success", `Welcome back, ${req.user.username}!`);
     const redirectUrl = req.session.intendedRoute || `${req.user.username}`;
     delete req.session.intendedRoute;
@@ -54,7 +54,7 @@ module.exports = {
       }
     );
     // Sort profile tasks, populate remainingHours on each, and get pre-ride status
-    for (const [index, profile] of user.bikeProfiles.entries()) {
+    for (const profile of user.bikeProfiles) {
       const { tasks } = profile;
       // Calculate remaining hours
       for (const task of tasks) {
@@ -73,20 +73,21 @@ module.exports = {
     );
     let profileInfo = req.body.profile;
     profileInfo.url = `${profileInfo.year}_${profileInfo.make}_${profileInfo.model}`;
-    // enforce unique url per user !Needs fix w/ regex and max! Dups can still happen after deletion
-    let dup = 0;
+    // enforce unique url per user
+    let dup = false;
+    let dupMax = 1; // min start for duplicate (considering increment before use)
+    var regExp = /\(([^)]+)\)/; // capture between parens
     for (const profile of user.bikeProfiles) {
-      // console.log(
-      //   profileInfo.url,
-      //   profile.url,
-      //   profileInfo.url.indexOf(profile.url)
-      // );
       if (profile.url.indexOf(profileInfo.url) >= 0) {
-        ++dup;
+        dup = true;
+        let matched = profile.url.match(regExp);
+        if (matched) {
+          dupMax = Math.max(dupMax, matched[matched.length - 1]);
+        }
       }
     }
     if (dup) {
-      profileInfo.url += `_(${dup + 1})`;
+      profileInfo.url += `_(${dupMax + 1})`;
     }
     const newProfile = new Profile(profileInfo);
     if (req.file) {

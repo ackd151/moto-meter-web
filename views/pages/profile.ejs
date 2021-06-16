@@ -21,20 +21,23 @@
           ><%= profile.hours %></a
         >
       </p>
+    </div>
+    <div class="resource-actions">
+      <div class="modal-trigger">
+        <h3 class="btn btn-primary btn-fw mb-sm py-xs" id="form-trigger">
+          Edit This Profile?
+        </h3>
+      </div>
       <form
         action="/<%=currentUser.username%>/garage/<%=profile.url%>?_method=DELETE"
         method="POST"
         onsubmit="return deleteConfirmation();"
+        class="profile-delete ml-sm"
       >
-        <button class="btn btn-danger mt-md p-xs">
-          <i class="fas fa-trash"></i>Delete this profile?
+        <button class="btn btn-danger p-xs">
+          <i class="fas fa-trash"></i>
         </button>
       </form>
-    </div>
-    <div class="modal-trigger">
-      <h3 class="btn btn-primary btn-fw mb-sm py-xs" id="form-trigger">
-        Edit This Profile?
-      </h3>
     </div>
   </section>
   <!-- Modal help -->

@@ -1,49 +1,18 @@
 <section class="profile-tab grid bg-dark-border">
   <div class="profile-tab__info">
-  <a
-    href="/<%=currentUser.username%>/garage/<%=profile.url%>"
-    class="btn btn-primary"
-  >
-    <h4><%=profile.title%></h4>
-    <img class="profile-tab__img" src="<%=profile.image.path%>" alt="Bike image" />
-  </a>
-</div>
-  <div class="profile-tab__data">
-    <p>
-      Current Hours:
-      <a
-        href="/<%=currentUser.username%>/garage/<%=profile.url%>/post-ride"
-        ><span class="link"><%=profile.hours%></span></a
-      >
-    </p>
-    <div class="profile-tab__nearest-task">
-      <p>Next Task:</p>
-      <% if (profile.tasks && profile.tasks.length) { %> <% const task =
-      profile.tasks[0]; %>
-      <h4><%= task.title %></h4>
-      <div>
-        <p>
-          Due in:
-          <a
-            href="/<%=currentUser.username%>/garage/<%=profile.url%>/maintenance"
-            ><span
-            class="<%=task.remainingHours > 3 ? 'col-good' : task.remainingHours > 1.5 ? 'col-caution' : 'col-danger'%>"
-            ><%= task.remainingHours %></span
-          ></a
-          >
-          hours.
-        </p>
-      </div>
-      <% } else { %>
-      <p>No tasks created yet...</p>
-      <% } %>
-    </div>
-    <div class="checklist-status">
-      <% if (profile.inspections.length) { %> 
-      <p>Pre-ride status: <a href="/<%=currentUser.username%>/garage/<%=profile.url%>/inspections"><span class="pr-status <%=profile.completed ? "good" : "danger"%>"></span></a></p>
-      <% } %> 
-    </div>
+    <a
+      href="/<%=currentUser.username%>/garage/<%=profile.url%>"
+      class="btn btn-primary"
+    >
+      <h4><%=profile.title%></h4>
+      <img
+        class="profile-tab__img"
+        src="<%=profile.image.path%>"
+        alt="Bike image"
+      />
+    </a>
   </div>
+  <%- include ../partials/profileData %>
   <div class="profile-tab__action-buttons">
     <a
       href="/<%=currentUser.username%>/garage/<%=profile.url%>/inspections"

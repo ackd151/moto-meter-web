@@ -7,15 +7,9 @@ const {
   getLogin,
   postLogin,
   getLogout,
-  getUserHome,
-  createProfile,
 } = require("../controllers/indexCtrl");
 const passport = require("passport");
-const { isLoggedIn, validateProfile } = require("../middleware/index");
 const catchAsync = require("../utils/catchAsync");
-const multer = require("multer");
-const { storage } = require("../cloudinary");
-const upload = multer({ storage });
 
 router.get("/", getHome);
 
@@ -33,10 +27,5 @@ router
   );
 
 router.get("/logout", getLogout);
-
-router
-  .route("/:username", isLoggedIn)
-  .get(catchAsync(getUserHome))
-  .post(upload.single("image"), validateProfile, catchAsync(createProfile));
 
 module.exports = router;

@@ -16,6 +16,7 @@ const app = express();
 
 /* Import Routes */
 const indexRoutes = require("./routes/indexRout");
+const userRoutes = require("./routes/userRout");
 const profileRoutes = require("./routes/profilesRout");
 const taskRoutes = require("./routes/tasksRout");
 const inspectionRoutes = require("./routes/inspectionsRout");
@@ -23,8 +24,6 @@ const noteRoutes = require("./routes/notesRout");
 
 /* Model imports */
 const User = require("./models/userModel");
-const Profile = require("./models/profileModel");
-const Task = require("./models/taskModel");
 
 /* Set up db */
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/motoMeterDB"; // process.env.DB_URL ||
@@ -87,21 +86,9 @@ app.use((req, res, next) => {
   next();
 });
 
-//***********************************DEV********************************* */
-
-// app.use((req, res, next) => {
-//   req.user = {
-//     _id: "60b6c5c91b9571329c173ddd",
-//     username: "ackd151",
-//   };
-//   res.locals.currentUser = req.user;
-//   next();
-// });
-
-//*********************************************************************** */
-
 /* Mount Routes */
 app.use("/", indexRoutes);
+app.use("/:username/garage", userRoutes);
 app.use("/:username/garage/:profileUrl", profileRoutes);
 app.use("/:username/garage/:profileUrl/maintenance", taskRoutes);
 app.use("/:username/garage/:profileUrl/inspections", inspectionRoutes);

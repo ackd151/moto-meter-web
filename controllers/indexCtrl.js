@@ -5,12 +5,23 @@ module.exports = {
     res.render("index");
   },
   getRegister(req, res, next) {
-    res.render("users/register");
+    res.render("users/register", {
+      usernameInput: req.flash("usernameInput"),
+      emailInput: req.flash("emailInput"),
+    });
   },
   async postRegister(req, res, next) {
+    const { username, email, password, password2 } = req.body.user;
     try {
-      const { username, email, password, password2 } = req.body.user;
+      if (password.length < 8 || password > 16) {
+        req.flash("usernameInput", username);
+        req.flash("emailInput", email);
+        req.flash("error", "Password must be between 8 and 16 characters.");
+        return res.redirect("/register");
+      }
       if (password !== password2) {
+        req.flash("usernameInput", username);
+        req.flash("emailInput", email);
         req.flash("error", "Passwords do not match.");
         return res.redirect("/register");
       }
@@ -24,6 +35,8 @@ module.exports = {
       let msg = e.message;
       if (msg.includes("email_1"))
         msg = "A user with the given email is already registered";
+      req.flash("usernameInput", username);
+      req.flash("emailInput", email);
       req.flash("error", `${msg}`);
       return res.redirect("/register");
     }

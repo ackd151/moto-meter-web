@@ -18,9 +18,9 @@ function conveyLengthError() {
 }
 function conveyMismatchError() {
   if (this.value !== pw.value || this.value.length < 8) {
-    this.classList.add("col-danger");
+    this.classList.add("col-caution");
   } else {
-    this.classList.remove("col-danger");
+    this.classList.remove("col-caution");
     this.classList.add("col-good");
   }
 }

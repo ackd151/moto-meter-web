@@ -26,9 +26,8 @@ const noteRoutes = require("./routes/notesRout");
 const User = require("./models/userModel");
 
 /* Set up db */
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/motoMeterDB"; // process.env.DB_URL ||
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/motoMeterDB";
 mongoose.connect(dbUrl, {
-  //"mongodb://localhost:27017/motoMeterDB"
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -75,7 +74,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser()); /* site-wide vars */
+passport.deserializeUser(User.deserializeUser());
 
 /* Flash config */
 app.use(flash());

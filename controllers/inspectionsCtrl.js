@@ -50,7 +50,9 @@ module.exports = {
     const response = await Inspection.deleteMany({ _id: { $in: cbs } });
     req.flash(
       "success",
-      `Successfully deleted ${response.deletedCount} inspections`
+      `Successfully deleted ${response.deletedCount} inspection${
+        response.deletedCount > 1 ? "s" : ""
+      }`
     );
     res.redirect(`/${req.user.username}/garage/${profile.url}/inspections`);
   },

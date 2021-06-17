@@ -23,7 +23,7 @@ router
       failureFlash: true,
       failureRedirect: "/login",
     }),
-    catchAsync(postLogin)
+    postLogin
   );
 
 router.get("/logout", getLogout);
